@@ -1,28 +1,31 @@
 #include "functions.h"
 
-char getInput(clock_t start, int updateRate) {
+char getInput(clock_t start, int updateRate, pPacman pacman) {
     char nextc = getch();
-    char c;
-
-    clock_t end;
-    long time_elapsed;
-    end = clock();
-    time_elapsed = (long) ((end - start)/(double)CLOCKS_PER_SEC*1000);
+    char c = ERR;
 
     while(nextc != ERR) {
         c = nextc;
         nextc = getch();
     }
 
+    clock_t end = clock();
+    long time_elapsed = (long) ((end - start)/(double)CLOCKS_PER_SEC*1000);
+
     while(time_elapsed < updateRate) {
         nextc = getch();
-        if(nextc != -1) {
+        if(nextc != ERR) {
             c = nextc;
         }
         end = clock();
         time_elapsed = (long) ((end - start)/(double)CLOCKS_PER_SEC*1000);
     }
 
+    if(c == ERR)
+        pacman->changedDirection = 0;
+    else
+        pacman->changedDirection = 1;
+    
     return c;
 }
 

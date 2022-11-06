@@ -8,9 +8,11 @@ void pacmanInit(pPacman this) {
     this->direction[1] = 0;
     this->oldDirection[0] = 0;
     this->oldDirection[1] = 0;
-    // this->nextDirection[0] = 0;
-    // this->nextDirection[1] = 0;
+    this->nextDirection[0] = 0;
+    this->nextDirection[1] = 0;
+    this->changedDirection = 0;
     this->sprite = 60;
+    this->nextSprite = 60;
 }
 
 char pacmanChangeDirection(pPacman this, char c) {
@@ -49,28 +51,59 @@ int pacmanCollides(pPacman this, pMap map, char elems[map->height][map->width]) 
 
 void pacmanMove(pPacman this, char sprite, pMap map) {
     int oldx = this->x, oldy = this->y;
-    // this->nextDirection[0] = 0;
-    // this->nextDirection[1] = 0;
-    this->x += this->direction[0];
-    this->y += this->direction[1];
 
-    if(!pacmanCollides(this, map, map->elems)) {
-        this->sprite = sprite;
-    }
-    else {
-        // this->nextDirection[0] = this->direction[0];
-        // this->nextDirection[1] = this->direction[1];
-        this->x = oldx + this->oldDirection[0];
-        this->y = oldy + this->oldDirection[1];
+    if(this->changedDirection || (!this->nextDirection[0] && !this->nextDirection[1])) {
+        if(this->changedDirection) {
+            this->nextDirection[0] = 0;
+            this->nextDirection[1] = 0;
+        }
+
+        this->x += this->direction[0];
+        this->y += this->direction[1];
+
         if(!pacmanCollides(this, map, map->elems)) {
-            this->direction[0] = this->oldDirection[0];
-            this->direction[1] = this->oldDirection[1];
+            this->sprite = sprite;
         }
         else {
-            this->x = oldx;
-            this->y = oldy;
-            this->direction[0] = 0;
-            this->direction[1] = 0;
+            this->nextDirection[0] = this->direction[0];
+            this->nextDirection[1] = this->direction[1];
+            this->nextSprite = sprite;
+            this->x = oldx + this->oldDirection[0];
+            this->y = oldy + this->oldDirection[1];
+            if(!pacmanCollides(this, map, map->elems)) {
+                this->direction[0] = this->oldDirection[0];
+                this->direction[1] = this->oldDirection[1];
+            }
+            else {
+                this->x = oldx;
+                this->y = oldy;
+                this->direction[0] = 0;
+                this->direction[1] = 0;
+            }
+        }
+    }
+    else if(this->nextDirection[0] || this->nextDirection[1]) {
+        this->x += this->nextDirection[0];
+        this->y += this->nextDirection[1];
+
+        if(!pacmanCollides(this, map, map->elems)) {
+            this->sprite = this->nextSprite;
+            this->direction[0] = this->nextDirection[0];
+            this->direction[1] = this->nextDirection[1];
+            this->nextDirection[0] = 0;
+            this->nextDirection[1] = 0;
+            this->changedDirection = 1;
+        }
+        else {
+            this->x = oldx + this->oldDirection[0];
+            this->y = oldy + this->oldDirection[1];
+
+            if(pacmanCollides(this, map, map->elems)) {
+                this->x = oldx;
+                this->y = oldy;
+                this->direction[0] = this->nextDirection[0] = 0;
+                this->direction[1] = this->nextDirection[1] = 0;
+            }
         }
     }
 }

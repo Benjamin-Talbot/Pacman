@@ -13,7 +13,9 @@ typedef struct Pacman {
     int direction[2];
     int oldDirection[2];
     int nextDirection[2];
+    char changedDirection;
     char sprite;
+    char nextSprite;
     // void (*move)(struct Pacman* player, int dx, int dy, map* map);
 } Pacman;
 typedef Pacman* pPacman;

@@ -1,3 +1,14 @@
+Checking that haven't tried moving
+
+
+
+Next Direction:
+when changeing direction, if can't move, save attempted direciton as next direction
+next update, if haven't tried moving, set direction to next direction
+otherwise, proceed normally
+
+
+
 GAME LOOP:
 update every updateRate milliseconds
 
@@ -6,7 +17,6 @@ ask for user input
 after getchar(), check if time is less than updateRate
 if not, enter while loop that constantly checks until it is
 update and draw
-
 
 
 

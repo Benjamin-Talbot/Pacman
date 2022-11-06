@@ -5,8 +5,6 @@
 #include "map.h"
 #include "functions.h"
 
-// implement look ahead movement
-
 int main() {
     clock_t start;
     int updateRate = 200;
@@ -20,11 +18,12 @@ int main() {
     pPacman pacman = (pPacman) malloc(sizeof(Pacman));
     pacmanInit(pacman);
 
-    initscr(); // creates stdscr
+    initscr();    // creates stdscr, start code dealing with
+
+
     curs_set(0);
     nodelay(stdscr, TRUE);
     noecho();
-
 
     while(1) {
         start = clock();
@@ -32,11 +31,12 @@ int main() {
         update(pacman, c, map);
         draw(pacman, map);
         
-        c = getInput(start, updateRate);
+        c = getInput(start, updateRate, pacman);
+        mvprintw(5, 60, "%d", pacman->nextDirection[0] && pacman->nextDirection[1]);
     }
     
 
-    endwin();
+    endwin();    // end code dealing with ncurses
 
     return 0;
 }

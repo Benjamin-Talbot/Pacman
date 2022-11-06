@@ -2,7 +2,7 @@
 #include <time.h>
 #include "pacman.h"
 
-char getInput(clock_t start, int updateRate);
+char getInput(clock_t start, int updateRate, pPacman pacman);
 
 void update(pPacman pacman, char c, pMap map);
 
