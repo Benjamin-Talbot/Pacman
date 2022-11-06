@@ -1,0 +1,84 @@
+1. Introduction
+Game development using C
+Use ncurses for building interactive games
+- Snake game
+- Tetris
+- Pacman
+- ...
+
+Submission
+- Proposal: Explain what you want to develop
+- Presentation: Show your result and share your experience
+game show
+show playing
+what went wrong
+what you would do differently if could do again
+- Final Report: Write a written document for your development
+what you did well and wrong
+source code
+
+3. Schedule
+Nov 17 (Thu): Proposal submission due
+Dec 1 (Thu), Dec 8 (Thu): Presentation (no labs)
+Dec 22 (Thu): Final report (can submit early draft, then if time permits notify and submint new. progressed one)
+
+Requirements
+Minimal Requirements (70%)
+- Playable game
+- Use of C features
+    > string
+    > conditionals/loops
+    > malloc/free
+
+Intermediate Requirements
+- Use random numbers to untroduce uncertainty
+    > Position of food
+    > Shape of the next piece
+- Scoring and ranking
+    > Display the updated rank at the end of the game
+Use of C features
+    > Keep score using a data structure (e.g. linked list)
+    > Use macros that make the C code readable
+    > Write the score to the file
+
+Advanced Requirements
+- Multiple stages (with increasing difficulty)
+- Use of C features
+    > Use files to store stage data
+
+Bonus (up to 10%)
+- Demonstration play (tutorial?, insert coin to play)
+- Autoplay for the given stage (Game AI)
+    use imagination/creativity to make game play automatically
+    not necessarily ACTUAL AI, but something that works
+
+4. Proposal
+- submit the ppt slides (or pdf) to prj_proposal
+- Title, student id, name
+- Explain the intended game
+- Snapshots of the game
+- Explain how you will implement the snapshot
+- List of features
+
+5. Presentation
+- submit the ppt slides (or pdf) to prj_presentation
+- Title, student id, name
+- Your level of achievement (minimal, intermediate, advanced)
+- Demonstration
+
+6. Final Report
+- submit the package (the word or latex document, the source codes, etc.) to prj_final
+- Report
+    > Title, student id, name
+    > Explain the game
+    > How the game implemented (with the game lood source code)
+    > How the data (scores, stages) are managed (with diagrams) (data structures)
+    > Known bugs (how to reproduce them)
+    > Lessons learned (what would you do differently next time)
+- Source code package
+- makefile to genereate the executable
+
+
+ON MAC:
+has gcc option
+default option might be something else (langc or something, variant of gcc project)

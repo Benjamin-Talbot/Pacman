@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "loadmap.h": "c",
+        "stdlib.h": "c",
+        "pacman.h": "c",
+        "map.h": "c",
+        "stdio.h": "c",
+        "sstream": "c",
+        "ncurses.h": "c"
+    }
+}
