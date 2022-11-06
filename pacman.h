@@ -21,7 +21,7 @@ void pacmanInit(pPacman this);
 
 int collides(pPacman player, Map* map);
 
-void pacmanMove(char c, pPacman this, int rows, int cols, char elems[rows][cols]);
+void pacmanMove(pPacman this, char c, pMap map, char elems[map->height][map->width]);
 
 void pacmanDraw(pPacman this);
 

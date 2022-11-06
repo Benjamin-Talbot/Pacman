@@ -4,6 +4,6 @@
 
 char getInput(clock_t start, int updateRate);
 
-void update(pPacman pacman, char c, int rows, int cols, char* elems);
+void update(pPacman pacman, char c, pMap map);
 
-void draw(pPacman pacman, int rows, int cols, char* elems);
+void draw(pPacman pacman, pMap map);

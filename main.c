@@ -30,8 +30,8 @@ int main() {
     while(1) {
         start = clock();
 
-        update(pacman, c, rows, cols, elems);
-        draw(pacman, rows, cols, elems);
+        update(pacman, c, map);
+        draw(pacman, map);
         
         c = getInput(start, updateRate);
     }

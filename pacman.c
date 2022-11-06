@@ -15,7 +15,7 @@ int collides(Pacman* player, Map* map) {
     return 0;
 }
 
-void pacmanMove(char c, pPacman this, int rows, int cols, char elems[rows][cols]) {
+void pacmanMove(pPacman this, char c, pMap map, char elems[map->height][map->width]) {
     char sprite = this->sprite;
     int oldDirection[2] = {this->direction[0], this->direction[1]};
     int oldx = this->x, oldy = this->y;

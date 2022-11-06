@@ -26,11 +26,11 @@ char getInput(clock_t start, int updateRate) {
     return c;
 }
 
-void update(pPacman pacman, char c, int rows, int cols, char* elems) {
-    pacmanMove(c, pacman, rows, cols, elems);    // move pacman
+void update(pPacman pacman, char c, pMap map) {
+    pacmanMove(pacman, c, map, map->elems);    // move pacman
 }
 
-void draw(pPacman pacman, int rows, int cols, char* elems) {
+void draw(pPacman pacman, pMap map) {
     pacmanDraw(pacman);    // print pacman
-    drawMap(rows, cols, elems);    // draw the board
+    drawMap(map, map->elems);    // draw the board
 }
