@@ -36,7 +36,7 @@ int main() {
     }
     
 
-    endwin();    // end code dealing with ncurses
+    endwin();    // end code dealing with n
 
     return 0;
 }
