@@ -17,12 +17,12 @@ typedef struct {
 } Pacman;
 typedef Pacman* pPacman;
 
+void pacmanInit(pPacman this);
+
 int collides(pPacman player, Map* map);
 
 void pacmanMove(char c, pPacman this, int rows, int cols, char elems[rows][cols]);
 
-void pacmanPrint(pPacman this);
-
-void pacmanInit(pPacman this);
+void pacmanDraw(pPacman this);
 
 #endif

@@ -5,6 +5,13 @@
 #include <math.h>
 #include <ncurses.h>
 
+pMap mapInit(pMap this, int rows, int cols, char* elems) {
+    this->xwidth = cols;
+    this->ywidth = rows;
+    this->elems = elems;
+    return this;
+}
+
 char* loadMap(char* dest, int rows, int cols, int level) {
     char* str = dest;
 

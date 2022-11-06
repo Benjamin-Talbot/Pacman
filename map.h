@@ -6,9 +6,11 @@
 typedef struct {
     int xwidth;
     int ywidth;
-    char elems;
+    char* elems;
 } Map;
 typedef Map* pMap;
+
+pMap mapInit(pMap this, int rows, int cols, char* elems);
 
 char* loadMap(char* str, int rows, int cols, int level);
 

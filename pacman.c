@@ -1,6 +1,16 @@
 #include <ncurses.h>
 #include "pacman.h"
 
+void pacmanInit(pPacman this) {
+    this->x = 1;
+    this->y = 1;
+    this->direction[0] = 0;
+    this->direction[1] = 0;
+    this->nextDirection[0] = 0;
+    this->nextDirection[1] = 0;
+    this->sprite = 60;
+}
+
 int collides(Pacman* player, Map* map) {
     return 0;
 }
@@ -57,17 +67,7 @@ void pacmanMove(char c, pPacman this, int rows, int cols, char elems[rows][cols]
     }
 }
 
-void pacmanPrint(pPacman this) {
+void pacmanDraw(pPacman this) {
     mvprintw(this->y - this->direction[1], this->x - this->direction[0], " ");    // erase pacman from previous position
     mvprintw(this->y, this->x, "%c", this->sprite);    // draw pacman at new position
-}
-
-void pacmanInit(pPacman this) {
-    this->x = 1;
-    this->y = 1;
-    this->direction[0] = 0;
-    this->direction[1] = 0;
-    this->nextDirection[0] = 0;
-    this->nextDirection[1] = 0;
-    this->sprite = 60;
 }
