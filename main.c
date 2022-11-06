@@ -6,7 +6,6 @@
 #include "functions.h"
 
 // implement look ahead movement
-// get map to offer width, height instead of rows, cols
 
 int main() {
     clock_t start;
@@ -14,8 +13,8 @@ int main() {
     char c;
     const int rows = 15, cols = 40;
     char* elems = malloc(sizeof(char) * rows * cols);
-    elems = loadMap(elems, rows, cols, 1);
     
+    elems = loadMap(elems, rows, cols, 1);
     pMap map = (pMap) malloc(sizeof(Map));
     mapInit(map, rows, cols, elems);
     pPacman pacman = (pPacman) malloc(sizeof(Pacman));
