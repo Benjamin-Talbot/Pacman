@@ -3,7 +3,7 @@
 
 #include <stdlib.h>
 
-typedef struct {
+typedef struct Map {
     int width;
     int height;
     char* elems;

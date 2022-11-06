@@ -27,7 +27,8 @@ char getInput(clock_t start, int updateRate) {
 }
 
 void update(pPacman pacman, char c, pMap map) {
-    pacmanMove(pacman, c, map, map->elems);    // move pacman
+    char sprite = pacmanChangeDirection(pacman, c);
+    pacmanMove(pacman, sprite, map);    // move pacman
 }
 
 void draw(pPacman pacman, pMap map) {

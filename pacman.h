@@ -7,10 +7,11 @@
 #include <unistd.h>
 #include "map.h"
 
-typedef struct {
+typedef struct Pacman {
     int x;
     int y;
     int direction[2];
+    int oldDirection[2];
     int nextDirection[2];
     char sprite;
     // void (*move)(struct Pacman* player, int dx, int dy, map* map);
@@ -19,9 +20,11 @@ typedef Pacman* pPacman;
 
 void pacmanInit(pPacman this);
 
-int collides(pPacman player, Map* map);
+char pacmanChangeDirection(pPacman this, char c);
 
-void pacmanMove(pPacman this, char c, pMap map, char elems[map->height][map->width]);
+int pacmanCollides(pPacman player, pMap map, char elems[map->height][map->width]);
+
+void pacmanMove(pPacman this, char c, pMap map);
 
 void pacmanDraw(pPacman this);
 
