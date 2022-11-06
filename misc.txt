@@ -1,3 +1,25 @@
+GAME LOOP:
+update every updateRate milliseconds
+
+first record system time
+ask for user input
+after getchar(), check if time is less than updateRate
+if not, enter while loop that constantly checks until it is
+update and draw
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ----------------------- FROM run.c -----------------------
 /*
 

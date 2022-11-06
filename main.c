@@ -1,14 +1,45 @@
 #include <stdio.h>
 #include <ncurses.h>
+#include <time.h>
 #include "pacman.h"
 #include "map.h"
 
-// don't allow multiple getch()'s per timeout
+// implement look ahead movement
+
+char getInput(clock_t start, int updateRate) {
+    char nextc = getch();
+    char c;
+
+    clock_t end;
+    long time_elapsed;
+    end = clock();
+    time_elapsed = (long) ((end - start)/(double)CLOCKS_PER_SEC*1000);
+
+    while(nextc != ERR) {
+        c = nextc;
+        nextc = getch();
+    }
+
+    while(time_elapsed < updateRate) {
+        nextc = getch();
+        if(nextc != -1) {
+            c = nextc;
+        }
+        end = clock();
+        time_elapsed = (long) ((end - start)/(double)CLOCKS_PER_SEC*1000);
+    }
+
+    return c;
+}
 
 int main() {
 
+    char keypressed = 0;
+    clock_t start;
+    int updateRate = 200;
+
     initscr(); // creates stdscr
-    timeout(200);
+    // timeout(updateRate);
 
 
     const int rows = 15, cols = 40;
@@ -23,17 +54,25 @@ int main() {
     pacmanInit(pacman);
 
     int c;
-    char backspace = 8;
     
     drawMap(rows, cols, elems);
     pacmanPrint(pacman);
 
+    curs_set(0);
+    nodelay(stdscr, TRUE);
+    noecho();
+
     while(1) {
-        c = getch();
-        printw("%c ", backspace);    // delete typed character
+        start = clock();
+
+        // update();
+        // draw();
+
         pacmanMove(c, pacman, rows, cols, elems);    // move pacman
         pacmanPrint(pacman);    // print pacman
         drawMap(rows, cols, elems);    // draw the board
+        
+        c = getInput(start, updateRate);
     }
     
 
