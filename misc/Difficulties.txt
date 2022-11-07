@@ -34,3 +34,9 @@ Problem: constant segmentation faults
     moved maps, but forgot to refactor the path
 Solution:
     Refactor path in map.c
+
+Problem: Powerups arrays
+    tried to store powerups in array but through pointer
+    was having difficulty accessing as array
+Solution:
+    implement array myself using pointer - (powerups+i) instead of powerups[i]

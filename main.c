@@ -8,11 +8,11 @@
 
 int main() {
     clock_t start;
-    int updateRate = 200;
+    int updateRate = 150;
     char c;
     const int rows = 15, cols = 40;
     char* elems = malloc(sizeof(char) * rows * cols);
-    int numPowerups = 0;
+    int numPowerups = 1;
     
     elems = loadMap(elems, rows, cols, 1);
     pMap map = (pMap) malloc(sizeof(Map));
@@ -20,9 +20,9 @@ int main() {
     pPacman pacman = (pPacman) malloc(sizeof(Pacman));
     pacmanInit(pacman);
     pPowerup powerups = (pPowerup) malloc(sizeof(Powerup));
-    powerupInit(&powerups[0], 2, 1);
+    powerupInit(powerups, 2, 1);
 
-    initscr();    // creates stdscr, start code dealing with
+    initscr();    // creates stdscr, start code dealing with ncurses
 
 
     curs_set(0);
@@ -32,14 +32,14 @@ int main() {
     while(1) {
         start = clock();
 
-        update(pacman, c, map);
-        draw(pacman, map, powerups);
+        update(pacman, c, map, powerups, numPowerups);
+        draw(pacman, map, powerups, numPowerups);
         
         c = getInput(start, updateRate, pacman);
     }
     
 
-    endwin();    // end code dealing with n
+    endwin();    // end code dealing with ncurses
 
     return 0;
 }

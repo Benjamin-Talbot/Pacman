@@ -53,17 +53,25 @@ int pacmanCollides(pPacman this, pMap map, char elems[map->height][map->width]) 
     return elems[this->y][this->x] == WALL || elems[this->y][this->x] == DOOR ? 1 : 0;
 }
 
-int pacmanEat(pPacman this, pMap map, char elems[map->height][map->width]) {
+// powerups give you 50 points
+int pacmanEat(pPacman this, pMap map, char elems[map->height][map->width], pPowerup powerups, int numPowerups) {
     char ate = 0;
     if(elems[this->y][this->x] == FOOD) {
-        this->score++;
+        this->score += 10;
         elems[this->y][this->x] = ' ';    // should this be in map?
         ate = 1;
+    }
+    else {
+        for(int i = 0; i < numPowerups; i++) {
+            if(this->x == (powerups+i)->x && this->y == (powerups+i)->y) {
+                this->score += 50;
+            }
+        }
     }
     return ate;
 }
 
-void pacmanMove(pPacman this, char sprite, pMap map) {
+void pacmanMove(pPacman this, char sprite, pMap map, pPowerup powerups, int numPowerups) {
     int oldx = this->x, oldy = this->y;
 
     if(this->changedDirection || (!this->nextDirection[0] && !this->nextDirection[1])) {
@@ -121,7 +129,7 @@ void pacmanMove(pPacman this, char sprite, pMap map) {
         }
     }
 
-    pacmanEat(this, map, map->elems);
+    pacmanEat(this, map, map->elems, powerups, numPowerups);
 }
 
 void pacmanDraw(pPacman this) {

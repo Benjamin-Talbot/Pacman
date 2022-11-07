@@ -6,6 +6,7 @@
 #include <ncurses.h>
 #include <unistd.h>
 #include "map.h"
+#include "powerup.h"
 
 typedef struct Pacman {
     int x;
@@ -27,9 +28,9 @@ char pacmanChangeDirection(pPacman this, char c);
 
 int pacmanCollides(pPacman player, pMap map, char elems[map->height][map->width]);
 
-int pacmanEat(pPacman this, pMap map, char elems[map->height][map->width]);
+int pacmanEat(pPacman this, pMap map, char elems[map->height][map->width], pPowerup powerups, int numPowerups);
 
-void pacmanMove(pPacman this, char c, pMap map);
+void pacmanMove(pPacman this, char c, pMap map, pPowerup powerups, int numPowerups);
 
 void pacmanDraw(pPacman this);
 

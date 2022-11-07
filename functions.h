@@ -8,8 +8,8 @@
 
 char getInput(clock_t start, int updateRate, pPacman pacman);
 
-void update(pPacman pacman, char c, pMap map);
+void update(pPacman pacman, char c, pMap map, pPowerup powerups, int numPowerups);
 
-void draw(pPacman pacman, pMap map, pPowerup powerups);
+void draw(pPacman pacman, pMap map, pPowerup powerups, int numPowerups);
 
 #endif

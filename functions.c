@@ -29,18 +29,15 @@ char getInput(clock_t start, int updateRate, pPacman pacman) {
     return c;
 }
 
-void update(pPacman pacman, char c, pMap map) {
+void update(pPacman pacman, char c, pMap map, pPowerup powerups, int numPowerups) {
     char sprite = pacmanChangeDirection(pacman, c);    // change pacman's direction
-    pacmanMove(pacman, sprite, map);    // move pacman
+    pacmanMove(pacman, sprite, map, powerups, numPowerups);    // move pacman
     mvprintw(5, 60, "Score: %d", pacman->score);    // update score
 }
 
-void draw(pPacman pacman, pMap map, Powerup powerups[]) {
+void draw(pPacman pacman, pMap map, pPowerup powerups, int numPowerups) {
     drawMap(map, map->elems);    // draw the board
-    // int numPowerups = sizeof(powerups);
-    // if(numPowerups)
-    //     numPowerups /= sizeof(powerups[0]);
-    // for(int i = 0; i < numPowerups; i++)
-    powerupDraw(powerups);
+    for(int i = 0; i < numPowerups; i++)
+        powerupDraw(powerups+i);
     pacmanDraw(pacman);    // print pacman
 }
