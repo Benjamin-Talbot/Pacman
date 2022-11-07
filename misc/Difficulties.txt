@@ -1,0 +1,36 @@
+Problem: Game Loop
+    getch without stopping program
+    move applies on next update
+Solution:
+    first timeout()
+    then nodelay() along with time loop
+
+Problem: Next Direction
+    pacman stops
+Solution:
+    had logic incorrect
+    wasn't always going into one of the ifs
+    else if had condition where both nextDirections had to be one, so never enetered
+    first if wasn't entered if changedDirection was false, even if both nextDirections were 0
+    also wasn't resetting nextDirections to zero if moved
+
+Problem: Load Map Function
+    details
+Solution:
+    details
+
+Problem: char elems
+    details
+Solution:
+    details
+
+Problem: dots in inaccessible areas
+    replaced ALL spaces with dots, even in inaccessible areas of the map
+    need to implement a function that can find enclosed areas
+Solution:
+    first start with placing x's in those areas manually, replace them by spaces
+
+Problem: constant segmentation faults
+    moved maps, but forgot to refactor the path
+Solution:
+    Refactor path in map.c

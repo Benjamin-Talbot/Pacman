@@ -1,9 +1,4 @@
 #include "map.h"
-#include <stdio.h>
-#include <stdio.h>
-#include <string.h>
-#include <math.h>
-#include <ncurses.h>
 
 pMap mapInit(pMap this, int rows, int cols, char* elems) {
     this->width = cols;
@@ -25,9 +20,9 @@ void replace_char(char str[], char old, char new) {
 char* loadMap(char* dest, int rows, int cols, int level) {
     char* str = dest;
 
-    int maxchars = sizeof(char)*(7+(int)log10(level) + 1) + 1;
+    int maxchars = sizeof(char)*(14+(int)log10(level) + 1) + 1;
     char filename[maxchars];
-    snprintf(filename, maxchars, "map%d.txt", level);
+    snprintf(filename, maxchars, "levels/map%d.txt", level);
 
     FILE* mapFile = fopen(filename, "r");
     char tmp[cols];
@@ -41,6 +36,7 @@ char* loadMap(char* dest, int rows, int cols, int level) {
     fclose(mapFile);
 
     replace_char(str, ' ', '.');
+    replace_char(str, 'x', ' ');
     str[cols+1] = ' ';    // put in pacman, since dependent on starting x, y? or include starting point in map file?
 
     return str;

@@ -7,11 +7,14 @@
 # NEED TO ADD .h FILES!!!
 #
 
-main: main.o functions.o pacman.o map.o
-	gcc -o main main.o map.o pacman.o functions.o -lncurses
+main: main.o functions.o pacman.o map.o powerup.o
+	gcc -o main main.o map.o pacman.o powerup.o functions.o -lncurses
 
 main.o: main.c
 	gcc -c main.c
+
+powerup.o: powerup.c
+	gcc -c powerup.c
 
 map.o: map.c
 	gcc -c map.c map.h
@@ -19,7 +22,7 @@ map.o: map.c
 pacman.o: pacman.c
 	gcc -c pacman.c
 
-functions.o: functions.c map.o pacman.o
+functions.o: functions.c
 	gcc -c functions.c
 
 clean:

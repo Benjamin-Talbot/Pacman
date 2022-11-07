@@ -4,6 +4,7 @@
 #include "pacman.h"
 #include "map.h"
 #include "functions.h"
+#include "powerup.h"
 
 int main() {
     clock_t start;
@@ -11,12 +12,15 @@ int main() {
     char c;
     const int rows = 15, cols = 40;
     char* elems = malloc(sizeof(char) * rows * cols);
+    int numPowerups = 0;
     
     elems = loadMap(elems, rows, cols, 1);
     pMap map = (pMap) malloc(sizeof(Map));
     mapInit(map, rows, cols, elems);
     pPacman pacman = (pPacman) malloc(sizeof(Pacman));
     pacmanInit(pacman);
+    pPowerup powerups = (pPowerup) malloc(sizeof(Powerup));
+    powerupInit(&powerups[0], 2, 1);
 
     initscr();    // creates stdscr, start code dealing with
 
@@ -29,7 +33,7 @@ int main() {
         start = clock();
 
         update(pacman, c, map);
-        draw(pacman, map);
+        draw(pacman, map, powerups);
         
         c = getInput(start, updateRate, pacman);
     }

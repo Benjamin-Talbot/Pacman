@@ -1,7 +1,11 @@
 #ifndef MAP_H
 #define MAP_H
 
+#include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <math.h>
+#include <ncurses.h>
 
 typedef struct Map {
     int width;

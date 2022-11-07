@@ -35,7 +35,12 @@ void update(pPacman pacman, char c, pMap map) {
     mvprintw(5, 60, "Score: %d", pacman->score);    // update score
 }
 
-void draw(pPacman pacman, pMap map) {
+void draw(pPacman pacman, pMap map, Powerup powerups[]) {
     drawMap(map, map->elems);    // draw the board
+    // int numPowerups = sizeof(powerups);
+    // if(numPowerups)
+    //     numPowerups /= sizeof(powerups[0]);
+    // for(int i = 0; i < numPowerups; i++)
+    powerupDraw(powerups);
     pacmanDraw(pacman);    // print pacman
 }

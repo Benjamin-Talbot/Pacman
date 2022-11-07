@@ -1,8 +1,8 @@
-#include <ncurses.h>
 #include "pacman.h"
 
-#define WALL 35
-#define FOOD 46
+#define WALL '#'    // #, 35
+#define DOOR '-'    // -, 45
+#define FOOD '.'    // ., 46
 
 void pacmanInit(pPacman this) {
     this->x = 1;
@@ -50,7 +50,7 @@ char pacmanChangeDirection(pPacman this, char c) {
 }
 
 int pacmanCollides(pPacman this, pMap map, char elems[map->height][map->width]) {
-    return elems[this->y][this->x] == WALL ? 1 : 0;
+    return elems[this->y][this->x] == WALL || elems[this->y][this->x] == DOOR ? 1 : 0;
 }
 
 int pacmanEat(pPacman this, pMap map, char elems[map->height][map->width]) {

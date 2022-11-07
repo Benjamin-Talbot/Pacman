@@ -6,6 +6,7 @@
         "map.h": "c",
         "stdio.h": "c",
         "sstream": "c",
-        "ncurses.h": "c"
+        "ncurses.h": "c",
+        "powerup.h": "c"
     }
 }

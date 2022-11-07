@@ -1,3 +1,8 @@
+Different colored ghosts have different view distances, able to pathfind farther
+make one (hardest) have unlimited view distance
+
+
+
 Checking that haven't tried moving
 
 
@@ -49,7 +54,7 @@ ASCII
 # = 35
 . = 46
 
--/|\-/|\-/|\, *, #, &, +, ., ^, <, >
+-/|\-/|\-/|\, *, #, &, +, ., ^, <, >, v
 
 Portals:
     (), {}, [], -/|\, #, +, 0, O, o, :, =, ?, _, ~
