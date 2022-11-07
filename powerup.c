@@ -11,6 +11,17 @@ void powerupInit(pPowerup this, int x, int y) {
     this->numSprites = 4;
 }
 
+void copyPowerup(pPowerup powerups[], int dest, int src) {
+    *powerups[dest] = *powerups[src];
+}
+
+void powerupDelete(pPowerup powerups, int numPowerups, int index) {
+    free(powerups+index);
+    for(int i = 0; i < numPowerups; i++) {
+        copyPowerup(&powerups, i, i+1);
+    }
+}
+
 void powerupDraw(pPowerup this) {
     mvprintw(this->y, this->x, "%c", this->sprites[this->sprite]);
     this->sprite++;

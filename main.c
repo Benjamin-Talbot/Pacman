@@ -19,7 +19,7 @@ int main() {
     mapInit(map, rows, cols, elems);
     pPacman pacman = (pPacman) malloc(sizeof(Pacman));
     pacmanInit(pacman);
-    pPowerup powerups = (pPowerup) malloc(sizeof(Powerup));
+    pPowerup powerups = (pPowerup) malloc(sizeof(Powerup) * numPowerups);
     powerupInit(powerups, 2, 1);
 
     initscr();    // creates stdscr, start code dealing with ncurses

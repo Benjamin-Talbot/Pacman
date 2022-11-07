@@ -16,6 +16,10 @@ typedef Powerup* pPowerup;
 
 void powerupInit(pPowerup this, int x, int y);
 
+void copyPowerup(pPowerup powerups[], int dest, int src);
+
+void powerupDelete(pPowerup this, int numPowerups, int i);
+
 void powerupDraw(pPowerup this);
 
 #endif

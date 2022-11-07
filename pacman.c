@@ -65,6 +65,7 @@ int pacmanEat(pPacman this, pMap map, char elems[map->height][map->width], pPowe
         for(int i = 0; i < numPowerups; i++) {
             if(this->x == (powerups+i)->x && this->y == (powerups+i)->y) {
                 this->score += 50;
+                powerupDelete(powerups, numPowerups, i);
             }
         }
     }
