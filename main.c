@@ -5,6 +5,9 @@
 #include "map.h"
 #include "functions.h"
 #include "powerup.h"
+#include "ghost.h"
+
+// add fruit (cherries, strawberries, etc.)
 
 int main() {
     clock_t start;
@@ -14,6 +17,7 @@ int main() {
     const int rows = 15, cols = 40;
     char* elems = malloc(sizeof(char) * rows * cols);
     int numPowerups = 1;
+    int numGhosts = 4;
     
     elems = loadMap(elems, rows, cols, 1);
     pMap map = (pMap) malloc(sizeof(Map));
@@ -22,6 +26,11 @@ int main() {
     pacmanInit(pacman);
     pPowerup powerups = (pPowerup) malloc(sizeof(Powerup) * numPowerups);
     powerupInit(powerups, 2, 1);
+    pGhost ghosts = (pGhost) malloc(sizeof(Ghost) * numGhosts);
+    ghostInit(ghosts, 28, 3);
+    ghostInit(ghosts+1, 27, 5);
+    ghostInit(ghosts+2, 28, 5);
+    ghostInit(ghosts+3, 29, 5);
 
     initscr();    // creates stdscr, start code dealing with ncurses
 
@@ -34,7 +43,7 @@ int main() {
         start = clock();
 
         update(pacman, c, map, powerups, numPowerups);
-        draw(pacman, map, powerups, numPowerups);
+        draw(pacman, map, powerups, numPowerups, ghosts, numGhosts);
         
         c = getInput(start, updateRate, pacman);
     }

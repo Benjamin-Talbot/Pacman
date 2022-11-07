@@ -143,7 +143,8 @@ void pacmanMove(pPacman this, char sprite, pMap map, pPowerup powerups, int numP
 }
 
 void pacmanDraw(pPacman this) {
-    mvprintw(8, 60, "Invincible: %d", this->invincible);
     mvprintw(this->y - this->direction[1], this->x - this->direction[0], " ");    // erase pacman from previous position
     mvprintw(this->y, this->x, "%c", this->sprite);    // draw pacman at new position
+    mvprintw(8, 60, "Invincible: %d", this->invincible);
+    mvprintw(5, 60, "Score: %d", this->score);    // update score
 }

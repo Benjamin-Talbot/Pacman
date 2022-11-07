@@ -32,12 +32,12 @@ char getInput(clock_t start, int updateRate, pPacman pacman) {
 void update(pPacman pacman, char c, pMap map, pPowerup powerups, int numPowerups) {
     char sprite = pacmanChangeDirection(pacman, c);    // change pacman's direction
     pacmanMove(pacman, sprite, map, powerups, numPowerups);    // move pacman
-    mvprintw(5, 60, "Score: %d", pacman->score);    // update score
 }
 
-void draw(pPacman pacman, pMap map, pPowerup powerups, int numPowerups) {
+void draw(pPacman pacman, pMap map, pPowerup powerups, int numPowerups, pGhost ghosts, int numGhosts) {
     drawMap(map, map->elems);    // draw the board
     for(int i = 0; i < numPowerups; i++)
         powerupDraw(powerups+i);
+    ghostDraw(ghosts, numGhosts);
     pacmanDraw(pacman);    // print pacman
 }
