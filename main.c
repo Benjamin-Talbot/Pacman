@@ -9,6 +9,7 @@
 int main() {
     clock_t start;
     int updateRate = 150;
+    // updateRate = 500;
     char c;
     const int rows = 15, cols = 40;
     char* elems = malloc(sizeof(char) * rows * cols);

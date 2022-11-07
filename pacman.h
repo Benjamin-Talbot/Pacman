@@ -18,6 +18,7 @@ typedef struct Pacman {
     char sprite;
     char nextSprite;
     int score;
+    int invincible;
     // void (*move)(struct Pacman* player, int dx, int dy, map* map);
 } Pacman;
 typedef Pacman* pPacman;
@@ -27,6 +28,8 @@ void pacmanInit(pPacman this);
 char pacmanChangeDirection(pPacman this, char c);
 
 int pacmanCollides(pPacman player, pMap map, char elems[map->height][map->width]);
+
+void pacmanMakeInvincible(pPacman this);
 
 int pacmanEat(pPacman this, pMap map, char elems[map->height][map->width], pPowerup powerups, int numPowerups);
 

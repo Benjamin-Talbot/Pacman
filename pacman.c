@@ -17,6 +17,7 @@ void pacmanInit(pPacman this) {
     this->sprite = 60;
     this->nextSprite = 60;
     this->score = 0;
+    this->invincible = 0;
 }
 
 char pacmanChangeDirection(pPacman this, char c) {
@@ -53,7 +54,10 @@ int pacmanCollides(pPacman this, pMap map, char elems[map->height][map->width]) 
     return elems[this->y][this->x] == WALL || elems[this->y][this->x] == DOOR ? 1 : 0;
 }
 
-// powerups give you 50 points
+void pacmanMakeInvincible(pPacman this) {
+    this->invincible = 54;
+}
+
 int pacmanEat(pPacman this, pMap map, char elems[map->height][map->width], pPowerup powerups, int numPowerups) {
     char ate = 0;
     if(elems[this->y][this->x] == FOOD) {
@@ -65,6 +69,7 @@ int pacmanEat(pPacman this, pMap map, char elems[map->height][map->width], pPowe
         for(int i = 0; i < numPowerups; i++) {
             if(this->x == (powerups+i)->x && this->y == (powerups+i)->y) {
                 this->score += 50;
+                pacmanMakeInvincible(this);
                 powerupDelete(powerups, numPowerups, i);
             }
         }
@@ -129,11 +134,16 @@ void pacmanMove(pPacman this, char sprite, pMap map, pPowerup powerups, int numP
             }
         }
     }
+    
+    if(this->invincible > 0)
+        this->invincible--;
+    
 
     pacmanEat(this, map, map->elems, powerups, numPowerups);
 }
 
 void pacmanDraw(pPacman this) {
+    mvprintw(8, 60, "Invincible: %d", this->invincible);
     mvprintw(this->y - this->direction[1], this->x - this->direction[0], " ");    // erase pacman from previous position
     mvprintw(this->y, this->x, "%c", this->sprite);    // draw pacman at new position
 }
