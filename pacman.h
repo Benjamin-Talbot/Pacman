@@ -16,6 +16,7 @@ typedef struct Pacman {
     char changedDirection;
     char sprite;
     char nextSprite;
+    int score;
     // void (*move)(struct Pacman* player, int dx, int dy, map* map);
 } Pacman;
 typedef Pacman* pPacman;
@@ -25,6 +26,8 @@ void pacmanInit(pPacman this);
 char pacmanChangeDirection(pPacman this, char c);
 
 int pacmanCollides(pPacman player, pMap map, char elems[map->height][map->width]);
+
+int pacmanEat(pPacman this, pMap map, char elems[map->height][map->width]);
 
 void pacmanMove(pPacman this, char c, pMap map);
 

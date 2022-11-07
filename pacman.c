@@ -1,6 +1,9 @@
 #include <ncurses.h>
 #include "pacman.h"
 
+#define WALL 35
+#define FOOD 46
+
 void pacmanInit(pPacman this) {
     this->x = 1;
     this->y = 1;
@@ -13,6 +16,7 @@ void pacmanInit(pPacman this) {
     this->changedDirection = 0;
     this->sprite = 60;
     this->nextSprite = 60;
+    this->score = 0;
 }
 
 char pacmanChangeDirection(pPacman this, char c) {
@@ -46,7 +50,17 @@ char pacmanChangeDirection(pPacman this, char c) {
 }
 
 int pacmanCollides(pPacman this, pMap map, char elems[map->height][map->width]) {
-    return elems[this->y][this->x] == 35 ? 1 : 0;
+    return elems[this->y][this->x] == WALL ? 1 : 0;
+}
+
+int pacmanEat(pPacman this, pMap map, char elems[map->height][map->width]) {
+    char ate = 0;
+    if(elems[this->y][this->x] == FOOD) {
+        this->score++;
+        elems[this->y][this->x] = ' ';    // should this be in map?
+        ate = 1;
+    }
+    return ate;
 }
 
 void pacmanMove(pPacman this, char sprite, pMap map) {
@@ -106,6 +120,8 @@ void pacmanMove(pPacman this, char sprite, pMap map) {
             }
         }
     }
+
+    pacmanEat(this, map, map->elems);
 }
 
 void pacmanDraw(pPacman this) {

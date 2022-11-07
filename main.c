@@ -32,7 +32,6 @@ int main() {
         draw(pacman, map);
         
         c = getInput(start, updateRate, pacman);
-        mvprintw(5, 60, "%d", pacman->nextDirection[0] && pacman->nextDirection[1]);
     }
     
 

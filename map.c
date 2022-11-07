@@ -12,6 +12,16 @@ pMap mapInit(pMap this, int rows, int cols, char* elems) {
     return this;
 }
 
+void replace_char(char str[], char old, char new) {
+    for(int i = 0; str[i];) {
+        if(str[i] == old) {
+            str[i] = new;
+        }
+        else
+            i++;
+    }
+}
+
 char* loadMap(char* dest, int rows, int cols, int level) {
     char* str = dest;
 
@@ -29,6 +39,9 @@ char* loadMap(char* dest, int rows, int cols, int level) {
         fscanf(mapFile, "%c", tmp);
     }
     fclose(mapFile);
+
+    replace_char(str, ' ', '.');
+    str[cols+1] = ' ';    // put in pacman, since dependent on starting x, y? or include starting point in map file?
 
     return str;
 }

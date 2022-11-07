@@ -30,11 +30,12 @@ char getInput(clock_t start, int updateRate, pPacman pacman) {
 }
 
 void update(pPacman pacman, char c, pMap map) {
-    char sprite = pacmanChangeDirection(pacman, c);
+    char sprite = pacmanChangeDirection(pacman, c);    // change pacman's direction
     pacmanMove(pacman, sprite, map);    // move pacman
+    mvprintw(5, 60, "%d", pacman->score);    // update score
 }
 
 void draw(pPacman pacman, pMap map) {
-    pacmanDraw(pacman);    // print pacman
     drawMap(map, map->elems);    // draw the board
+    pacmanDraw(pacman);    // print pacman
 }
