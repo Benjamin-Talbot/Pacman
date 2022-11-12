@@ -9,7 +9,7 @@
 
 char getInput(clock_t start, int updateRate, pPacman pacman);
 
-void update(pPacman pacman, char c, pMap map, pPowerup powerups, int numPowerups);
+void update(pPacman pacman, char c, pMap map, pPowerup powerups, int numPowerups, pGhost ghosts, int numGhosts);
 
 void draw(pPacman pacman, pMap map, pPowerup powerups, int numPowerups, pGhost ghosts, int numGhosts);
 

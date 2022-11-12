@@ -1,5 +1,13 @@
+ORDER OF OPERATIONS:
+(not necessarily in correct order)
+1. Move
+2. Check if ate pellet
+3. etc.
+
+
+
 Different colored ghosts have different view distances, able to pathfind farther
-make one (hardest) have unlimited view distance
+make one (hardest) have unlimited view distance ???
 
 
 

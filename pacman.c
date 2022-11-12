@@ -20,6 +20,10 @@ void pacmanInit(pPacman this) {
     this->invincible = 0;
 }
 
+void gameover() {
+    mvprintw(5, 70, "Gameover");
+}
+
 char pacmanChangeDirection(pPacman this, char c) {
     char sprite = this->sprite;
     this->oldDirection[0] = this->direction[0];
@@ -51,7 +55,7 @@ char pacmanChangeDirection(pPacman this, char c) {
 }
 
 int pacmanCollides(pPacman this, pMap map, char elems[map->height][map->width]) {
-    return elems[this->y][this->x] == WALL || elems[this->y][this->x] == DOOR ? 1 : 0;
+    return elems[this->y][this->x] == WALL || elems[this->y][this->x] == DOOR ? TRUE : FALSE;
 }
 
 void pacmanMakeInvincible(pPacman this) {
@@ -59,11 +63,11 @@ void pacmanMakeInvincible(pPacman this) {
 }
 
 int pacmanEat(pPacman this, pMap map, char elems[map->height][map->width], pPowerup powerups, int numPowerups) {
-    char ate = 0;
+    char ate = FALSE;
     if(elems[this->y][this->x] == FOOD) {
         this->score += 10;
         elems[this->y][this->x] = ' ';    // should this be in map?
-        ate = 1;
+        ate = TRUE;
     }
     else {
         for(int i = 0; i < numPowerups; i++) {
@@ -77,7 +81,33 @@ int pacmanEat(pPacman this, pMap map, char elems[map->height][map->width], pPowe
     return ate;
 }
 
-void pacmanMove(pPacman this, char sprite, pMap map, pPowerup powerups, int numPowerups) {
+char pacmanHitsGhost(pPacman this, pGhost ghosts, int numGhosts) {
+    char hitGhost = FALSE;
+    pGhost ghost;
+    for(int i = 0; i < numGhosts && !hitGhost; i++) {
+        ghost = (ghosts+i);
+        
+        if(this->x == ghost->x) {
+            if(this->y == ghost->y)
+                hitGhost = TRUE;
+            else if(this->y - ghost->y == 1 || this->y - ghost->y == -1) {
+                if(this->direction[1] + ghost->direction[1] == 0)
+                    hitGhost = TRUE;
+            }
+        }
+        
+        else if(this->y == ghost->y) {
+            if(this->x - ghost->x == 1 || this->x - ghost->x == -1) {
+                if(this->direction[0] + ghost->direction[0] == 0)
+                    hitGhost = TRUE;
+            }
+        }
+    }
+
+    return hitGhost;
+}
+
+void pacmanMove(pPacman this, char sprite, pMap map, pPowerup powerups, int numPowerups, pGhost ghosts, int numGhosts) {
     int oldx = this->x, oldy = this->y;
 
     if(this->changedDirection || (!this->nextDirection[0] && !this->nextDirection[1])) {
@@ -140,6 +170,8 @@ void pacmanMove(pPacman this, char sprite, pMap map, pPowerup powerups, int numP
     
 
     pacmanEat(this, map, map->elems, powerups, numPowerups);
+    if(pacmanHitsGhost(this, ghosts, numGhosts))
+        gameover();
 }
 
 void pacmanDraw(pPacman this) {

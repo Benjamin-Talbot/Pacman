@@ -8,6 +8,7 @@
         "sstream": "c",
         "ncurses.h": "c",
         "powerup.h": "c",
-        "__hash_table": "c"
+        "__hash_table": "c",
+        "ghost.h": "c"
     }
 }

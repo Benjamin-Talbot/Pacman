@@ -29,9 +29,9 @@ char getInput(clock_t start, int updateRate, pPacman pacman) {
     return c;
 }
 
-void update(pPacman pacman, char c, pMap map, pPowerup powerups, int numPowerups) {
+void update(pPacman pacman, char c, pMap map, pPowerup powerups, int numPowerups, pGhost ghosts, int numGhosts) {
     char sprite = pacmanChangeDirection(pacman, c);    // change pacman's direction
-    pacmanMove(pacman, sprite, map, powerups, numPowerups);    // move pacman
+    pacmanMove(pacman, sprite, map, powerups, numPowerups, ghosts, numGhosts);    // move pacman
 }
 
 void draw(pPacman pacman, pMap map, pPowerup powerups, int numPowerups, pGhost ghosts, int numGhosts) {
@@ -40,4 +40,8 @@ void draw(pPacman pacman, pMap map, pPowerup powerups, int numPowerups, pGhost g
         powerupDraw(powerups+i);
     ghostDraw(ghosts, numGhosts);
     pacmanDraw(pacman);    // print pacman
+}
+
+void gameover() {
+
 }

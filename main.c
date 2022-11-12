@@ -8,6 +8,8 @@
 #include "ghost.h"
 
 // add fruit (cherries, strawberries, etc.)
+// automate the process of creating powerups and ghosts?
+// check misc.txt for order of operations
 
 int main() {
     clock_t start;
@@ -42,7 +44,7 @@ int main() {
     while(1) {
         start = clock();
 
-        update(pacman, c, map, powerups, numPowerups);
+        update(pacman, c, map, powerups, numPowerups, ghosts, numGhosts);
         draw(pacman, map, powerups, numPowerups, ghosts, numGhosts);
         
         c = getInput(start, updateRate, pacman);

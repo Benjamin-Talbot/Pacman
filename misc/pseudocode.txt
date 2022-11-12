@@ -1,0 +1,11 @@
+GHOST/PACMAN COLLISION
+IF pacman.x == ghost.x:
+    IF pacman.y == ghost.y:
+        gameover()
+    ELSE IF pacmman.y - ghost.y == 1 OR pacman.y - ghost.y == -1:
+        IF pacman.direction[1] + ghost.direction[1] == 0:
+            gameover()
+ELSE IF pacman.y == ghost.y:
+    IF pacman.x - ghost.x == 1 OR pacman.x - ghost.x == -1:
+        IF pacman.direction[0] + ghost.direction[0] == 0:
+            gameover()
