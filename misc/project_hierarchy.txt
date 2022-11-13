@@ -1,0 +1,14 @@
+ALL FILES (CURRENT):
+functions.h/c
+ghost.h/c
+main.c
+map.h/c
+pacman.h/c
+powerup.h/c
+
+
+LEVEL (HIGH TO LOW):
+- main.c
+- functions.h/c
+- pacmanFunctions.h/c, ghostFunctions.h/c, powerupFunctions.h/c, mapFunctions.h/c
+- pacman.h/c, ghost.h/c, powerup.h/c, map.h/c

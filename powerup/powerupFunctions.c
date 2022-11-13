@@ -1,4 +1,4 @@
-#include "powerup.h"
+#include "powerupFunctions.h"
 
 void powerupInit(pPowerup this, int x, int y) {
     this->x = x;

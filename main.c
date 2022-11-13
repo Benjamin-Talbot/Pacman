@@ -1,11 +1,15 @@
 #include <stdio.h>
 #include <ncurses.h>
 #include <time.h>
-#include "pacman.h"
-#include "map.h"
-#include "functions.h"
-#include "powerup.h"
-#include "ghost.h"
+#include "pacman/pacman.h"
+#include "pacman/pacmanFunctions.h"
+#include "map/map.h"
+#include "map/mapFunctions.h"
+#include "powerup/powerup.h"
+#include "powerup/powerupFunctions.h"
+#include "ghost/ghost.h"
+#include "ghost/ghostFunctions.h"
+#include "mainFunctions/mainFunctions.h"
 
 // add fruit (cherries, strawberries, etc.)
 // automate the process of creating powerups and ghosts?

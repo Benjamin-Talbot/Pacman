@@ -1,4 +1,4 @@
-#include "ghost.h"
+#include "ghostFunctions.h"
 
 #ifndef WALL
 #define WALL '#'    // #, 35

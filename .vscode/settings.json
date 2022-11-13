@@ -9,6 +9,9 @@
         "ncurses.h": "c",
         "powerup.h": "c",
         "__hash_table": "c",
-        "ghost.h": "c"
+        "ghost.h": "c",
+        "mapfunctions.h": "c",
+        "pacmanfunctions.h": "c",
+        "ghostfunctions.h": "c"
     }
 }

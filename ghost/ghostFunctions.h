@@ -1,21 +1,12 @@
-#ifndef GHOST_H
-#define GHOST_H
+#ifndef GHOST_FUNCTIONS_H
+#define GHOST_FUNCTIONS_H
+
+#include "ghost.h"
 
 #include <ncurses.h>
-#include "pacman.h"
-#include "map.h"
 
-typedef struct Ghost {
-    int x;
-    int y;
-    int direction[2];
-    int oldDirection[2];
-    char sprite;
-    char nextSprite;
-    int timer;
-    char trackingPacman;
-} Ghost;
-typedef Ghost* pGhost;
+#include "../pacman/pacmanFunctions.h"
+#include "../map/mapFunctions.h"
 
 void ghostInit(pGhost this, int x, int y);
 
@@ -28,8 +19,3 @@ void ghostInit(pGhost this, int x, int y);
 void ghostDraw(pGhost this, int numGhosts);
 
 #endif
-
-/*
-&
-m n
-*/

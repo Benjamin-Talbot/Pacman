@@ -1,4 +1,4 @@
-#include "map.h"
+#include "mapFunctions.h"
 
 pMap mapInit(pMap this, int rows, int cols, char* elems) {
     this->width = cols;

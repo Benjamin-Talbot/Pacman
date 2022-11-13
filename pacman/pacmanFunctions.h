@@ -1,28 +1,16 @@
-#ifndef PACMAN_H
-#define PACMAN_H
+#ifndef PACMAN_FUNCTIONS_H
+#define PACMAN_FUNCTIONS_H
+
+#include "pacman.h"
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <ncurses.h>
 #include <unistd.h>
-#include "map.h"
-#include "powerup.h"
-#include "ghost.h"
 
-typedef struct Pacman {
-    int x;
-    int y;
-    int direction[2];
-    int oldDirection[2];
-    int nextDirection[2];
-    char changedDirection;
-    char sprite;
-    char nextSprite;
-    int score;
-    int invincible;
-    // void (*move)(struct Pacman* player, int dx, int dy, map* map);
-} Pacman;
-typedef Pacman* pPacman;
+#include "../map/mapFunctions.h"
+#include "../powerup/powerupFunctions.h"
+#include "../ghost/ghostFunctions.h"
 
 void pacmanInit(pPacman this);
 

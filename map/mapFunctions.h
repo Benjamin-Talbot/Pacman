@@ -1,18 +1,13 @@
-#ifndef MAP_H
-#define MAP_H
+#ifndef MAP_FUNCTIONS_H
+#define MAP_FUNCTIONS_H
+
+#include "map.h"
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
 #include <ncurses.h>
-
-typedef struct Map {
-    int width;
-    int height;
-    char* elems;
-} Map;
-typedef Map* pMap;
 
 pMap mapInit(pMap this, int rows, int cols, char* elems);
 

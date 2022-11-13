@@ -1,4 +1,4 @@
-#include "pacman.h"
+#include "pacmanFunctions.h"
 
 #define WALL '#'    // #, 35
 #define DOOR '-'    // -, 45

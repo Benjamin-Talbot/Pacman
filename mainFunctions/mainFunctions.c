@@ -1,4 +1,4 @@
-#include "functions.h"
+#include "mainFunctions.h"
 
 char getInput(clock_t start, int updateRate, pPacman pacman) {
     char nextc = getch();
@@ -40,8 +40,4 @@ void draw(pPacman pacman, pMap map, pPowerup powerups, int numPowerups, pGhost g
         powerupDraw(powerups+i);
     ghostDraw(ghosts, numGhosts);
     pacmanDraw(pacman);    // print pacman
-}
-
-void gameover() {
-
 }

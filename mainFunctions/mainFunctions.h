@@ -3,9 +3,12 @@
 
 #include <stdio.h>
 #include <time.h>
-#include "pacman.h"
-#include "powerup.h"
-#include "ghost.h"
+#include <ncurses.h>
+
+#include "../pacman/pacmanFunctions.h"
+#include "../map/mapFunctions.h"
+#include "../powerup/powerupFunctions.h"
+#include "../ghost/ghostFunctions.h"
 
 char getInput(clock_t start, int updateRate, pPacman pacman);
 
