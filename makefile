@@ -29,7 +29,7 @@ mainFunctions.o: mainFunctions/mainFunctions.c
 	gcc -c mainFunctions/mainFunctions.c
 
 clean:
-	rm -f *.o a.out main
+	rm -f *.o a.out main map/map.h.gch
 
 # included in clean
 #map
