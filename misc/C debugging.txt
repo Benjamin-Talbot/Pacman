@@ -1,0 +1,1708 @@
+(base) ben@Benjamins-MBP FinalProject % lldb main
+(lldb) target create "main"
+Current executable set to '/Users/ben/C/FinalProject/main' (arm64).
+(lldb) b main
+Breakpoint 1: where = main`main, address = 0x00000001000028a8
+(lldb) r
+Process 24722 launched: '/Users/ben/C/FinalProject/main' (arm64)
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = breakpoint 1.1
+    frame #0: 0x00000001000028a8 main`main
+main`main:
+->  0x1000028a8 <+0>:  sub    sp, sp, #0x80             ; =0x80 
+    0x1000028ac <+4>:  stp    x29, x30, [sp, #0x70]
+    0x1000028b0 <+8>:  add    x29, sp, #0x70            ; =0x70 
+    0x1000028b4 <+12>: mov    w8, #0x0
+Target 0: (main) stopped.
+(lldb) n
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x00000001000028ac main`main + 4
+main`main:
+->  0x1000028ac <+4>:  stp    x29, x30, [sp, #0x70]
+    0x1000028b0 <+8>:  add    x29, sp, #0x70            ; =0x70 
+    0x1000028b4 <+12>: mov    w8, #0x0
+    0x1000028b8 <+16>: stur   wzr, [x29, #-0x4]
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x00000001000028b0 main`main + 8
+main`main:
+->  0x1000028b0 <+8>:  add    x29, sp, #0x70            ; =0x70 
+    0x1000028b4 <+12>: mov    w8, #0x0
+    0x1000028b8 <+16>: stur   wzr, [x29, #-0x4]
+    0x1000028bc <+20>: adrp   x0, 1
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x00000001000028b4 main`main + 12
+main`main:
+->  0x1000028b4 <+12>: mov    w8, #0x0
+    0x1000028b8 <+16>: stur   wzr, [x29, #-0x4]
+    0x1000028bc <+20>: adrp   x0, 1
+    0x1000028c0 <+24>: add    x0, x0, #0xf18            ; =0xf18 
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x00000001000028b8 main`main + 16
+main`main:
+->  0x1000028b8 <+16>: stur   wzr, [x29, #-0x4]
+    0x1000028bc <+20>: adrp   x0, 1
+    0x1000028c0 <+24>: add    x0, x0, #0xf18            ; =0xf18 
+    0x1000028c4 <+28>: str    w8, [sp, #0x1c]
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x00000001000028bc main`main + 20
+main`main:
+->  0x1000028bc <+20>: adrp   x0, 1
+    0x1000028c0 <+24>: add    x0, x0, #0xf18            ; =0xf18 
+    0x1000028c4 <+28>: str    w8, [sp, #0x1c]
+    0x1000028c8 <+32>: bl     0x100003e1c               ; symbol stub for: printf
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x00000001000028c0 main`main + 24
+main`main:
+->  0x1000028c0 <+24>: add    x0, x0, #0xf18            ; =0xf18 
+    0x1000028c4 <+28>: str    w8, [sp, #0x1c]
+    0x1000028c8 <+32>: bl     0x100003e1c               ; symbol stub for: printf
+    0x1000028cc <+36>: mov    w8, #0x96
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x00000001000028c4 main`main + 28
+main`main:
+->  0x1000028c4 <+28>: str    w8, [sp, #0x1c]
+    0x1000028c8 <+32>: bl     0x100003e1c               ; symbol stub for: printf
+    0x1000028cc <+36>: mov    w8, #0x96
+    0x1000028d0 <+40>: stur   w8, [x29, #-0x14]
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x00000001000028c8 main`main + 32
+main`main:
+->  0x1000028c8 <+32>: bl     0x100003e1c               ; symbol stub for: printf
+    0x1000028cc <+36>: mov    w8, #0x96
+    0x1000028d0 <+40>: stur   w8, [x29, #-0x14]
+    0x1000028d4 <+44>: mov    w8, #0xf
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x00000001000028cc main`main + 36
+main`main:
+->  0x1000028cc <+36>: mov    w8, #0x96
+    0x1000028d0 <+40>: stur   w8, [x29, #-0x14]
+    0x1000028d4 <+44>: mov    w8, #0xf
+    0x1000028d8 <+48>: stur   w8, [x29, #-0x1c]
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x00000001000028d0 main`main + 40
+main`main:
+->  0x1000028d0 <+40>: stur   w8, [x29, #-0x14]
+    0x1000028d4 <+44>: mov    w8, #0xf
+    0x1000028d8 <+48>: stur   w8, [x29, #-0x1c]
+    0x1000028dc <+52>: mov    w9, #0x28
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x00000001000028d4 main`main + 44
+main`main:
+->  0x1000028d4 <+44>: mov    w8, #0xf
+    0x1000028d8 <+48>: stur   w8, [x29, #-0x1c]
+    0x1000028dc <+52>: mov    w9, #0x28
+    0x1000028e0 <+56>: stur   w9, [x29, #-0x20]
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x00000001000028d8 main`main + 48
+main`main:
+->  0x1000028d8 <+48>: stur   w8, [x29, #-0x1c]
+    0x1000028dc <+52>: mov    w9, #0x28
+    0x1000028e0 <+56>: stur   w9, [x29, #-0x20]
+    0x1000028e4 <+60>: mov    x10, #0x258
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x00000001000028dc main`main + 52
+main`main:
+->  0x1000028dc <+52>: mov    w9, #0x28
+    0x1000028e0 <+56>: stur   w9, [x29, #-0x20]
+    0x1000028e4 <+60>: mov    x10, #0x258
+    0x1000028e8 <+64>: mov    x0, x10
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x00000001000028e0 main`main + 56
+main`main:
+->  0x1000028e0 <+56>: stur   w9, [x29, #-0x20]
+    0x1000028e4 <+60>: mov    x10, #0x258
+    0x1000028e8 <+64>: mov    x0, x10
+    0x1000028ec <+68>: str    w8, [sp, #0x18]
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x00000001000028e4 main`main + 60
+main`main:
+->  0x1000028e4 <+60>: mov    x10, #0x258
+    0x1000028e8 <+64>: mov    x0, x10
+    0x1000028ec <+68>: str    w8, [sp, #0x18]
+    0x1000028f0 <+72>: str    w9, [sp, #0x14]
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x00000001000028e8 main`main + 64
+main`main:
+->  0x1000028e8 <+64>: mov    x0, x10
+    0x1000028ec <+68>: str    w8, [sp, #0x18]
+    0x1000028f0 <+72>: str    w9, [sp, #0x14]
+    0x1000028f4 <+76>: bl     0x100003dec               ; symbol stub for: malloc
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x00000001000028ec main`main + 68
+main`main:
+->  0x1000028ec <+68>: str    w8, [sp, #0x18]
+    0x1000028f0 <+72>: str    w9, [sp, #0x14]
+    0x1000028f4 <+76>: bl     0x100003dec               ; symbol stub for: malloc
+    0x1000028f8 <+80>: stur   x0, [x29, #-0x28]
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x00000001000028f0 main`main + 72
+main`main:
+->  0x1000028f0 <+72>: str    w9, [sp, #0x14]
+    0x1000028f4 <+76>: bl     0x100003dec               ; symbol stub for: malloc
+    0x1000028f8 <+80>: stur   x0, [x29, #-0x28]
+    0x1000028fc <+84>: mov    w8, #0x1
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x00000001000028f4 main`main + 76
+main`main:
+->  0x1000028f4 <+76>: bl     0x100003dec               ; symbol stub for: malloc
+    0x1000028f8 <+80>: stur   x0, [x29, #-0x28]
+    0x1000028fc <+84>: mov    w8, #0x1
+    0x100002900 <+88>: stur   w8, [x29, #-0x2c]
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x00000001000028f8 main`main + 80
+main`main:
+->  0x1000028f8 <+80>: stur   x0, [x29, #-0x28]
+    0x1000028fc <+84>: mov    w8, #0x1
+    0x100002900 <+88>: stur   w8, [x29, #-0x2c]
+    0x100002904 <+92>: mov    w9, #0x4
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x00000001000028fc main`main + 84
+main`main:
+->  0x1000028fc <+84>: mov    w8, #0x1
+    0x100002900 <+88>: stur   w8, [x29, #-0x2c]
+    0x100002904 <+92>: mov    w9, #0x4
+    0x100002908 <+96>: stur   w9, [x29, #-0x30]
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x0000000100002900 main`main + 88
+main`main:
+->  0x100002900 <+88>:  stur   w8, [x29, #-0x2c]
+    0x100002904 <+92>:  mov    w9, #0x4
+    0x100002908 <+96>:  stur   w9, [x29, #-0x30]
+    0x10000290c <+100>: ldur   x0, [x29, #-0x28]
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x0000000100002904 main`main + 92
+main`main:
+->  0x100002904 <+92>:  mov    w9, #0x4
+    0x100002908 <+96>:  stur   w9, [x29, #-0x30]
+    0x10000290c <+100>: ldur   x0, [x29, #-0x28]
+    0x100002910 <+104>: ldr    w1, [sp, #0x18]
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x0000000100002908 main`main + 96
+main`main:
+->  0x100002908 <+96>:  stur   w9, [x29, #-0x30]
+    0x10000290c <+100>: ldur   x0, [x29, #-0x28]
+    0x100002910 <+104>: ldr    w1, [sp, #0x18]
+    0x100002914 <+108>: ldr    w2, [sp, #0x14]
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x000000010000290c main`main + 100
+main`main:
+->  0x10000290c <+100>: ldur   x0, [x29, #-0x28]
+    0x100002910 <+104>: ldr    w1, [sp, #0x18]
+    0x100002914 <+108>: ldr    w2, [sp, #0x14]
+    0x100002918 <+112>: mov    x3, x8
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x0000000100002910 main`main + 104
+main`main:
+->  0x100002910 <+104>: ldr    w1, [sp, #0x18]
+    0x100002914 <+108>: ldr    w2, [sp, #0x14]
+    0x100002918 <+112>: mov    x3, x8
+    0x10000291c <+116>: str    w8, [sp, #0x10]
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x0000000100002914 main`main + 108
+main`main:
+->  0x100002914 <+108>: ldr    w2, [sp, #0x14]
+    0x100002918 <+112>: mov    x3, x8
+    0x10000291c <+116>: str    w8, [sp, #0x10]
+    0x100002920 <+120>: bl     0x100003740               ; loadMap
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x0000000100002918 main`main + 112
+main`main:
+->  0x100002918 <+112>: mov    x3, x8
+    0x10000291c <+116>: str    w8, [sp, #0x10]
+    0x100002920 <+120>: bl     0x100003740               ; loadMap
+    0x100002924 <+124>: stur   x0, [x29, #-0x28]
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x000000010000291c main`main + 116
+main`main:
+->  0x10000291c <+116>: str    w8, [sp, #0x10]
+    0x100002920 <+120>: bl     0x100003740               ; loadMap
+    0x100002924 <+124>: stur   x0, [x29, #-0x28]
+    0x100002928 <+128>: mov    x0, #0x10
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x0000000100002920 main`main + 120
+main`main:
+->  0x100002920 <+120>: bl     0x100003740               ; loadMap
+    0x100002924 <+124>: stur   x0, [x29, #-0x28]
+    0x100002928 <+128>: mov    x0, #0x10
+    0x10000292c <+132>: bl     0x100003dec               ; symbol stub for: malloc
+Target 0: (main) stopped.
+(lldb) s
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step into
+    frame #0: 0x0000000100003740 main`loadMap
+main`loadMap:
+->  0x100003740 <+0>:  stp    x29, x30, [sp, #-0x10]!
+    0x100003744 <+4>:  mov    x29, sp
+    0x100003748 <+8>:  sub    sp, sp, #0xa0             ; =0xa0 
+    0x10000374c <+12>: adrp   x8, 1
+Target 0: (main) stopped.
+(lldb) n
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x0000000100003744 main`loadMap + 4
+main`loadMap:
+->  0x100003744 <+4>:  mov    x29, sp
+    0x100003748 <+8>:  sub    sp, sp, #0xa0             ; =0xa0 
+    0x10000374c <+12>: adrp   x8, 1
+    0x100003750 <+16>: ldr    x8, [x8, #0x8]
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x0000000100003748 main`loadMap + 8
+main`loadMap:
+->  0x100003748 <+8>:  sub    sp, sp, #0xa0             ; =0xa0 
+    0x10000374c <+12>: adrp   x8, 1
+    0x100003750 <+16>: ldr    x8, [x8, #0x8]
+    0x100003754 <+20>: ldr    x8, [x8]
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x000000010000374c main`loadMap + 12
+main`loadMap:
+->  0x10000374c <+12>: adrp   x8, 1
+    0x100003750 <+16>: ldr    x8, [x8, #0x8]
+    0x100003754 <+20>: ldr    x8, [x8]
+    0x100003758 <+24>: stur   x8, [x29, #-0x8]
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x0000000100003750 main`loadMap + 16
+main`loadMap:
+->  0x100003750 <+16>: ldr    x8, [x8, #0x8]
+    0x100003754 <+20>: ldr    x8, [x8]
+    0x100003758 <+24>: stur   x8, [x29, #-0x8]
+    0x10000375c <+28>: stur   x0, [x29, #-0x10]
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x0000000100003754 main`loadMap + 20
+main`loadMap:
+->  0x100003754 <+20>: ldr    x8, [x8]
+    0x100003758 <+24>: stur   x8, [x29, #-0x8]
+    0x10000375c <+28>: stur   x0, [x29, #-0x10]
+    0x100003760 <+32>: stur   w1, [x29, #-0x14]
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x0000000100003758 main`loadMap + 24
+main`loadMap:
+->  0x100003758 <+24>: stur   x8, [x29, #-0x8]
+    0x10000375c <+28>: stur   x0, [x29, #-0x10]
+    0x100003760 <+32>: stur   w1, [x29, #-0x14]
+    0x100003764 <+36>: stur   w2, [x29, #-0x18]
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x000000010000375c main`loadMap + 28
+main`loadMap:
+->  0x10000375c <+28>: stur   x0, [x29, #-0x10]
+    0x100003760 <+32>: stur   w1, [x29, #-0x14]
+    0x100003764 <+36>: stur   w2, [x29, #-0x18]
+    0x100003768 <+40>: stur   w3, [x29, #-0x1c]
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x0000000100003760 main`loadMap + 32
+main`loadMap:
+->  0x100003760 <+32>: stur   w1, [x29, #-0x14]
+    0x100003764 <+36>: stur   w2, [x29, #-0x18]
+    0x100003768 <+40>: stur   w3, [x29, #-0x1c]
+    0x10000376c <+44>: ldur   x8, [x29, #-0x10]
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x0000000100003764 main`loadMap + 36
+main`loadMap:
+->  0x100003764 <+36>: stur   w2, [x29, #-0x18]
+    0x100003768 <+40>: stur   w3, [x29, #-0x1c]
+    0x10000376c <+44>: ldur   x8, [x29, #-0x10]
+    0x100003770 <+48>: stur   x8, [x29, #-0x28]
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x0000000100003768 main`loadMap + 40
+main`loadMap:
+->  0x100003768 <+40>: stur   w3, [x29, #-0x1c]
+    0x10000376c <+44>: ldur   x8, [x29, #-0x10]
+    0x100003770 <+48>: stur   x8, [x29, #-0x28]
+    0x100003774 <+52>: ldur   s0, [x29, #-0x1c]
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x000000010000376c main`loadMap + 44
+main`loadMap:
+->  0x10000376c <+44>: ldur   x8, [x29, #-0x10]
+    0x100003770 <+48>: stur   x8, [x29, #-0x28]
+    0x100003774 <+52>: ldur   s0, [x29, #-0x1c]
+    0x100003778 <+56>: mov.16b v1, v0
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x0000000100003770 main`loadMap + 48
+main`loadMap:
+->  0x100003770 <+48>: stur   x8, [x29, #-0x28]
+    0x100003774 <+52>: ldur   s0, [x29, #-0x1c]
+    0x100003778 <+56>: mov.16b v1, v0
+    0x10000377c <+60>: sshll.2d v2, v1, #0x0
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x0000000100003774 main`loadMap + 52
+main`loadMap:
+->  0x100003774 <+52>: ldur   s0, [x29, #-0x1c]
+    0x100003778 <+56>: mov.16b v1, v0
+    0x10000377c <+60>: sshll.2d v2, v1, #0x0
+    0x100003780 <+64>: scvtf  d0, d2
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x0000000100003778 main`loadMap + 56
+main`loadMap:
+->  0x100003778 <+56>: mov.16b v1, v0
+    0x10000377c <+60>: sshll.2d v2, v1, #0x0
+    0x100003780 <+64>: scvtf  d0, d2
+    0x100003784 <+68>: bl     0x100003de0               ; symbol stub for: log10
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x000000010000377c main`loadMap + 60
+main`loadMap:
+->  0x10000377c <+60>: sshll.2d v2, v1, #0x0
+    0x100003780 <+64>: scvtf  d0, d2
+    0x100003784 <+68>: bl     0x100003de0               ; symbol stub for: log10
+    0x100003788 <+72>: fcvtzs w9, d0
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x0000000100003780 main`loadMap + 64
+main`loadMap:
+->  0x100003780 <+64>: scvtf  d0, d2
+    0x100003784 <+68>: bl     0x100003de0               ; symbol stub for: log10
+    0x100003788 <+72>: fcvtzs w9, d0
+    0x10000378c <+76>: add    w9, w9, #0xe              ; =0xe 
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x0000000100003784 main`loadMap + 68
+main`loadMap:
+->  0x100003784 <+68>: bl     0x100003de0               ; symbol stub for: log10
+    0x100003788 <+72>: fcvtzs w9, d0
+    0x10000378c <+76>: add    w9, w9, #0xe              ; =0xe 
+    0x100003790 <+80>: add    w9, w9, #0x1              ; =0x1 
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x0000000100003788 main`loadMap + 72
+main`loadMap:
+->  0x100003788 <+72>: fcvtzs w9, d0
+    0x10000378c <+76>: add    w9, w9, #0xe              ; =0xe 
+    0x100003790 <+80>: add    w9, w9, #0x1              ; =0x1 
+    0x100003794 <+84>: mov    x0, x9
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x000000010000378c main`loadMap + 76
+main`loadMap:
+->  0x10000378c <+76>: add    w9, w9, #0xe              ; =0xe 
+    0x100003790 <+80>: add    w9, w9, #0x1              ; =0x1 
+    0x100003794 <+84>: mov    x0, x9
+    0x100003798 <+88>: sxtw   x8, w0
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x0000000100003790 main`loadMap + 80
+main`loadMap:
+->  0x100003790 <+80>: add    w9, w9, #0x1              ; =0x1 
+    0x100003794 <+84>: mov    x0, x9
+    0x100003798 <+88>: sxtw   x8, w0
+    0x10000379c <+92>: mov    x10, #0x1
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x0000000100003794 main`loadMap + 84
+main`loadMap:
+->  0x100003794 <+84>: mov    x0, x9
+    0x100003798 <+88>: sxtw   x8, w0
+    0x10000379c <+92>: mov    x10, #0x1
+    0x1000037a0 <+96>: mul    x8, x10, x8
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x0000000100003798 main`loadMap + 88
+main`loadMap:
+->  0x100003798 <+88>:  sxtw   x8, w0
+    0x10000379c <+92>:  mov    x10, #0x1
+    0x1000037a0 <+96>:  mul    x8, x10, x8
+    0x1000037a4 <+100>: add    x8, x8, #0x1              ; =0x1 
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x000000010000379c main`loadMap + 92
+main`loadMap:
+->  0x10000379c <+92>:  mov    x10, #0x1
+    0x1000037a0 <+96>:  mul    x8, x10, x8
+    0x1000037a4 <+100>: add    x8, x8, #0x1              ; =0x1 
+    0x1000037a8 <+104>: stur   w8, [x29, #-0x2c]
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x00000001000037a0 main`loadMap + 96
+main`loadMap:
+->  0x1000037a0 <+96>:  mul    x8, x10, x8
+    0x1000037a4 <+100>: add    x8, x8, #0x1              ; =0x1 
+    0x1000037a8 <+104>: stur   w8, [x29, #-0x2c]
+    0x1000037ac <+108>: ldur   w8, [x29, #-0x2c]
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x00000001000037a4 main`loadMap + 100
+main`loadMap:
+->  0x1000037a4 <+100>: add    x8, x8, #0x1              ; =0x1 
+    0x1000037a8 <+104>: stur   w8, [x29, #-0x2c]
+    0x1000037ac <+108>: ldur   w8, [x29, #-0x2c]
+    0x1000037b0 <+112>: mov    x10, x8
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x00000001000037a8 main`loadMap + 104
+main`loadMap:
+->  0x1000037a8 <+104>: stur   w8, [x29, #-0x2c]
+    0x1000037ac <+108>: ldur   w8, [x29, #-0x2c]
+    0x1000037b0 <+112>: mov    x10, x8
+    0x1000037b4 <+116>: mov    x11, sp
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x00000001000037ac main`loadMap + 108
+main`loadMap:
+->  0x1000037ac <+108>: ldur   w8, [x29, #-0x2c]
+    0x1000037b0 <+112>: mov    x10, x8
+    0x1000037b4 <+116>: mov    x11, sp
+    0x1000037b8 <+120>: stur   x11, [x29, #-0x38]
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x00000001000037b0 main`loadMap + 112
+main`loadMap:
+->  0x1000037b0 <+112>: mov    x10, x8
+    0x1000037b4 <+116>: mov    x11, sp
+    0x1000037b8 <+120>: stur   x11, [x29, #-0x38]
+    0x1000037bc <+124>: add    x11, x10, #0xf            ; =0xf 
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x00000001000037b4 main`loadMap + 116
+main`loadMap:
+->  0x1000037b4 <+116>: mov    x11, sp
+    0x1000037b8 <+120>: stur   x11, [x29, #-0x38]
+    0x1000037bc <+124>: add    x11, x10, #0xf            ; =0xf 
+    0x1000037c0 <+128>: and    x11, x11, #0xfffffffffffffff0
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x00000001000037b8 main`loadMap + 120
+main`loadMap:
+->  0x1000037b8 <+120>: stur   x11, [x29, #-0x38]
+    0x1000037bc <+124>: add    x11, x10, #0xf            ; =0xf 
+    0x1000037c0 <+128>: and    x11, x11, #0xfffffffffffffff0
+    0x1000037c4 <+132>: mov    x9, x11
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x00000001000037bc main`loadMap + 124
+main`loadMap:
+->  0x1000037bc <+124>: add    x11, x10, #0xf            ; =0xf 
+    0x1000037c0 <+128>: and    x11, x11, #0xfffffffffffffff0
+    0x1000037c4 <+132>: mov    x9, x11
+    0x1000037c8 <+136>: stur   x10, [x29, #-0x60]
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x00000001000037c0 main`loadMap + 128
+main`loadMap:
+->  0x1000037c0 <+128>: and    x11, x11, #0xfffffffffffffff0
+    0x1000037c4 <+132>: mov    x9, x11
+    0x1000037c8 <+136>: stur   x10, [x29, #-0x60]
+    0x1000037cc <+140>: stur   x11, [x29, #-0x68]
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x00000001000037c4 main`loadMap + 132
+main`loadMap:
+->  0x1000037c4 <+132>: mov    x9, x11
+    0x1000037c8 <+136>: stur   x10, [x29, #-0x60]
+    0x1000037cc <+140>: stur   x11, [x29, #-0x68]
+    0x1000037d0 <+144>: adrp   x16, 1
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x00000001000037c8 main`loadMap + 136
+main`loadMap:
+->  0x1000037c8 <+136>: stur   x10, [x29, #-0x60]
+    0x1000037cc <+140>: stur   x11, [x29, #-0x68]
+    0x1000037d0 <+144>: adrp   x16, 1
+    0x1000037d4 <+148>: ldr    x16, [x16]
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x00000001000037cc main`loadMap + 140
+main`loadMap:
+->  0x1000037cc <+140>: stur   x11, [x29, #-0x68]
+    0x1000037d0 <+144>: adrp   x16, 1
+    0x1000037d4 <+148>: ldr    x16, [x16]
+    0x1000037d8 <+152>: blr    x16
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x00000001000037d0 main`loadMap + 144
+main`loadMap:
+->  0x1000037d0 <+144>: adrp   x16, 1
+    0x1000037d4 <+148>: ldr    x16, [x16]
+    0x1000037d8 <+152>: blr    x16
+    0x1000037dc <+156>: mov    x9, sp
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x00000001000037d4 main`loadMap + 148
+main`loadMap:
+->  0x1000037d4 <+148>: ldr    x16, [x16]
+    0x1000037d8 <+152>: blr    x16
+    0x1000037dc <+156>: mov    x9, sp
+    0x1000037e0 <+160>: ldur   x10, [x29, #-0x68]
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x00000001000037d8 main`loadMap + 152
+main`loadMap:
+->  0x1000037d8 <+152>: blr    x16
+    0x1000037dc <+156>: mov    x9, sp
+    0x1000037e0 <+160>: ldur   x10, [x29, #-0x68]
+    0x1000037e4 <+164>: subs   x9, x9, x10
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x00000001000037dc main`loadMap + 156
+main`loadMap:
+->  0x1000037dc <+156>: mov    x9, sp
+    0x1000037e0 <+160>: ldur   x10, [x29, #-0x68]
+    0x1000037e4 <+164>: subs   x9, x9, x10
+    0x1000037e8 <+168>: mov    sp, x9
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x00000001000037e0 main`loadMap + 160
+main`loadMap:
+->  0x1000037e0 <+160>: ldur   x10, [x29, #-0x68]
+    0x1000037e4 <+164>: subs   x9, x9, x10
+    0x1000037e8 <+168>: mov    sp, x9
+    0x1000037ec <+172>: ldur   x11, [x29, #-0x60]
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x00000001000037e4 main`loadMap + 164
+main`loadMap:
+->  0x1000037e4 <+164>: subs   x9, x9, x10
+    0x1000037e8 <+168>: mov    sp, x9
+    0x1000037ec <+172>: ldur   x11, [x29, #-0x60]
+    0x1000037f0 <+176>: stur   x11, [x29, #-0x40]
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x00000001000037e8 main`loadMap + 168
+main`loadMap:
+->  0x1000037e8 <+168>: mov    sp, x9
+    0x1000037ec <+172>: ldur   x11, [x29, #-0x60]
+    0x1000037f0 <+176>: stur   x11, [x29, #-0x40]
+    0x1000037f4 <+180>: ldursw x1, [x29, #-0x2c]
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x00000001000037ec main`loadMap + 172
+main`loadMap:
+->  0x1000037ec <+172>: ldur   x11, [x29, #-0x60]
+    0x1000037f0 <+176>: stur   x11, [x29, #-0x40]
+    0x1000037f4 <+180>: ldursw x1, [x29, #-0x2c]
+    0x1000037f8 <+184>: ldur   w8, [x29, #-0x1c]
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x00000001000037f0 main`loadMap + 176
+main`loadMap:
+->  0x1000037f0 <+176>: stur   x11, [x29, #-0x40]
+    0x1000037f4 <+180>: ldursw x1, [x29, #-0x2c]
+    0x1000037f8 <+184>: ldur   w8, [x29, #-0x1c]
+    0x1000037fc <+188>: mov    x0, x8
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x00000001000037f4 main`loadMap + 180
+main`loadMap:
+->  0x1000037f4 <+180>: ldursw x1, [x29, #-0x2c]
+    0x1000037f8 <+184>: ldur   w8, [x29, #-0x1c]
+    0x1000037fc <+188>: mov    x0, x8
+    0x100003800 <+192>: sub    sp, sp, #0x10             ; =0x10 
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x00000001000037f8 main`loadMap + 184
+main`loadMap:
+->  0x1000037f8 <+184>: ldur   w8, [x29, #-0x1c]
+    0x1000037fc <+188>: mov    x0, x8
+    0x100003800 <+192>: sub    sp, sp, #0x10             ; =0x10 
+    0x100003804 <+196>: stur   x0, [x29, #-0x70]
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x00000001000037fc main`loadMap + 188
+main`loadMap:
+->  0x1000037fc <+188>: mov    x0, x8
+    0x100003800 <+192>: sub    sp, sp, #0x10             ; =0x10 
+    0x100003804 <+196>: stur   x0, [x29, #-0x70]
+    0x100003808 <+200>: mov    x0, x9
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x0000000100003800 main`loadMap + 192
+main`loadMap:
+->  0x100003800 <+192>: sub    sp, sp, #0x10             ; =0x10 
+    0x100003804 <+196>: stur   x0, [x29, #-0x70]
+    0x100003808 <+200>: mov    x0, x9
+    0x10000380c <+204>: mov    w8, #0x0
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x0000000100003804 main`loadMap + 196
+main`loadMap:
+->  0x100003804 <+196>: stur   x0, [x29, #-0x70]
+    0x100003808 <+200>: mov    x0, x9
+    0x10000380c <+204>: mov    w8, #0x0
+    0x100003810 <+208>: mov    x2, x8
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x0000000100003808 main`loadMap + 200
+main`loadMap:
+->  0x100003808 <+200>: mov    x0, x9
+    0x10000380c <+204>: mov    w8, #0x0
+    0x100003810 <+208>: mov    x2, x8
+    0x100003814 <+212>: mov    x3, #-0x1
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x000000010000380c main`loadMap + 204
+main`loadMap:
+->  0x10000380c <+204>: mov    w8, #0x0
+    0x100003810 <+208>: mov    x2, x8
+    0x100003814 <+212>: mov    x3, #-0x1
+    0x100003818 <+216>: adrp   x4, 0
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x0000000100003810 main`loadMap + 208
+main`loadMap:
+->  0x100003810 <+208>: mov    x2, x8
+    0x100003814 <+212>: mov    x3, #-0x1
+    0x100003818 <+216>: adrp   x4, 0
+    0x10000381c <+220>: add    x4, x4, #0xf42            ; =0xf42 
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x0000000100003814 main`loadMap + 212
+main`loadMap:
+->  0x100003814 <+212>: mov    x3, #-0x1
+    0x100003818 <+216>: adrp   x4, 0
+    0x10000381c <+220>: add    x4, x4, #0xf42            ; =0xf42 
+    0x100003820 <+224>: mov    x12, sp
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x0000000100003818 main`loadMap + 216
+main`loadMap:
+->  0x100003818 <+216>: adrp   x4, 0
+    0x10000381c <+220>: add    x4, x4, #0xf42            ; =0xf42 
+    0x100003820 <+224>: mov    x12, sp
+    0x100003824 <+228>: ldur   x13, [x29, #-0x70]
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x000000010000381c main`loadMap + 220
+main`loadMap:
+->  0x10000381c <+220>: add    x4, x4, #0xf42            ; =0xf42 
+    0x100003820 <+224>: mov    x12, sp
+    0x100003824 <+228>: ldur   x13, [x29, #-0x70]
+    0x100003828 <+232>: str    x13, [x12]
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x0000000100003820 main`loadMap + 224
+main`loadMap:
+->  0x100003820 <+224>: mov    x12, sp
+    0x100003824 <+228>: ldur   x13, [x29, #-0x70]
+    0x100003828 <+232>: str    x13, [x12]
+    0x10000382c <+236>: stur   x9, [x29, #-0x78]
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x0000000100003824 main`loadMap + 228
+main`loadMap:
+->  0x100003824 <+228>: ldur   x13, [x29, #-0x70]
+    0x100003828 <+232>: str    x13, [x12]
+    0x10000382c <+236>: stur   x9, [x29, #-0x78]
+    0x100003830 <+240>: bl     0x100003d68               ; symbol stub for: __snprintf_chk
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x0000000100003828 main`loadMap + 232
+main`loadMap:
+->  0x100003828 <+232>: str    x13, [x12]
+    0x10000382c <+236>: stur   x9, [x29, #-0x78]
+    0x100003830 <+240>: bl     0x100003d68               ; symbol stub for: __snprintf_chk
+    0x100003834 <+244>: add    sp, sp, #0x10             ; =0x10 
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x000000010000382c main`loadMap + 236
+main`loadMap:
+->  0x10000382c <+236>: stur   x9, [x29, #-0x78]
+    0x100003830 <+240>: bl     0x100003d68               ; symbol stub for: __snprintf_chk
+    0x100003834 <+244>: add    sp, sp, #0x10             ; =0x10 
+    0x100003838 <+248>: ldur   x1, [x29, #-0x78]
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x0000000100003830 main`loadMap + 240
+main`loadMap:
+->  0x100003830 <+240>: bl     0x100003d68               ; symbol stub for: __snprintf_chk
+    0x100003834 <+244>: add    sp, sp, #0x10             ; =0x10 
+    0x100003838 <+248>: ldur   x1, [x29, #-0x78]
+    0x10000383c <+252>: mov    x0, x1
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x0000000100003834 main`loadMap + 244
+main`loadMap:
+->  0x100003834 <+244>: add    sp, sp, #0x10             ; =0x10 
+    0x100003838 <+248>: ldur   x1, [x29, #-0x78]
+    0x10000383c <+252>: mov    x0, x1
+    0x100003840 <+256>: adrp   x1, 0
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x0000000100003838 main`loadMap + 248
+main`loadMap:
+->  0x100003838 <+248>: ldur   x1, [x29, #-0x78]
+    0x10000383c <+252>: mov    x0, x1
+    0x100003840 <+256>: adrp   x1, 0
+    0x100003844 <+260>: add    x1, x1, #0xf53            ; =0xf53 
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x000000010000383c main`loadMap + 252
+main`loadMap:
+->  0x10000383c <+252>: mov    x0, x1
+    0x100003840 <+256>: adrp   x1, 0
+    0x100003844 <+260>: add    x1, x1, #0xf53            ; =0xf53 
+    0x100003848 <+264>: bl     0x100003db0               ; symbol stub for: fopen
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x0000000100003840 main`loadMap + 256
+main`loadMap:
+->  0x100003840 <+256>: adrp   x1, 0
+    0x100003844 <+260>: add    x1, x1, #0xf53            ; =0xf53 
+    0x100003848 <+264>: bl     0x100003db0               ; symbol stub for: fopen
+    0x10000384c <+268>: stur   x0, [x29, #-0x48]
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x0000000100003844 main`loadMap + 260
+main`loadMap:
+->  0x100003844 <+260>: add    x1, x1, #0xf53            ; =0xf53 
+    0x100003848 <+264>: bl     0x100003db0               ; symbol stub for: fopen
+    0x10000384c <+268>: stur   x0, [x29, #-0x48]
+    0x100003850 <+272>: ldur   w8, [x29, #-0x18]
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x0000000100003848 main`loadMap + 264
+main`loadMap:
+->  0x100003848 <+264>: bl     0x100003db0               ; symbol stub for: fopen
+    0x10000384c <+268>: stur   x0, [x29, #-0x48]
+    0x100003850 <+272>: ldur   w8, [x29, #-0x18]
+    0x100003854 <+276>: mov    x9, x8
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x000000010000384c main`loadMap + 268
+main`loadMap:
+->  0x10000384c <+268>: stur   x0, [x29, #-0x48]
+    0x100003850 <+272>: ldur   w8, [x29, #-0x18]
+    0x100003854 <+276>: mov    x9, x8
+    0x100003858 <+280>: add    x10, x9, #0xf             ; =0xf 
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x0000000100003850 main`loadMap + 272
+main`loadMap:
+->  0x100003850 <+272>: ldur   w8, [x29, #-0x18]
+    0x100003854 <+276>: mov    x9, x8
+    0x100003858 <+280>: add    x10, x9, #0xf             ; =0xf 
+    0x10000385c <+284>: and    x10, x10, #0xfffffffffffffff0
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x0000000100003854 main`loadMap + 276
+main`loadMap:
+->  0x100003854 <+276>: mov    x9, x8
+    0x100003858 <+280>: add    x10, x9, #0xf             ; =0xf 
+    0x10000385c <+284>: and    x10, x10, #0xfffffffffffffff0
+    0x100003860 <+288>: stur   x9, [x29, #-0x80]
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x0000000100003858 main`loadMap + 280
+main`loadMap:
+->  0x100003858 <+280>: add    x10, x9, #0xf             ; =0xf 
+    0x10000385c <+284>: and    x10, x10, #0xfffffffffffffff0
+    0x100003860 <+288>: stur   x9, [x29, #-0x80]
+    0x100003864 <+292>: mov    x9, x10
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x000000010000385c main`loadMap + 284
+main`loadMap:
+->  0x10000385c <+284>: and    x10, x10, #0xfffffffffffffff0
+    0x100003860 <+288>: stur   x9, [x29, #-0x80]
+    0x100003864 <+292>: mov    x9, x10
+    0x100003868 <+296>: stur   x10, [x29, #-0x88]
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x0000000100003860 main`loadMap + 288
+main`loadMap:
+->  0x100003860 <+288>: stur   x9, [x29, #-0x80]
+    0x100003864 <+292>: mov    x9, x10
+    0x100003868 <+296>: stur   x10, [x29, #-0x88]
+    0x10000386c <+300>: adrp   x16, 1
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x0000000100003864 main`loadMap + 292
+main`loadMap:
+->  0x100003864 <+292>: mov    x9, x10
+    0x100003868 <+296>: stur   x10, [x29, #-0x88]
+    0x10000386c <+300>: adrp   x16, 1
+    0x100003870 <+304>: ldr    x16, [x16]
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x0000000100003868 main`loadMap + 296
+main`loadMap:
+->  0x100003868 <+296>: stur   x10, [x29, #-0x88]
+    0x10000386c <+300>: adrp   x16, 1
+    0x100003870 <+304>: ldr    x16, [x16]
+    0x100003874 <+308>: blr    x16
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x000000010000386c main`loadMap + 300
+main`loadMap:
+->  0x10000386c <+300>: adrp   x16, 1
+    0x100003870 <+304>: ldr    x16, [x16]
+    0x100003874 <+308>: blr    x16
+    0x100003878 <+312>: mov    x9, sp
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x0000000100003870 main`loadMap + 304
+main`loadMap:
+->  0x100003870 <+304>: ldr    x16, [x16]
+    0x100003874 <+308>: blr    x16
+    0x100003878 <+312>: mov    x9, sp
+    0x10000387c <+316>: ldur   x10, [x29, #-0x88]
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x0000000100003874 main`loadMap + 308
+main`loadMap:
+->  0x100003874 <+308>: blr    x16
+    0x100003878 <+312>: mov    x9, sp
+    0x10000387c <+316>: ldur   x10, [x29, #-0x88]
+    0x100003880 <+320>: subs   x9, x9, x10
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x0000000100003878 main`loadMap + 312
+main`loadMap:
+->  0x100003878 <+312>: mov    x9, sp
+    0x10000387c <+316>: ldur   x10, [x29, #-0x88]
+    0x100003880 <+320>: subs   x9, x9, x10
+    0x100003884 <+324>: mov    sp, x9
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x000000010000387c main`loadMap + 316
+main`loadMap:
+->  0x10000387c <+316>: ldur   x10, [x29, #-0x88]
+    0x100003880 <+320>: subs   x9, x9, x10
+    0x100003884 <+324>: mov    sp, x9
+    0x100003888 <+328>: ldur   x11, [x29, #-0x80]
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x0000000100003880 main`loadMap + 320
+main`loadMap:
+->  0x100003880 <+320>: subs   x9, x9, x10
+    0x100003884 <+324>: mov    sp, x9
+    0x100003888 <+328>: ldur   x11, [x29, #-0x80]
+    0x10000388c <+332>: stur   x11, [x29, #-0x50]
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x0000000100003884 main`loadMap + 324
+main`loadMap:
+->  0x100003884 <+324>: mov    sp, x9
+    0x100003888 <+328>: ldur   x11, [x29, #-0x80]
+    0x10000388c <+332>: stur   x11, [x29, #-0x50]
+    0x100003890 <+336>: stur   wzr, [x29, #-0x54]
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x0000000100003888 main`loadMap + 328
+main`loadMap:
+->  0x100003888 <+328>: ldur   x11, [x29, #-0x80]
+    0x10000388c <+332>: stur   x11, [x29, #-0x50]
+    0x100003890 <+336>: stur   wzr, [x29, #-0x54]
+    0x100003894 <+340>: stur   x9, [x29, #-0x90]
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x000000010000388c main`loadMap + 332
+main`loadMap:
+->  0x10000388c <+332>: stur   x11, [x29, #-0x50]
+    0x100003890 <+336>: stur   wzr, [x29, #-0x54]
+    0x100003894 <+340>: stur   x9, [x29, #-0x90]
+    0x100003898 <+344>: ldur   w8, [x29, #-0x54]
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x0000000100003890 main`loadMap + 336
+main`loadMap:
+->  0x100003890 <+336>: stur   wzr, [x29, #-0x54]
+    0x100003894 <+340>: stur   x9, [x29, #-0x90]
+    0x100003898 <+344>: ldur   w8, [x29, #-0x54]
+    0x10000389c <+348>: ldur   w9, [x29, #-0x14]
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x0000000100003894 main`loadMap + 340
+main`loadMap:
+->  0x100003894 <+340>: stur   x9, [x29, #-0x90]
+    0x100003898 <+344>: ldur   w8, [x29, #-0x54]
+    0x10000389c <+348>: ldur   w9, [x29, #-0x14]
+    0x1000038a0 <+352>: subs   w8, w8, w9
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x0000000100003898 main`loadMap + 344
+main`loadMap:
+->  0x100003898 <+344>: ldur   w8, [x29, #-0x54]
+    0x10000389c <+348>: ldur   w9, [x29, #-0x14]
+    0x1000038a0 <+352>: subs   w8, w8, w9
+    0x1000038a4 <+356>: b.ge   0x100003938               ; <+504>
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x000000010000389c main`loadMap + 348
+main`loadMap:
+->  0x10000389c <+348>: ldur   w9, [x29, #-0x14]
+    0x1000038a0 <+352>: subs   w8, w8, w9
+    0x1000038a4 <+356>: b.ge   0x100003938               ; <+504>
+    0x1000038a8 <+360>: stur   wzr, [x29, #-0x58]
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x00000001000038a0 main`loadMap + 352
+main`loadMap:
+->  0x1000038a0 <+352>: subs   w8, w8, w9
+    0x1000038a4 <+356>: b.ge   0x100003938               ; <+504>
+    0x1000038a8 <+360>: stur   wzr, [x29, #-0x58]
+    0x1000038ac <+364>: ldur   w8, [x29, #-0x58]
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x00000001000038a4 main`loadMap + 356
+main`loadMap:
+->  0x1000038a4 <+356>: b.ge   0x100003938               ; <+504>
+    0x1000038a8 <+360>: stur   wzr, [x29, #-0x58]
+    0x1000038ac <+364>: ldur   w8, [x29, #-0x58]
+    0x1000038b0 <+368>: ldur   w9, [x29, #-0x18]
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x00000001000038a8 main`loadMap + 360
+main`loadMap:
+->  0x1000038a8 <+360>: stur   wzr, [x29, #-0x58]
+    0x1000038ac <+364>: ldur   w8, [x29, #-0x58]
+    0x1000038b0 <+368>: ldur   w9, [x29, #-0x18]
+    0x1000038b4 <+372>: subs   w8, w8, w9
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x00000001000038ac main`loadMap + 364
+main`loadMap:
+->  0x1000038ac <+364>: ldur   w8, [x29, #-0x58]
+    0x1000038b0 <+368>: ldur   w9, [x29, #-0x18]
+    0x1000038b4 <+372>: subs   w8, w8, w9
+    0x1000038b8 <+376>: b.ge   0x100003904               ; <+452>
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x00000001000038b0 main`loadMap + 368
+main`loadMap:
+->  0x1000038b0 <+368>: ldur   w9, [x29, #-0x18]
+    0x1000038b4 <+372>: subs   w8, w8, w9
+    0x1000038b8 <+376>: b.ge   0x100003904               ; <+452>
+    0x1000038bc <+380>: ldur   x0, [x29, #-0x48]
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x00000001000038b4 main`loadMap + 372
+main`loadMap:
+->  0x1000038b4 <+372>: subs   w8, w8, w9
+    0x1000038b8 <+376>: b.ge   0x100003904               ; <+452>
+    0x1000038bc <+380>: ldur   x0, [x29, #-0x48]
+    0x1000038c0 <+384>: sub    sp, sp, #0x10             ; =0x10 
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x00000001000038b8 main`loadMap + 376
+main`loadMap:
+->  0x1000038b8 <+376>: b.ge   0x100003904               ; <+452>
+    0x1000038bc <+380>: ldur   x0, [x29, #-0x48]
+    0x1000038c0 <+384>: sub    sp, sp, #0x10             ; =0x10 
+    0x1000038c4 <+388>: adrp   x1, 0
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x00000001000038bc main`loadMap + 380
+main`loadMap:
+->  0x1000038bc <+380>: ldur   x0, [x29, #-0x48]
+    0x1000038c0 <+384>: sub    sp, sp, #0x10             ; =0x10 
+    0x1000038c4 <+388>: adrp   x1, 0
+    0x1000038c8 <+392>: add    x1, x1, #0xf26            ; =0xf26 
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x00000001000038c0 main`loadMap + 384
+main`loadMap:
+->  0x1000038c0 <+384>: sub    sp, sp, #0x10             ; =0x10 
+    0x1000038c4 <+388>: adrp   x1, 0
+    0x1000038c8 <+392>: add    x1, x1, #0xf26            ; =0xf26 
+    0x1000038cc <+396>: mov    x8, sp
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x00000001000038c4 main`loadMap + 388
+main`loadMap:
+->  0x1000038c4 <+388>: adrp   x1, 0
+    0x1000038c8 <+392>: add    x1, x1, #0xf26            ; =0xf26 
+    0x1000038cc <+396>: mov    x8, sp
+    0x1000038d0 <+400>: ldur   x9, [x29, #-0x90]
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x00000001000038c8 main`loadMap + 392
+main`loadMap:
+->  0x1000038c8 <+392>: add    x1, x1, #0xf26            ; =0xf26 
+    0x1000038cc <+396>: mov    x8, sp
+    0x1000038d0 <+400>: ldur   x9, [x29, #-0x90]
+    0x1000038d4 <+404>: str    x9, [x8]
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x00000001000038cc main`loadMap + 396
+main`loadMap:
+->  0x1000038cc <+396>: mov    x8, sp
+    0x1000038d0 <+400>: ldur   x9, [x29, #-0x90]
+    0x1000038d4 <+404>: str    x9, [x8]
+    0x1000038d8 <+408>: bl     0x100003dc8               ; symbol stub for: fscanf
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x00000001000038d0 main`loadMap + 400
+main`loadMap:
+->  0x1000038d0 <+400>: ldur   x9, [x29, #-0x90]
+    0x1000038d4 <+404>: str    x9, [x8]
+    0x1000038d8 <+408>: bl     0x100003dc8               ; symbol stub for: fscanf
+    0x1000038dc <+412>: add    sp, sp, #0x10             ; =0x10 
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x00000001000038d4 main`loadMap + 404
+main`loadMap:
+->  0x1000038d4 <+404>: str    x9, [x8]
+    0x1000038d8 <+408>: bl     0x100003dc8               ; symbol stub for: fscanf
+    0x1000038dc <+412>: add    sp, sp, #0x10             ; =0x10 
+    0x1000038e0 <+416>: ldur   x8, [x29, #-0x28]
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x00000001000038d8 main`loadMap + 408
+main`loadMap:
+->  0x1000038d8 <+408>: bl     0x100003dc8               ; symbol stub for: fscanf
+    0x1000038dc <+412>: add    sp, sp, #0x10             ; =0x10 
+    0x1000038e0 <+416>: ldur   x8, [x29, #-0x28]
+    0x1000038e4 <+420>: mov    x0, x8
+Target 0: (main) stopped.
+(lldb) s
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step into
+    frame #0: 0x0000000100003dc8 main`fscanf
+main`fscanf:
+->  0x100003dc8 <+0>: nop    
+    0x100003dcc <+4>: ldr    x16, #0x4274              ; (void *)0x00000001880df0e8: fscanf
+    0x100003dd0 <+8>: br     x16
+
+main`initscr:
+    0x100003dd4 <+0>: nop    
+Target 0: (main) stopped.
+(lldb) n
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x0000000100003dcc main`fscanf + 4
+main`fscanf:
+->  0x100003dcc <+4>: ldr    x16, #0x4274              ; (void *)0x00000001880df0e8: fscanf
+    0x100003dd0 <+8>: br     x16
+
+main`initscr:
+    0x100003dd4 <+0>: nop    
+    0x100003dd8 <+4>: ldr    x16, #0x4270              ; (void *)0x00000001ac3c2380: initscr
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x0000000100003dd0 main`fscanf + 8
+main`fscanf:
+->  0x100003dd0 <+8>: br     x16
+
+main`initscr:
+    0x100003dd4 <+0>: nop    
+    0x100003dd8 <+4>: ldr    x16, #0x4270              ; (void *)0x00000001ac3c2380: initscr
+    0x100003ddc <+8>: br     x16
+Target 0: (main) stopped.
+(lldb) s
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step into
+    frame #0: 0x00000001880df0e8 libsystem_c.dylib`fscanf
+libsystem_c.dylib`fscanf:
+->  0x1880df0e8 <+0>:  pacibsp 
+    0x1880df0ec <+4>:  sub    sp, sp, #0x30             ; =0x30 
+    0x1880df0f0 <+8>:  stp    x20, x19, [sp, #0x10]
+    0x1880df0f4 <+12>: stp    x29, x30, [sp, #0x20]
+Target 0: (main) stopped.
+(lldb) n
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x00000001880df0ec libsystem_c.dylib`fscanf + 4
+libsystem_c.dylib`fscanf:
+->  0x1880df0ec <+4>:  sub    sp, sp, #0x30             ; =0x30 
+    0x1880df0f0 <+8>:  stp    x20, x19, [sp, #0x10]
+    0x1880df0f4 <+12>: stp    x29, x30, [sp, #0x20]
+    0x1880df0f8 <+16>: add    x29, sp, #0x20            ; =0x20 
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x00000001880df0f0 libsystem_c.dylib`fscanf + 8
+libsystem_c.dylib`fscanf:
+->  0x1880df0f0 <+8>:  stp    x20, x19, [sp, #0x10]
+    0x1880df0f4 <+12>: stp    x29, x30, [sp, #0x20]
+    0x1880df0f8 <+16>: add    x29, sp, #0x20            ; =0x20 
+    0x1880df0fc <+20>: mov    x19, x1
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x00000001880df0f4 libsystem_c.dylib`fscanf + 12
+libsystem_c.dylib`fscanf:
+->  0x1880df0f4 <+12>: stp    x29, x30, [sp, #0x20]
+    0x1880df0f8 <+16>: add    x29, sp, #0x20            ; =0x20 
+    0x1880df0fc <+20>: mov    x19, x1
+    0x1880df100 <+24>: mov    x20, x0
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x00000001880df0f8 libsystem_c.dylib`fscanf + 16
+libsystem_c.dylib`fscanf:
+->  0x1880df0f8 <+16>: add    x29, sp, #0x20            ; =0x20 
+    0x1880df0fc <+20>: mov    x19, x1
+    0x1880df100 <+24>: mov    x20, x0
+    0x1880df104 <+28>: add    x8, x29, #0x10            ; =0x10 
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x00000001880df0fc libsystem_c.dylib`fscanf + 20
+libsystem_c.dylib`fscanf:
+->  0x1880df0fc <+20>: mov    x19, x1
+    0x1880df100 <+24>: mov    x20, x0
+    0x1880df104 <+28>: add    x8, x29, #0x10            ; =0x10 
+    0x1880df108 <+32>: str    x8, [sp, #0x8]
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x00000001880df100 libsystem_c.dylib`fscanf + 24
+libsystem_c.dylib`fscanf:
+->  0x1880df100 <+24>: mov    x20, x0
+    0x1880df104 <+28>: add    x8, x29, #0x10            ; =0x10 
+    0x1880df108 <+32>: str    x8, [sp, #0x8]
+    0x1880df10c <+36>: bl     0x188091448               ; flockfile
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x00000001880df104 libsystem_c.dylib`fscanf + 28
+libsystem_c.dylib`fscanf:
+->  0x1880df104 <+28>: add    x8, x29, #0x10            ; =0x10 
+    0x1880df108 <+32>: str    x8, [sp, #0x8]
+    0x1880df10c <+36>: bl     0x188091448               ; flockfile
+    0x1880df110 <+40>: adrp   x8, 364604
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x00000001880df108 libsystem_c.dylib`fscanf + 32
+libsystem_c.dylib`fscanf:
+->  0x1880df108 <+32>: str    x8, [sp, #0x8]
+    0x1880df10c <+36>: bl     0x188091448               ; flockfile
+    0x1880df110 <+40>: adrp   x8, 364604
+    0x1880df114 <+44>: ldr    x8, [x8, #0x230]
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x00000001880df10c libsystem_c.dylib`fscanf + 36
+libsystem_c.dylib`fscanf:
+->  0x1880df10c <+36>: bl     0x188091448               ; flockfile
+    0x1880df110 <+40>: adrp   x8, 364604
+    0x1880df114 <+44>: ldr    x8, [x8, #0x230]
+    0x1880df118 <+48>: mrs    x9, TPIDRRO_EL0
+Target 0: (main) stopped.
+(lldb) s
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step into
+    frame #0: 0x0000000188091448 libsystem_c.dylib`flockfile
+libsystem_c.dylib`flockfile:
+->  0x188091448 <+0>:  pacibsp 
+    0x18809144c <+4>:  stp    x20, x19, [sp, #-0x20]!
+    0x188091450 <+8>:  stp    x29, x30, [sp, #0x10]
+    0x188091454 <+12>: add    x29, sp, #0x10            ; =0x10 
+Target 0: (main) stopped.
+(lldb) n
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x000000018809144c libsystem_c.dylib`flockfile + 4
+libsystem_c.dylib`flockfile:
+->  0x18809144c <+4>:  stp    x20, x19, [sp, #-0x20]!
+    0x188091450 <+8>:  stp    x29, x30, [sp, #0x10]
+    0x188091454 <+12>: add    x29, sp, #0x10            ; =0x10 
+    0x188091458 <+16>: mov    x19, x0
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x0000000188091450 libsystem_c.dylib`flockfile + 8
+libsystem_c.dylib`flockfile:
+->  0x188091450 <+8>:  stp    x29, x30, [sp, #0x10]
+    0x188091454 <+12>: add    x29, sp, #0x10            ; =0x10 
+    0x188091458 <+16>: mov    x19, x0
+    0x18809145c <+20>: bl     0x1880fabb0               ; symbol stub for: __error
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x0000000188091454 libsystem_c.dylib`flockfile + 12
+libsystem_c.dylib`flockfile:
+->  0x188091454 <+12>: add    x29, sp, #0x10            ; =0x10 
+    0x188091458 <+16>: mov    x19, x0
+    0x18809145c <+20>: bl     0x1880fabb0               ; symbol stub for: __error
+    0x188091460 <+24>: ldr    w20, [x0]
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x0000000188091458 libsystem_c.dylib`flockfile + 16
+libsystem_c.dylib`flockfile:
+->  0x188091458 <+16>: mov    x19, x0
+    0x18809145c <+20>: bl     0x1880fabb0               ; symbol stub for: __error
+    0x188091460 <+24>: ldr    w20, [x0]
+    0x188091464 <+28>: ldr    x8, [x19, #0x68]
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x000000018809145c libsystem_c.dylib`flockfile + 20
+libsystem_c.dylib`flockfile:
+->  0x18809145c <+20>: bl     0x1880fabb0               ; symbol stub for: __error
+    0x188091460 <+24>: ldr    w20, [x0]
+    0x188091464 <+28>: ldr    x8, [x19, #0x68]
+    0x188091468 <+32>: add    x0, x8, #0x8              ; =0x8 
+Target 0: (main) stopped.
+(lldb) s
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step into
+    frame #0: 0x00000001880fabb0 libsystem_c.dylib`__error
+libsystem_c.dylib`__error:
+->  0x1880fabb0 <+0>:  adrp   x17, 369123
+    0x1880fabb4 <+4>:  add    x17, x17, #0x968          ; =0x968 
+    0x1880fabb8 <+8>:  ldr    x16, [x17]
+    0x1880fabbc <+12>: braa   x16, x17
+Target 0: (main) stopped.
+(lldb) n
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x00000001880fabb4 libsystem_c.dylib`__error + 4
+libsystem_c.dylib`__error:
+->  0x1880fabb4 <+4>:  add    x17, x17, #0x968          ; =0x968 
+    0x1880fabb8 <+8>:  ldr    x16, [x17]
+    0x1880fabbc <+12>: braa   x16, x17
+
+libsystem_c.dylib`__exit:
+    0x1880fabc0 <+0>:  adrp   x17, 369123
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x00000001880fabb8 libsystem_c.dylib`__error + 8
+libsystem_c.dylib`__error:
+->  0x1880fabb8 <+8>:  ldr    x16, [x17]
+    0x1880fabbc <+12>: braa   x16, x17
+
+libsystem_c.dylib`__exit:
+    0x1880fabc0 <+0>:  adrp   x17, 369123
+    0x1880fabc4 <+4>:  add    x17, x17, #0x970          ; =0x970 
+Target 0: (main) stopped.
+(lldb) s
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step into
+    frame #0: 0x00000001880fabbc libsystem_c.dylib`__error + 12
+libsystem_c.dylib`__error:
+->  0x1880fabbc <+12>: braa   x16, x17
+
+libsystem_c.dylib`__exit:
+    0x1880fabc0 <+0>:  adrp   x17, 369123
+    0x1880fabc4 <+4>:  add    x17, x17, #0x970          ; =0x970 
+    0x1880fabc8 <+8>:  ldr    x16, [x17]
+Target 0: (main) stopped.
+(lldb) s
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step into
+    frame #0: 0x0000000188183454 libsystem_kernel.dylib`__error
+libsystem_kernel.dylib`__error:
+->  0x188183454 <+0>:  mrs    x8, TPIDRRO_EL0
+    0x188183458 <+4>:  ldr    x8, [x8, #0x8]
+    0x18818345c <+8>:  adrp   x9, 364442
+    0x188183460 <+12>: add    x9, x9, #0xb20            ; =0xb20 
+Target 0: (main) stopped.
+(lldb) n
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x0000000188183458 libsystem_kernel.dylib`__error + 4
+libsystem_kernel.dylib`__error:
+->  0x188183458 <+4>:  ldr    x8, [x8, #0x8]
+    0x18818345c <+8>:  adrp   x9, 364442
+    0x188183460 <+12>: add    x9, x9, #0xb20            ; =0xb20 
+    0x188183464 <+16>: cmp    x8, #0x0                  ; =0x0 
+Target 0: (main) stopped.
+(lldb) s
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step into
+    frame #0: 0x000000018818345c libsystem_kernel.dylib`__error + 8
+libsystem_kernel.dylib`__error:
+->  0x18818345c <+8>:  adrp   x9, 364442
+    0x188183460 <+12>: add    x9, x9, #0xb20            ; =0xb20 
+    0x188183464 <+16>: cmp    x8, #0x0                  ; =0x0 
+    0x188183468 <+20>: csel   x0, x9, x8, eq
+Target 0: (main) stopped.
+(lldb) n
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x0000000188183460 libsystem_kernel.dylib`__error + 12
+libsystem_kernel.dylib`__error:
+->  0x188183460 <+12>: add    x9, x9, #0xb20            ; =0xb20 
+    0x188183464 <+16>: cmp    x8, #0x0                  ; =0x0 
+    0x188183468 <+20>: csel   x0, x9, x8, eq
+    0x18818346c <+24>: ret    
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x0000000188183464 libsystem_kernel.dylib`__error + 16
+libsystem_kernel.dylib`__error:
+->  0x188183464 <+16>: cmp    x8, #0x0                  ; =0x0 
+    0x188183468 <+20>: csel   x0, x9, x8, eq
+    0x18818346c <+24>: ret    
+
+libsystem_kernel.dylib`__getattrlist:
+    0x188183470 <+0>:  mov    x16, #0xdc
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x0000000188183468 libsystem_kernel.dylib`__error + 20
+libsystem_kernel.dylib`__error:
+->  0x188183468 <+20>: csel   x0, x9, x8, eq
+    0x18818346c <+24>: ret    
+
+libsystem_kernel.dylib`__getattrlist:
+    0x188183470 <+0>:  mov    x16, #0xdc
+    0x188183474 <+4>:  svc    #0x80
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x000000018818346c libsystem_kernel.dylib`__error + 24
+libsystem_kernel.dylib`__error:
+->  0x18818346c <+24>: ret    
+
+libsystem_kernel.dylib`__getattrlist:
+    0x188183470 <+0>:  mov    x16, #0xdc
+    0x188183474 <+4>:  svc    #0x80
+    0x188183478 <+8>:  b.lo   0x188183498               ; <+40>
+Target 0: (main) stopped.
+(lldb) 
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step over
+    frame #0: 0x0000000188091460 libsystem_c.dylib`flockfile + 24
+libsystem_c.dylib`flockfile:
+->  0x188091460 <+24>: ldr    w20, [x0]
+    0x188091464 <+28>: ldr    x8, [x19, #0x68]
+    0x188091468 <+32>: add    x0, x8, #0x8              ; =0x8 
+    0x18809146c <+36>: bl     0x1880fb820               ; symbol stub for: pthread_mutex_lock
+Target 0: (main) stopped.
+(lldb) s
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = instruction step into
+    frame #0: 0x0000000188091464 libsystem_c.dylib`flockfile + 28
+libsystem_c.dylib`flockfile:
+->  0x188091464 <+28>: ldr    x8, [x19, #0x68]
+    0x188091468 <+32>: add    x0, x8, #0x8              ; =0x8 
+    0x18809146c <+36>: bl     0x1880fb820               ; symbol stub for: pthread_mutex_lock
+    0x188091470 <+40>: bl     0x1880fabb0               ; symbol stub for: __error
+Target 0: (main) stopped.
+(lldb) s
+Process 24722 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = EXC_BAD_ACCESS (code=1, address=0x68)
+    frame #0: 0x0000000188091464 libsystem_c.dylib`flockfile + 28
+libsystem_c.dylib`flockfile:
+->  0x188091464 <+28>: ldr    x8, [x19, #0x68]
+    0x188091468 <+32>: add    x0, x8, #0x8              ; =0x8 
+    0x18809146c <+36>: bl     0x1880fb820               ; symbol stub for: pthread_mutex_lock
+    0x188091470 <+40>: bl     0x1880fabb0               ; symbol stub for: __error
+Target 0: (main) stopped.
+(lldb) p $x8
+(unsigned long) $0 = 4295525932
+(lldb) x $x8
+0x10008862c: 02 00 00 00 00 00 e0 6f 01 00 00 00 00 40 60 6f  .......o.....@`o
+0x10008863c: 01 00 00 00 00 00 e0 6b 01 00 00 00 00 00 00 04  .......k........
+(lldb) p $x19
+(unsigned long) $2 = 0
+(lldb) x $x19
+error: memory read failed for 0x0
+(lldb) p $x19 + 0x86
+(unsigned long) $4 = 134
+(lldb) x 134
+error: memory read failed for 0x0
+(lldb) 

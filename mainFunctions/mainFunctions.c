@@ -1,5 +1,27 @@
 #include "mainFunctions.h"
 
+void initialize(pPacman* pacman, 
+                pMap* map, int rows, int cols, char* elems, 
+                pPowerup* powerups, int numPowerups, int powerupCoords[numPowerups][2],
+                pGhost* ghosts, int numGhosts, int ghostCoords[numGhosts][2]) {
+    
+    *pacman = (pPacman) malloc(sizeof(Pacman));
+    pacmanInit(*pacman);
+
+    *map = (pMap) malloc(sizeof(Map));
+    mapInit(*map, rows, cols, elems);
+
+    *powerups = (pPowerup) malloc(sizeof(Powerup) * numPowerups);
+    for(int i = 0; i < numPowerups; i++) {
+        powerupInit(*powerups+i, powerupCoords[i][0], powerupCoords[i][1]);
+    }
+
+    *ghosts = (pGhost) malloc(sizeof(Ghost) * numGhosts);
+    for(int i = 0; i < numGhosts; i++) {
+        ghostInit(*ghosts+i, ghostCoords[i][0], ghostCoords[0][1]);
+    }
+}
+
 char getInput(clock_t start, int updateRate, pPacman pacman) {
     char nextc = getch();
     char c = ERR;

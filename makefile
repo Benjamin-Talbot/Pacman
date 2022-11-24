@@ -10,23 +10,26 @@
 main: main.o mainFunctions.o pacmanFunctions.o mapFunctions.o powerupFunctions.o ghostFunctions.o
 	gcc -o main main.o mainFunctions.o pacmanFunctions.o mapFunctions.o powerupFunctions.o ghostFunctions.o -lncurses -lm
 
+# debug: main.o mainFunctions.o pacmanFunctions.o mapFunctions.o powerupFunctions.o ghostFunctions.o
+# 	gcc -o main main.o -g mainFunctions.o pacmanFunctions.o mapFunctions.o powerupFunctions.o ghostFunctions.o -lncurses -lm
+
 main.o: main.c
-	gcc -c main.c
+	gcc -c main.c -g
 
 ghostFunctions.o: ghost/ghostFunctions.c
-	gcc -c ghost/ghostFunctions.c
+	gcc -c ghost/ghostFunctions.c -g
 
 powerupFunctions.o: powerup/powerupFunctions.c
-	gcc -c powerup/powerupFunctions.c
+	gcc -c powerup/powerupFunctions.c -g
 
 mapFunctions.o: map/mapFunctions.c
-	gcc -c map/mapFunctions.c
+	gcc -c map/mapFunctions.c -g
 
 pacmanFunctions.o: pacman/pacmanFunctions.c
-	gcc -c pacman/pacmanFunctions.c
+	gcc -c pacman/pacmanFunctions.c -g
 
 mainFunctions.o: mainFunctions/mainFunctions.c
-	gcc -c mainFunctions/mainFunctions.c
+	gcc -c mainFunctions/mainFunctions.c -g
 
 clean:
 	rm -f *.o a.out main map/map.h.gch

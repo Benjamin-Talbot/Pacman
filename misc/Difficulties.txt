@@ -40,3 +40,8 @@ Problem: Powerups arrays
     was having difficulty accessing as array
 Solution:
     implement array myself using pointer - (powerups+i) instead of powerups[i]
+
+Problem: Circular References
+
+Solution:
+    Restructure and reogranize code

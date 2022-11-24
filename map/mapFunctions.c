@@ -1,5 +1,5 @@
-#include "mapFunctions.h"
 
+#include "mapFunctions.h"
 pMap mapInit(pMap this, int rows, int cols, char* elems) {
     this->width = cols;
     this->height = rows;
@@ -19,11 +19,16 @@ void replace_char(char str[], char old, char new) {
 
 char* loadMap(char* dest, int rows, int cols, int level) {
     char* str = dest;
+    int maxchars;
 
-    int maxchars = sizeof(char)*(14+(int)log10(level) + 1) + 1;
+    if(level)
+        maxchars = sizeof(char)*(18+(int)log10(level) + 1) + 1;
+    else
+        maxchars = sizeof(char)*(18+(int)log10(level+1) + 1) + 1;
     char filename[maxchars];
-    snprintf(filename, maxchars, "levels/map%d.txt", level);
-
+    printf("%d\n", level);
+    snprintf(filename, maxchars, "map/levels/map%d.txt", level);
+    // char filename[] = "map/levels/map0.txt";
     FILE* mapFile = fopen(filename, "r");
     char tmp[cols];
     for(int r = 0; r < rows; r++) {

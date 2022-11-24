@@ -2,6 +2,7 @@
 #define FUNCTIONS_H
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <time.h>
 #include <ncurses.h>
 
@@ -9,6 +10,11 @@
 #include "../map/mapFunctions.h"
 #include "../powerup/powerupFunctions.h"
 #include "../ghost/ghostFunctions.h"
+
+void initialize(pPacman* pacman, 
+                pMap* map, int rows, int cols, char* elems, 
+                pPowerup* powerups, int numPowerups, int powerupCoords[numPowerups][2],
+                pGhost* ghosts, int numGhosts, int ghostCoords[numGhosts][2]);
 
 char getInput(clock_t start, int updateRate, pPacman pacman);
 

@@ -12,6 +12,27 @@
         "ghost.h": "c",
         "mapfunctions.h": "c",
         "pacmanfunctions.h": "c",
-        "ghostfunctions.h": "c"
+        "ghostfunctions.h": "c",
+        "mainfunctions.h": "c",
+        "types.h": "c",
+        "_types.h": "c",
+        "cdefs.h": "c",
+        "_u_int32_t.h": "c",
+        "_u_int8_t.h": "c",
+        "_int64_t.h": "c",
+        "_int32_t.h": "c",
+        "_int16_t.h": "c",
+        "_int8_t.h": "c",
+        "__locale": "c",
+        "atomic": "c",
+        "cstdint": "c",
+        "_u_int64_t.h": "c",
+        "_u_int16_t.h": "c",
+        "powerupfunctions.h": "c",
+        "cstdlib": "c",
+        "locale": "c",
+        "ostream": "c",
+        "new": "c",
+        "time.h": "c"
     }
 }
