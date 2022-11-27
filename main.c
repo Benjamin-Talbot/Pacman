@@ -9,8 +9,9 @@
 #include "mainFunctions/mainFunctions.h"
 
 int main() {
+    srand(time(NULL));
     clock_t start;
-    int updateRate = 150;   // set to 150
+    int updateRate = 200;   // set to 150 or 200
     char c;
     pPacman pacman = NULL;
     pMap map = NULL;
@@ -28,6 +29,7 @@ int main() {
     nodelay(stdscr, TRUE);
     noecho();
 
+    draw(pacman, map, powerups, *numPowerups, ghosts, *numGhosts);
     while(1) {
         start = clock();
 
@@ -41,3 +43,12 @@ int main() {
 
     return 0;
 }
+
+/*
+variables for free():
+- pacman
+- ghosts
+- powerups
+- powerup[i]
+- directions
+*/

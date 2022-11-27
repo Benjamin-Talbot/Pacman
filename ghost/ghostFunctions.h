@@ -10,12 +10,20 @@
 
 void ghostInit(pGhost this, int x, int y);
 
-// char ghostSeesPacman(pGhost this, pPacman pacman, pMap map, char elems[map->height][map->width]);
+char ghostSeesPacman(pGhost this, pPacman pacman, pMap map, char elems[map->height][map->width]);
 
-// char ghostAtIntersection(pGhost this);
+void ghostMoveOptions(pGhost this, pMap map, char elems[map->height][map->width]);
 
-// void ghostMove(pGhost this, pPacman pacman, pMap map);
+void ghostWander(pGhost this);
 
-void ghostsDraw(pGhost ghosts, int numGhosts);
+void ghostFollowPacman();
+
+char ghostHitsPacman(pGhost this, pPacman pacman);
+
+void ghostMove(pGhost this, pPacman pacman, pMap map);
+
+void ghostsMove(pGhost ghosts, int numGhosts, pPacman pacman, pMap map);
+
+void ghostsDraw(pGhost ghosts, int numGhosts, pMap map, char elems[map->height][map->width]);
 
 #endif

@@ -127,7 +127,8 @@ void initialize(pPacman* pacman, pMap* map, int level, pPowerup** powerups, int*
 
     replace_char((*map)->elems, '<', ' ', 1);
     replace_char((*map)->elems, 'o', ' ', -1);
-    replace_char((*map)->elems, '&', '.', -1);
+    replace_char((*map)->elems, '&', '.', 1);
+    replace_char((*map)->elems, '&', ' ', -1);
 }
 
 char getInput(clock_t start, int updateRate, pPacman pacman) {
@@ -162,11 +163,12 @@ char getInput(clock_t start, int updateRate, pPacman pacman) {
 void update(pPacman pacman, char c, pMap map, pPowerup* powerups, int* numPowerups, pGhost ghosts, int numGhosts) {
     char sprite = pacmanChangeDirection(pacman, c);    // change pacman's direction
     pacmanMove(pacman, sprite, map, powerups, numPowerups, ghosts, numGhosts);    // move pacman
+    ghostsMove(ghosts, numGhosts, pacman, map);
 }
 
 void draw(pPacman pacman, pMap map, pPowerup* powerups, int numPowerups, pGhost ghosts, int numGhosts) {
     drawMap(map, map->elems);    // draw the board
     powerupsDraw(powerups, numPowerups);
-    ghostsDraw(ghosts, numGhosts);
+    ghostsDraw(ghosts, numGhosts, map, map->elems);
     pacmanDraw(pacman);    // print pacman
 }

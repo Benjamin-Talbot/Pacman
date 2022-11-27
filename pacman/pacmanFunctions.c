@@ -56,7 +56,7 @@ char pacmanChangeDirection(pPacman this, char c) {
 
 // implement bounds checking in case at edges
 int pacmanCollides(pPacman this, pMap map, char elems[map->height][map->width]) {
-    return elems[this->y][this->x] == WALL || elems[this->y][this->x] == DOOR ? TRUE : FALSE;
+    return elems[this->y][this->x] == WALL || elems[this->y][this->x] == DOOR ? true : false;
 }
 
 void pacmanMakeInvincible(pPacman this) {
@@ -64,11 +64,11 @@ void pacmanMakeInvincible(pPacman this) {
 }
 
 int pacmanEat(pPacman this, pMap map, char elems[map->height][map->width], pPowerup* powerups, int* numPowerups) {
-    char ate = FALSE;
+    char ate = false;
     if(elems[this->y][this->x] == FOOD) {
         this->score += 10;
         elems[this->y][this->x] = ' ';    // should this be in map?
-        ate = TRUE;
+        ate = true;
     }
     else {
         for(int i = 0; i < *numPowerups; i++) {
@@ -83,26 +83,32 @@ int pacmanEat(pPacman this, pMap map, char elems[map->height][map->width], pPowe
 }
 
 char pacmanHitsGhost(pPacman this, pGhost ghosts, int numGhosts) {
-    char hitGhost = FALSE;
+    char hitGhost = false;
     pGhost ghost;
     for(int i = 0; i < numGhosts && !hitGhost; i++) {
         ghost = (ghosts+i);
+
+        if(this->x == ghost->x && this->y == ghost->y) {
+            hitGhost = true;
+        }
         
+        /**
         if(this->x == ghost->x) {
             if(this->y == ghost->y)
-                hitGhost = TRUE;
+                hitGhost = true;
             else if(this->y - ghost->y == 1 || this->y - ghost->y == -1) {
                 if(this->direction[1] + ghost->direction[1] == 0)
-                    hitGhost = TRUE;
+                    hitGhost = true;
             }
         }
         
         else if(this->y == ghost->y) {
             if(this->x - ghost->x == 1 || this->x - ghost->x == -1) {
                 if(this->direction[0] + ghost->direction[0] == 0)
-                    hitGhost = TRUE;
+                    hitGhost = true;
             }
         }
+        //*/
     }
 
     return hitGhost;
