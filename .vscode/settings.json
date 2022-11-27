@@ -33,6 +33,8 @@
         "locale": "c",
         "ostream": "c",
         "new": "c",
-        "time.h": "c"
+        "time.h": "c",
+        "memory": "c",
+        "string.h": "c"
     }
 }

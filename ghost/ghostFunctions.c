@@ -75,7 +75,7 @@ void ghostInit(pGhost this, int x, int y) {
 //     }
 // }
 
-void ghostDraw(pGhost ghosts, int numGhosts) {
+void ghostsDraw(pGhost ghosts, int numGhosts) {
     for(int i = 0; i < numGhosts; i++)
-        mvprintw((ghosts+i)->y, (ghosts+i)->x, "%c", (ghosts+i)->sprite);
+        mvprintw(ghosts[i].y, ghosts[i].x, "%c", ghosts[i].sprite);
 }

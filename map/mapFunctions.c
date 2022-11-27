@@ -7,45 +7,46 @@ pMap mapInit(pMap this, int rows, int cols, char* elems) {
     return this;
 }
 
-void replace_char(char str[], char old, char new) {
-    for(int i = 0; str[i];) {
-        if(str[i] == old) {
-            str[i] = new;
-        }
-        else
-            i++;
-    }
-}
+// void replace_char(char str[], char oldc, char newc) {
+//     for(int i = 0; str[i];) {
+//         if(str[i] == oldc) {
+//             str[i] = newc;
+//         }
+//         else
+//             i++;
+//     }
+// }
 
-char* loadMap(char* dest, int rows, int cols, int level) {
-    char* str = dest;
-    int maxchars;
+// char* loadMap(char* dest, int rows, int cols, int level) {
+//     char* str = dest;
+//     int maxchars;
 
-    if(level)
-        maxchars = sizeof(char)*(18+(int)log10(level) + 1) + 1;
-    else
-        maxchars = sizeof(char)*(18+(int)log10(level+1) + 1) + 1;
-    char filename[maxchars];
-    printf("%d\n", level);
-    snprintf(filename, maxchars, "map/levels/map%d.txt", level);
-    // char filename[] = "map/levels/map0.txt";
-    FILE* mapFile = fopen(filename, "r");
-    char tmp[cols];
-    for(int r = 0; r < rows; r++) {
-        for(int c = 0; c < cols; c++) {
-            fscanf(mapFile, "%c", tmp);
-            strcat(str, tmp);
-        }
-        fscanf(mapFile, "%c", tmp);
-    }
-    fclose(mapFile);
+//     // cite the log expression
+//     if(level)
+//         maxchars = sizeof(char)*(18+(int)log10(level) + 1) + 1;
+//     else
+//         maxchars = sizeof(char)*(18+(int)log10(level+1) + 1) + 1;
+    
+//     char filename[maxchars];
+//     snprintf(filename, maxchars, "map/levels/map%d.txt", level);
+//     // char filename[] = "map/levels/map0.txt";
+//     FILE* mapFile = fopen(filename, "r");
+//     char tmp[cols];
+//     for(int r = 0; r < rows; r++) {
+//         for(int c = 0; c < cols; c++) {
+//             fscanf(mapFile, "%c", tmp);
+//             strncat(str, tmp, 1);
+//         }
+//         fscanf(mapFile, "%c", tmp);
+//     }
+//     fclose(mapFile);
 
-    replace_char(str, ' ', '.');
-    replace_char(str, 'x', ' ');
-    str[cols+1] = ' ';    // put in pacman, since dependent on starting x, y? or include starting point in map file?
+//     replace_char(str, ' ', '.');
+//     replace_char(str, 'x', ' ');
+//     str[cols+1] = ' ';    // put in pacman, since dependent on starting x, y? or include starting point in map file?
 
-    return str;
-}
+//     return str;
+// }
 
 void drawMap(pMap this, char arr[this->height][this->width]) {
     for(int r = 0; r < this->height; r++) {

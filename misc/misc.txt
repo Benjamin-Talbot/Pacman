@@ -1,3 +1,11 @@
+map characters:
+- < is pacman
+- & are ghosts
+- x is empty space (' ')
+- ' ' are . (pellets)
+- O are power pellets
+
+
 ORDER OF OPERATIONS:
 (not necessarily in correct order)
 1. Move

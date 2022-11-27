@@ -8,8 +8,9 @@ To Do:
 - make map loading automatic with different rows and columns
   first maybe using numbers at top of file or straight up until \n and if exists
 - look into windows
+- don't delete char moved from unless ghost, same for ghosts
+- implement bounds checking in case at edges
 
 
 - How to use elems as 2D array, but as pointers?
 - How to malloc powerups, ghosts, etc., with (pGhost) sizeof(Ghost) or (Ghost) sizeof(Ghost)?
-- Bug with variables being overwritten

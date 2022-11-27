@@ -11,7 +11,7 @@
 
 pMap mapInit(pMap this, int rows, int cols, char* elems);
 
-char* loadMap(char* str, int rows, int cols, int level);
+// char* loadMap(char* str, int rows, int cols, int level);
 
 void drawMap(pMap this, char arr[this->height][this->width]);
 

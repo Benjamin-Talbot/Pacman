@@ -4,9 +4,9 @@
 #define DOOR '-'    // -, 45
 #define FOOD '.'    // ., 46
 
-void pacmanInit(pPacman this) {
-    this->x = 1;
-    this->y = 1;
+void pacmanInit(pPacman this, int x, int y) {
+    this->x = x;
+    this->y = y;
     this->direction[0] = 0;
     this->direction[1] = 0;
     this->oldDirection[0] = 0;
@@ -54,6 +54,7 @@ char pacmanChangeDirection(pPacman this, char c) {
     return sprite;
 }
 
+// implement bounds checking in case at edges
 int pacmanCollides(pPacman this, pMap map, char elems[map->height][map->width]) {
     return elems[this->y][this->x] == WALL || elems[this->y][this->x] == DOOR ? TRUE : FALSE;
 }
@@ -62,7 +63,7 @@ void pacmanMakeInvincible(pPacman this) {
     this->invincible = 54;
 }
 
-int pacmanEat(pPacman this, pMap map, char elems[map->height][map->width], pPowerup powerups, int numPowerups) {
+int pacmanEat(pPacman this, pMap map, char elems[map->height][map->width], pPowerup* powerups, int* numPowerups) {
     char ate = FALSE;
     if(elems[this->y][this->x] == FOOD) {
         this->score += 10;
@@ -70,8 +71,8 @@ int pacmanEat(pPacman this, pMap map, char elems[map->height][map->width], pPowe
         ate = TRUE;
     }
     else {
-        for(int i = 0; i < numPowerups; i++) {
-            if(this->x == (powerups+i)->x && this->y == (powerups+i)->y) {
+        for(int i = 0; i < *numPowerups; i++) {
+            if(this->x == powerups[i]->x && this->y == powerups[i]->y) {
                 this->score += 50;
                 pacmanMakeInvincible(this);
                 powerupDelete(powerups, numPowerups, i);
@@ -107,7 +108,7 @@ char pacmanHitsGhost(pPacman this, pGhost ghosts, int numGhosts) {
     return hitGhost;
 }
 
-void pacmanMove(pPacman this, char sprite, pMap map, pPowerup powerups, int numPowerups, pGhost ghosts, int numGhosts) {
+void pacmanMove(pPacman this, char sprite, pMap map, pPowerup* powerups, int* numPowerups, pGhost ghosts, int numGhosts) {
     int oldx = this->x, oldy = this->y;
 
     if(this->changedDirection || (!this->nextDirection[0] && !this->nextDirection[1])) {

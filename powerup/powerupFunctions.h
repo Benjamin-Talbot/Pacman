@@ -9,10 +9,10 @@
 
 void powerupInit(pPowerup this, int x, int y);
 
-void copyPowerup(pPowerup powerups[], int dest, int src);
+void movePowerups(pPowerup* powerups, int* numPowerups, int index);
 
-void powerupDelete(pPowerup this, int numPowerups, int i);
+void powerupDelete(pPowerup* powerups, int* numPowerups, int index);
 
-void powerupDraw(pPowerup this);
+void powerupsDraw(pPowerup* powerups, int numPowerups);
 
 #endif

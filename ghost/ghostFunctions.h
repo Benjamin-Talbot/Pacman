@@ -16,6 +16,6 @@ void ghostInit(pGhost this, int x, int y);
 
 // void ghostMove(pGhost this, pPacman pacman, pMap map);
 
-void ghostDraw(pGhost this, int numGhosts);
+void ghostsDraw(pGhost ghosts, int numGhosts);
 
 #endif

@@ -12,7 +12,7 @@
 #include "../powerup/powerupFunctions.h"
 #include "../ghost/ghostFunctions.h"
 
-void pacmanInit(pPacman this);
+void pacmanInit(pPacman this, int x, int y);
 
 void gameover();
 
@@ -22,9 +22,9 @@ int pacmanCollides(pPacman player, pMap map, char elems[map->height][map->width]
 
 void pacmanMakeInvincible(pPacman this);
 
-int pacmanEat(pPacman this, pMap map, char elems[map->height][map->width], pPowerup powerups, int numPowerups);
+int pacmanEat(pPacman this, pMap map, char elems[map->height][map->width], pPowerup* powerups, int* numPowerups);
 
-void pacmanMove(pPacman this, char c, pMap map, pPowerup powerups, int numPowerups, pGhost ghosts, int numGhosts);
+void pacmanMove(pPacman this, char c, pMap map, pPowerup* powerups, int* numPowerups, pGhost ghosts, int numGhosts);
 
 void pacmanDraw(pPacman this);
 
