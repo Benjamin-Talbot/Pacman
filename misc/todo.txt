@@ -1,11 +1,31 @@
+-- Intermediate Requirements (??%) --
+Scoring and ranking:
+ > display the updated rank at the end of the game
+Use of C features:
+ > keep score using data structure
+ > use macros to make code more readable
+ > write score to file
+
+-- Advanced Requirements (100%?) --
+Multiple stages with increasing difficulty
+Use of C features:
+ > Use files to store stage data
+
+-- Bonus (<= 10%) --
+Demonstration play
+Autoplay for given stage (Game AI)
+
+
+
 To Do:
 - check when out of powerups
+- don't delete char moved from unless ghost, same for ghosts
+- see if can make macros for left/right/up/down for direction
+
+- this->invincible-- vs w/ ()
 - add fruit (cherries, strawberries, etc.)
-- pacman hitting ghost is buggy (go straight down BESIDE ghost)
 - check misc.txt for order of operations
-- use free()
 - make chance that if ghost sees pacman will not follow
 - create ghost home struct?
 - look into windows
-- don't delete char moved from unless ghost, same for ghosts
 - implement bounds checking in case at edges

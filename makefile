@@ -7,8 +7,8 @@
 # NEED TO ADD .h FILES!!!
 #
 
-main: main.o mainFunctions.o pacmanFunctions.o mapFunctions.o powerupFunctions.o ghostFunctions.o
-	gcc -o main main.o mainFunctions.o pacmanFunctions.o mapFunctions.o powerupFunctions.o ghostFunctions.o -lncurses -lm
+main: main.o score.o mainFunctions.o pacmanFunctions.o mapFunctions.o powerupFunctions.o ghostFunctions.o
+	gcc -o main main.o score.o mainFunctions.o pacmanFunctions.o mapFunctions.o powerupFunctions.o ghostFunctions.o -lncurses -lm
 
 # debug: main.o mainFunctions.o pacmanFunctions.o mapFunctions.o powerupFunctions.o ghostFunctions.o
 # 	gcc -o main main.o -g mainFunctions.o pacmanFunctions.o mapFunctions.o powerupFunctions.o ghostFunctions.o -lncurses -lm
@@ -30,6 +30,9 @@ pacmanFunctions.o: pacman/pacmanFunctions.c
 
 mainFunctions.o: mainFunctions/mainFunctions.c
 	gcc -c mainFunctions/mainFunctions.c -g
+
+score.o: score/score.c
+	gcc -c score/score.c -g
 
 clean:
 	rm -f *.o a.out main map/map.h.gch

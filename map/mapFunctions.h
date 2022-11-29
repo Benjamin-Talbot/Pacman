@@ -11,6 +11,8 @@
 
 pMap mapInit(pMap this, int rows, int cols, char* elems);
 
+void drawWalls(pMap this, char arr[this->height][this->width]);
+
 void drawMap(pMap this, char arr[this->height][this->width]);
 
 #endif

@@ -9,9 +9,6 @@
 #define DOOR '-'    // -, 45
 #endif
 
-static int** directions = NULL;
-static int numChoices = 0;
-
 void ghostInit(pGhost this, int x, int y) {
     this->x = x;
     this->y = y;
@@ -119,8 +116,8 @@ void ghostFollowPacman() {
 
 char ghostHitsPacman(pGhost this, pPacman pacman) {
     if(this->x == pacman->x && this->y == pacman->y)
-        return true;
-    return false;
+        return TRUE;
+    return FALSE;
 }
 
 void ghostMove(pGhost this, pPacman pacman, pMap map) {
@@ -147,7 +144,7 @@ void ghostMove(pGhost this, pPacman pacman, pMap map) {
     this->y += this->direction[1];
 
     if(ghostHitsPacman(this, pacman))
-        gameover();     // change to a variable, maybe in pacman, in case of circular references?
+        gameover(pacman);     // change to a variable, maybe in pacman, in case of circular references?
 }
 
 void ghostsMove(pGhost ghosts, int numGhosts, pPacman pacman, pMap map) {

@@ -8,6 +8,9 @@
 #include "../pacman/pacmanFunctions.h"
 #include "../map/mapFunctions.h"
 
+static int** directions = NULL;
+static int numChoices = 0;
+
 void ghostInit(pGhost this, int x, int y);
 
 char ghostSeesPacman(pGhost this, pPacman pacman, pMap map, char elems[map->height][map->width]);

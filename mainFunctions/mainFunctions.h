@@ -11,6 +11,9 @@
 #include "../map/mapFunctions.h"
 #include "../powerup/powerupFunctions.h"
 #include "../ghost/ghostFunctions.h"
+#include "../score/score.h"
+
+char* getName(char* player);
 
 void replace_char(char str[], char oldc, char newc, int max);
 
@@ -23,5 +26,7 @@ char getInput(clock_t start, int updateRate, pPacman pacman);
 void update(pPacman pacman, char c, pMap map, pPowerup* powerups, int* numPowerups, pGhost ghosts, int numGhosts);
 
 void draw(pPacman pacman, pMap map, pPowerup* powerups, int numPowerups, pGhost ghosts, int numGhosts);
+
+void endGame(int score, char* player);
 
 #endif

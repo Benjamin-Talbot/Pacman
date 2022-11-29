@@ -12,6 +12,7 @@ typedef struct Pacman {
     char nextSprite;
     int score;
     int invincible;
+    char gameover;
 } Pacman;
 typedef Pacman* pPacman;
 

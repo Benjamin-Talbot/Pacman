@@ -35,6 +35,7 @@
         "new": "c",
         "time.h": "c",
         "memory": "c",
-        "string.h": "c"
+        "string.h": "c",
+        "score.h": "c"
     }
 }

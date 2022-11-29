@@ -14,7 +14,7 @@
 
 void pacmanInit(pPacman this, int x, int y);
 
-void gameover();
+void gameover(pPacman this);
 
 char pacmanChangeDirection(pPacman this, char c);
 

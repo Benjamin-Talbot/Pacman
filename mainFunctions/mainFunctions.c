@@ -1,5 +1,36 @@
 #include "mainFunctions.h"
 
+// what about empty name?
+char* getName(char* player) {
+    int lenName = 8;
+    player = malloc(sizeof(char) * lenName);
+
+    printf("Please enter your name: ");
+
+	int i = 0;
+	scanf("%c", &player[0]);
+	while(player[i] != '\n' && player[i] != ':') {
+		i++;
+        if(i >= lenName) {
+            lenName *= 2;
+            player = realloc(player, lenName);
+        }
+		scanf("%c", &player[i]);
+	}
+    if(player[i] != ':')
+	    player[i] = '\0';
+    else {
+        printf("You cannot include the character ':' in your name.\n");
+        player = getName(player);
+    }
+
+    char* tmp = malloc(sizeof(char) * i);
+	strncpy(tmp, player, sizeof(char) * i);
+	free(player);
+
+	return tmp;
+}
+
 void replace_char(char str[], char oldc, char newc, int max) {
     for(int i = 0; str[i] && max;) {
         if(str[i] == oldc) {
@@ -53,7 +84,7 @@ char* loadMap(pMap* map, int level) {
     char* elems = malloc(sizeof(char) * lenElems);
     int maxchars;
 
-    // cite the log expression
+    // cite the log expression or change
     if(level)
         maxchars = sizeof(char)*(18+(int)log10(level) + 1) + 1;
     else
@@ -67,7 +98,7 @@ char* loadMap(pMap* map, int level) {
     int rows = 0;
     int cols = 0;
     int numchars = 0;
-    int success = 1;
+    int success = TRUE;
 
     while(success > 0) {
         cols = 0;
@@ -91,6 +122,7 @@ char* loadMap(pMap* map, int level) {
 
     char* tmp = malloc(sizeof(char) * numchars);
     strncpy(tmp, elems, numchars);
+    free(elems);
 
     replace_char(tmp, ' ', '.', -1);
     replace_char(tmp, 'x', ' ', -1);
@@ -129,6 +161,9 @@ void initialize(pPacman* pacman, pMap* map, int level, pPowerup** powerups, int*
     replace_char((*map)->elems, 'o', ' ', -1);
     replace_char((*map)->elems, '&', '.', 1);
     replace_char((*map)->elems, '&', ' ', -1);
+
+    free(coords[0]);
+    free(coords);
 }
 
 char getInput(clock_t start, int updateRate, pPacman pacman) {
@@ -153,9 +188,9 @@ char getInput(clock_t start, int updateRate, pPacman pacman) {
     }
 
     if(c == ERR)
-        pacman->changedDirection = 0;
+        pacman->changedDirection = FALSE;
     else
-        pacman->changedDirection = 1;
+        pacman->changedDirection = TRUE;
     
     return c;
 }
@@ -171,4 +206,19 @@ void draw(pPacman pacman, pMap map, pPowerup* powerups, int numPowerups, pGhost 
     powerupsDraw(powerups, numPowerups);
     ghostsDraw(ghosts, numGhosts, map, map->elems);
     pacmanDraw(pacman);    // print pacman
+}
+
+void endGame(int score, char* player) {
+    pTree scores = loadScores(scores);
+    if(scores) {
+        addNode(scores->head, score, player);
+    }
+    else {
+        scores = treeInit(scores, score, player);
+    }
+    printTree(scores->head, 0);
+    printScores(scores->head);
+    writeScores(scores->head);
+    
+    printf("Thanks for playing %s!\n", player);
 }
