@@ -219,6 +219,9 @@ void endGame(int score, char* player) {
     printTree(scores->head, 0);
     printScores(scores->head);
     writeScores(scores->head);
+    // FILE* scoresFile = fopen("../score/scores.txt", "a");
+    // fprintf("%c", '\b');
+    // fclose(scoresFile);
     
     printf("Thanks for playing %s!\n", player);
 }

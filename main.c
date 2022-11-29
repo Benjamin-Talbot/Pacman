@@ -10,8 +10,8 @@
 #include "score/score.h"
 
 int main() {
-    // char* player = getName(player);
-    char* player = "Ben";
+    char* player = getName(player);
+    // char* player = "Ben";
 
     srand(time(NULL));
     clock_t start;
@@ -27,7 +27,7 @@ int main() {
 
     initialize(&pacman, &map, level, &powerups, &numPowerups, &ghosts, &numGhosts);
 
-    /**
+    /**/
     initscr();    // creates stdscr, start code dealing with ncurses
 
     curs_set(0);

@@ -5,6 +5,13 @@
 #include <stdlib.h>
 #include <string.h>
 
+#ifndef TRUE
+#define TRUE 1
+#endif
+#ifndef FALSE
+#define FALSE 0
+#endif
+
 typedef struct Node {
     int score;
     char* name;
@@ -17,6 +24,10 @@ typedef struct Tree {
     pNode head;
 } Tree;
 typedef Tree* pTree;
+
+static int rank = 1;
+static int numWritten = 1;
+static int append = FALSE;
 
 pNode nodeInit(int score, char* name);
 

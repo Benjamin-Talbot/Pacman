@@ -1,10 +1,10 @@
 -- Intermediate Requirements (??%) --
 Scoring and ranking:
  > display the updated rank at the end of the game
-Use of C features:
- > keep score using data structure
- > use macros to make code more readable
  > write score to file
+
+** Terminating character at end of scores file, or figure out how to remove final newline when printing to **
+* test appending '\b' (backspace) tp see if deletes last written character
 
 -- Advanced Requirements (100%?) --
 Multiple stages with increasing difficulty

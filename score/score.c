@@ -1,12 +1,5 @@
 #include "score.h"
 
-#ifndef TRUE
-#define TRUE 1
-#endif
-#ifndef FALSE
-#define FALSE 0
-#endif
-
 pNode nodeInit(int score, char* name) {
     pNode node = (pNode) malloc(sizeof(Node));
     node->score = score;
@@ -91,23 +84,39 @@ pTree loadScores(pTree scores) {
     return scores;
 }
 
-void writeScores(pNode head) {
-    FILE* scoresFile = fopen("scores.txt", "w");
-    if(head->left)
-        writeScores(head->left);
-    fprintf(scoresFile, "%s:%d", head->name, head->score);
-    if(head->right)
-        writeScores(head->right);
+void writeScore(pNode score) {
+    FILE* scoresFile;
+    if(append)
+        scoresFile = fopen("score/scores.txt", "a");
+    else {
+        scoresFile = fopen("score/scores.txt", "w");
+        append = TRUE;
+    }
+    
+    if(numWritten != rank - 1)
+        fprintf(scoresFile, "%s:%d\n", score->name, score->score);
+    else
+        fprintf(scoresFile, "%s:%d", score->name, score->score);
+    numWritten++;
 
     fclose(scoresFile);
 }
 
-void printScores(pNode head) {
+void writeScores(pNode head) {
     if(head->left)
-        printScores(head->left);
-    printf("%s: %d\n", head->name, head->score);
+        writeScores(head->left);
+    writeScore(head);
+    if(head->right)
+        writeScores(head->right);
+}
+
+void printScores(pNode head) {
     if(head->right)
         printScores(head->right);
+    printf("%d. %s: %d\n", rank, head->name, head->score);
+    rank++;
+    if(head->left)
+        printScores(head->left);
 }
 
 void printTree(pNode head, int level) {
