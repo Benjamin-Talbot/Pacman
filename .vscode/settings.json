@@ -36,6 +36,7 @@
         "time.h": "c",
         "memory": "c",
         "string.h": "c",
-        "score.h": "c"
+        "score.h": "c",
+        "unistd.h": "c"
     }
 }

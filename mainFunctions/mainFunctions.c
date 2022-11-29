@@ -1,6 +1,6 @@
 #include "mainFunctions.h"
 
-// what about empty name?
+// what about empty name? and test if include :
 char* getName(char* player) {
     int lenName = 8;
     player = malloc(sizeof(char) * lenName);
@@ -162,6 +162,7 @@ void initialize(pPacman* pacman, pMap* map, int level, pPowerup** powerups, int*
     replace_char((*map)->elems, '&', '.', 1);
     replace_char((*map)->elems, '&', ' ', -1);
 
+
     free(coords[0]);
     free(coords);
 }
@@ -216,12 +217,9 @@ void endGame(int score, char* player) {
     else {
         scores = treeInit(scores, score, player);
     }
-    printTree(scores->head, 0);
+    // printTree(scores->head, 0);
     printScores(scores->head);
     writeScores(scores->head);
-    // FILE* scoresFile = fopen("../score/scores.txt", "a");
-    // fprintf("%c", '\b');
-    // fclose(scoresFile);
     
     printf("Thanks for playing %s!\n", player);
 }

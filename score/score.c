@@ -129,17 +129,3 @@ void printTree(pNode head, int level) {
     if(head->left)
         printTree(head->left, level + 1);
 }
-
-/**
-int main() {
-    pTree tree = treeInit(tree, 0, "Ben");
-    addNode(tree->head, 1, "Carl");
-    addNode(tree->head, 2, "A");
-    addNode(tree->head, 3, "B");
-    addNode(tree->head, 1, "C");
-
-    printTree(tree->head, 0);
-
-    return 0;
-}
-//*/

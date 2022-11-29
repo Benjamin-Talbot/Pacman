@@ -10,6 +10,8 @@ typedef struct Ghost {
     char nextSprite;
     int timer;
     char trackingPacman;
+    int** directions;
+    int numChoices;
 } Ghost;
 typedef Ghost* pGhost;
 

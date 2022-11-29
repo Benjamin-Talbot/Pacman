@@ -4,7 +4,7 @@
 typedef struct Pacman {
     int x;
     int y;
-    int direction[2];
+    int *direction;
     int oldDirection[2];
     int nextDirection[2];
     char changedDirection;

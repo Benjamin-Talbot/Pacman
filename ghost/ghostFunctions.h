@@ -8,8 +8,8 @@
 #include "../pacman/pacmanFunctions.h"
 #include "../map/mapFunctions.h"
 
-static int** directions = NULL;
-static int numChoices = 0;
+// static int** directions = NULL;
+// static int numChoices = 0;
 
 void ghostInit(pGhost this, int x, int y);
 

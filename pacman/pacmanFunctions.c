@@ -6,15 +6,24 @@
 #define PELLET ('.')    // ., 46
 #endif
 
+#undef GO_LEFT(dir)
+#define GO_LEFT(dir) this->dir; this->dir[0] = -1; this->dir[1] = 0;
+#undef GO_RIGHT(dir)
+#define GO_RIGHT(dir) this->dir; this->dir[0] = 1; this->dir[1] = 0;
+#undef GO_UP(dir)
+#define GO_UP(dir) this->dir; this->dir[0] = 0; this->dir[1] = -1;
+#undef GO_DOWN(dir)
+#define GO_DOWN(dir) this->dir; this->dir[0] = 0; this->dir[1] = 1;
+#undef STOP(dir)
+#define STOP(dir) this->dir; this->dir[0] = 0; this->dir[1] = 0;
+
 void pacmanInit(pPacman this, int x, int y) {
     this->x = x;
     this->y = y;
-    this->direction[0] = 0;
-    this->direction[1] = 0;
-    this->oldDirection[0] = 0;
-    this->oldDirection[1] = 0;
-    this->nextDirection[0] = 0;
-    this->nextDirection[1] = 0;
+    this->direction = malloc(sizeof(int) * 2);
+    STOP(direction);
+    STOP(oldDirection);
+    STOP(nextDirection);
     this->changedDirection = FALSE;
     this->sprite = 60;
     this->nextSprite = 60;
@@ -24,7 +33,7 @@ void pacmanInit(pPacman this, int x, int y) {
 }
 
 void gameover(pPacman this) {
-    mvprintw(5, 70, "Gameover");
+    // mvprintw(5, 70, "Gameover");
     this->gameover = TRUE;
 }
 
@@ -33,24 +42,20 @@ char pacmanChangeDirection(pPacman this, char c) {
     this->oldDirection[0] = this->direction[0];
     this->oldDirection[1] = this->direction[1];
     switch(c) {
-            case 119:   // w
-                this->direction[0] = 0;
-                this->direction[1] = -1;
+            case 119:   // w, move up
+                GO_UP(direction);
                 sprite = 118;   // v
                 break;
-            case 97:    // a
-                this->direction[0] = -1;
-                this->direction[1] = 0;
+            case 97:    // a, go left
+                GO_LEFT(direction);
                 sprite = 62;    // >
                 break;
-            case 115:   // s
-                this->direction[0] = 0;
-                this->direction[1] = 1;
+            case 115:   // s, go down
+                GO_DOWN(direction);
                 sprite = 94;    // ^
                 break;
-            case 100:   // d
-                this->direction[0] = 1;
-                this->direction[1] = 0;
+            case 100:   // d, go right
+                GO_RIGHT(direction);
                 sprite = 60;    // <
                 break;
     }
@@ -113,8 +118,7 @@ void pacmanMove(pPacman this, char sprite, pMap map, pPowerup* powerups, int* nu
 
     if(this->changedDirection || (!this->nextDirection[0] && !this->nextDirection[1])) {
         if(this->changedDirection) {
-            this->nextDirection[0] = 0;
-            this->nextDirection[1] = 0;
+            STOP(nextDirection);
         }
 
         this->x += this->direction[0];
@@ -136,8 +140,7 @@ void pacmanMove(pPacman this, char sprite, pMap map, pPowerup* powerups, int* nu
             else {
                 this->x = oldx;
                 this->y = oldy;
-                this->direction[0] = 0;
-                this->direction[1] = 0;
+                STOP(direction);
             }
         }
     }
@@ -149,8 +152,7 @@ void pacmanMove(pPacman this, char sprite, pMap map, pPowerup* powerups, int* nu
             this->sprite = this->nextSprite;
             this->direction[0] = this->nextDirection[0];
             this->direction[1] = this->nextDirection[1];
-            this->nextDirection[0] = 0;
-            this->nextDirection[1] = 0;
+            STOP(nextDirection);
             this->changedDirection = 1;
         }
         else {
@@ -160,8 +162,8 @@ void pacmanMove(pPacman this, char sprite, pMap map, pPowerup* powerups, int* nu
             if(pacmanCollides(this, map, map->elems)) {
                 this->x = oldx;
                 this->y = oldy;
-                this->direction[0] = this->nextDirection[0] = 0;
-                this->direction[1] = this->nextDirection[1] = 0;
+                STOP(direction);
+                STOP(nextDirection);
             }
         }
     }

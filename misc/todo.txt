@@ -1,10 +1,11 @@
--- Intermediate Requirements (??%) --
-Scoring and ranking:
- > display the updated rank at the end of the game
- > write score to file
-
-** Terminating character at end of scores file, or figure out how to remove final newline when printing to **
-* test appending '\b' (backspace) tp see if deletes last written character
+Pressing issues:
+- make ghosts follow pacman
+- make ghosts wait in hub until timeout
+Then:
+- Move on to next level if eat all pellets
+- Harder stages
+Then:
+- Autoplay
 
 -- Advanced Requirements (100%?) --
 Multiple stages with increasing difficulty
@@ -22,7 +23,8 @@ To Do:
 - don't delete char moved from unless ghost, same for ghosts
 - see if can make macros for left/right/up/down for direction
 
-- this->invincible-- vs w/ ()
+- Terminating character at end of scores file?
+- this->invincible-- vs (this->invincible)--
 - add fruit (cherries, strawberries, etc.)
 - check misc.txt for order of operations
 - make chance that if ghost sees pacman will not follow

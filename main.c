@@ -9,17 +9,25 @@
 #include "mainFunctions/mainFunctions.h"
 #include "score/score.h"
 
+/*
+Left to deallocate:
+- pacman->direction
+- player
+- nodes in tree
+- tree
+*/
+
 int main() {
     char* player = getName(player);
-    // char* player = "Ben";
 
     srand(time(NULL));
     clock_t start;
-    int updateRate = 100;   // set to 150 or 200
+    int updateRate = 200;   // set to 150 or 200
     char c;
     pPacman pacman = NULL;
     pMap map = NULL;
     int level = 0;
+    level++;
     pPowerup* powerups = NULL;
     int* numPowerups = NULL;
     pGhost ghosts = NULL;
@@ -36,8 +44,8 @@ int main() {
 
     drawWalls(map, map->elems);
     draw(pacman, map, powerups, *numPowerups, ghosts, *numGhosts);
-    // while(!pacman->gameover) {
-    while(pacman->gameover) {
+
+    while(!pacman->gameover) {
         start = clock();
 
         update(pacman, c, map, powerups, numPowerups, ghosts, *numGhosts);
@@ -74,10 +82,3 @@ int main() {
 
     return 0;
 }
-
-/*
-Left to deallocate:
-- player
-- nodes in tree
-- tree
-*/
