@@ -6,6 +6,10 @@ typedef struct Ghost {
     int y;
     int direction[2];
     int oldDirection[2];
+    int nextDirection[2];
+    int turnx;
+    int turny;
+    char stopTracking;
     char sprite;
     char nextSprite;
     int timer;
@@ -16,8 +20,3 @@ typedef struct Ghost {
 typedef Ghost* pGhost;
 
 #endif
-
-/*
-&
-m n
-*/

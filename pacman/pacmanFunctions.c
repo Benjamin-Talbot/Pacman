@@ -1,26 +1,8 @@
 #include "pacmanFunctions.h"
 
-#define WALL ('#')    // #, 35
-#define DOOR ('-')    // -, 45
-#ifndef PELLET
-#define PELLET ('.')    // ., 46
-#endif
-
-#undef GO_LEFT(dir)
-#define GO_LEFT(dir) this->dir; this->dir[0] = -1; this->dir[1] = 0;
-#undef GO_RIGHT(dir)
-#define GO_RIGHT(dir) this->dir; this->dir[0] = 1; this->dir[1] = 0;
-#undef GO_UP(dir)
-#define GO_UP(dir) this->dir; this->dir[0] = 0; this->dir[1] = -1;
-#undef GO_DOWN(dir)
-#define GO_DOWN(dir) this->dir; this->dir[0] = 0; this->dir[1] = 1;
-#undef STOP(dir)
-#define STOP(dir) this->dir; this->dir[0] = 0; this->dir[1] = 0;
-
 void pacmanInit(pPacman this, int x, int y) {
     this->x = x;
     this->y = y;
-    this->direction = malloc(sizeof(int) * 2);
     STOP(direction);
     STOP(oldDirection);
     STOP(nextDirection);
@@ -30,10 +12,10 @@ void pacmanInit(pPacman this, int x, int y) {
     this->score = 0;
     this->invincible = 0;
     this->gameover = FALSE;
+    this->won = FALSE;
 }
 
 void gameover(pPacman this) {
-    // mvprintw(5, 70, "Gameover");
     this->gameover = TRUE;
 }
 
@@ -63,36 +45,48 @@ char pacmanChangeDirection(pPacman this, char c) {
     return sprite;
 }
 
-// implement bounds checking in case at edges
 int pacmanCollides(pPacman this, pMap map, char elems[map->height][map->width]) {
-    return elems[this->y][this->x] == WALL || elems[this->y][this->x] == DOOR ? TRUE : FALSE;
+    if(this->x >= 0 && this->x < map->width && this->y >= 0 && this->y < map->height)
+        return elems[this->y][this->x] == WALL || elems[this->y][this->x] == DOOR ? TRUE : FALSE;
+    return FALSE;
 }
 
 void pacmanMakeInvincible(pPacman this) {
     this->invincible = 54;
 }
 
+void increaseScore(pPacman this, int points) {
+    this->score += points;
+}
+
 int pacmanEat(pPacman this, pMap map, char elems[map->height][map->width], pPowerup* powerups, int* numPowerups) {
     char ate = FALSE;
     char allGone = TRUE;
     if(elems[this->y][this->x] == PELLET) {
-        this->score += 10;
-        elems[this->y][this->x] = ' ';    // should this be in map?
+        increaseScore(this, 10);
+        eatPellet(map, map->elems, this->x, this->y);
         ate = TRUE;
+        // elems[this->y][this->x] = ' ';    // should this be in map?
 
         for(int row = 0; row < map->height && allGone; row++)
             for(int col = 0; col < map->width && allGone; col++)
                 if (elems[row][col] == PELLET)
                     allGone = FALSE;
-        if(allGone)
-            gameover(this);
+        if(allGone && *numPowerups == 0)
+            this->won = TRUE;
     }
     else {
         for(int i = 0; i < *numPowerups; i++) {
             if(this->x == powerups[i]->x && this->y == powerups[i]->y) {
-                this->score += 50;
+                increaseScore(this, 50);
                 pacmanMakeInvincible(this);
                 powerupDelete(powerups, numPowerups, i);
+                for(int row = 0; row < map->height && allGone; row++)
+                    for(int col = 0; col < map->width && allGone; col++)
+                        if (elems[row][col] == PELLET)
+                            allGone = FALSE;
+                if(allGone && *numPowerups == 0)
+                    this->won = TRUE;
             }
         }
     }

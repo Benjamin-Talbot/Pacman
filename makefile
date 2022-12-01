@@ -35,12 +35,13 @@ score.o: score/score.c
 	gcc -c score/score.c -g
 
 clean:
-	rm -f *.o a.out main map/map.h.gch
+	rm -f *.o a.out main
 
 # included in clean
 #map
 #pacman
 #map.h.gch
+# map/map.h.gch
 
 # map: map.o
 # 	gcc -o map map.c -lm

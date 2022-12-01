@@ -17,22 +17,34 @@ pMap mapInit(pMap this, int rows, int cols, char* elems) {
     return this;
 }
 
-void drawWalls(pMap this, char arr[this->height][this->width]) {
+void eatPellet(pMap this, char elems[this->height][this->width], int x, int y) {
+    elems[y][x] = ' ';
+}
+
+void drawWalls(pMap this, char elems[this->height][this->width]) {
     for(int r = 0; r < this->height; r++) {
         for(int c = 0; c < this->width; c++) {
-            if(arr[r][c] == WALL || arr[r][c] == DOOR) {
-                mvprintw(r, c, "%c", arr[r][c]);
+            if(elems[r][c] == WALL || elems[r][c] == DOOR) {
+                mvprintw(r, c, "%c", elems[r][c]);
             }
         }
     }
 }
 
-void drawMap(pMap this, char arr[this->height][this->width]) {
+void drawMap(pMap this, char elems[this->height][this->width]) {
     for(int r = 0; r < this->height; r++) {
         for(int c = 0; c < this->width; c++) {
-            if(arr[r][c] == PELLET) {
-                mvprintw(r, c, "%c", arr[r][c]);
+            if(elems[r][c] == PELLET) {
+                mvprintw(r, c, "%c", elems[r][c]);
             }
+        }
+    }
+}
+
+void clearMap(pMap this, char elems[this->height][this->width]) {
+    for(int r = 0; r < this->height; r++) {
+        for(int c = 0; c < this->width; c++) {
+            mvprintw(r, c, " ");
         }
     }
 }

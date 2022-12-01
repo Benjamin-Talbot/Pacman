@@ -11,8 +11,12 @@
 
 pMap mapInit(pMap this, int rows, int cols, char* elems);
 
-void drawWalls(pMap this, char arr[this->height][this->width]);
+void eatPellet(pMap this, char elems[this->height][this->width], int x, int y);
 
-void drawMap(pMap this, char arr[this->height][this->width]);
+void drawWalls(pMap this, char elems[this->height][this->width]);
+
+void drawMap(pMap this, char elems[this->height][this->width]);
+
+void clearMap(pMap this, char elems[this->height][this->width]);
 
 #endif

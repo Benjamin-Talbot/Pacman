@@ -124,7 +124,7 @@ char* loadMap(pMap* map, int level) {
     strncpy(tmp, elems, numchars);
     free(elems);
 
-    replace_char(tmp, ' ', '.', -1);
+    // replace_char(tmp, ' ', '.', -1);
     replace_char(tmp, 'x', ' ', -1);
 
     *map = (pMap) malloc(sizeof(Map));
@@ -159,12 +159,28 @@ void initialize(pPacman* pacman, pMap* map, int level, pPowerup** powerups, int*
 
     replace_char((*map)->elems, '<', ' ', 1);
     replace_char((*map)->elems, 'o', ' ', -1);
-    replace_char((*map)->elems, '&', '.', 1);
+    // replace_char((*map)->elems, '&', '.', 1);
     replace_char((*map)->elems, '&', ' ', -1);
-
 
     free(coords[0]);
     free(coords);
+
+    drawWalls(*map, (*map)->elems);
+    draw(*pacman, *map, *powerups, **numPowerups, *ghosts, **numGhosts);
+}
+
+void freeMemory(pPacman pacman, pMap map, pPowerup* powerups, int* numPowerups, pGhost ghosts, int* numGhosts) {
+    free(pacman);
+    free(map->elems);
+    free(map);
+    for(int i = 0; i < *numPowerups; i++) {
+        free(powerups[i]);
+    }
+    free(powerups);
+    free(numPowerups);
+    free(ghosts->directions);
+    free(ghosts);
+    free(numGhosts);
 }
 
 char getInput(clock_t start, int updateRate, pPacman pacman) {
@@ -217,8 +233,7 @@ void endGame(int score, char* player) {
     else {
         scores = treeInit(scores, score, player);
     }
-    // printTree(scores->head, 0);
-    printScores(scores->head);
+    printScores(scores->head);   // problematic
     writeScores(scores->head);
     
     printf("Thanks for playing %s!\n", player);

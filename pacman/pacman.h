@@ -4,7 +4,7 @@
 typedef struct Pacman {
     int x;
     int y;
-    int *direction;
+    int direction[2];
     int oldDirection[2];
     int nextDirection[2];
     char changedDirection;
@@ -13,6 +13,7 @@ typedef struct Pacman {
     int score;
     int invincible;
     char gameover;
+    char won;
 } Pacman;
 typedef Pacman* pPacman;
 

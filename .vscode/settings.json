@@ -37,6 +37,10 @@
         "memory": "c",
         "string.h": "c",
         "score.h": "c",
-        "unistd.h": "c"
+        "unistd.h": "c",
+        "algorithm": "c",
+        "bitset": "c",
+        "optional": "c",
+        "math.h": "c"
     }
 }

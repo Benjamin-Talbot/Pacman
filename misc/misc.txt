@@ -1,3 +1,5 @@
+make ghosts move before or after the tracking pacman and stuff
+
 map characters:
 - < is pacman
 - & are ghosts

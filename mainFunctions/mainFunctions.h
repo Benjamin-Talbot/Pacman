@@ -21,6 +21,8 @@ char* loadMap(pMap* map, int level);
 
 void initialize(pPacman* pacman, pMap* map, int level, pPowerup** powerups, int** numPowerups, pGhost* ghosts, int** numGhosts);
 
+void freeMemory(pPacman pacman, pMap map, pPowerup* powerups, int* numPowerups, pGhost ghosts, int* numGhosts);
+
 char getInput(clock_t start, int updateRate, pPacman pacman);
 
 void update(pPacman pacman, char c, pMap map, pPowerup* powerups, int* numPowerups, pGhost ghosts, int numGhosts);
