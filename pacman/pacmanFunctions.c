@@ -1,6 +1,6 @@
 #include "pacmanFunctions.h"
 
-void pacmanInit(pPacman this, int x, int y) {
+void pacmanInit(pPacman this, int x, int y, int score) {
     this->x = x;
     this->y = y;
     STOP(direction);
@@ -9,7 +9,7 @@ void pacmanInit(pPacman this, int x, int y) {
     this->changedDirection = FALSE;
     this->sprite = 60;
     this->nextSprite = 60;
-    this->score = 0;
+    this->score = score;
     this->invincible = 0;
     this->gameover = FALSE;
     this->won = FALSE;

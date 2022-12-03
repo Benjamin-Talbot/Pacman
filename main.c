@@ -12,7 +12,7 @@
 
 /*
 bugs:
-- segfault with ghosts
+- segfault with ghosts (ghostSeesPacman)
 - segfault at end of game
 - ghosts sometimes go through walls
 */
@@ -33,6 +33,7 @@ int main() {
     int updateRate = 100;   // set to 150 or 200
     char c;
     pPacman pacman = NULL;
+    int score = 0;
     pMap map = NULL;
     int maxLevel = 2;
     int level = 0;
@@ -48,7 +49,7 @@ int main() {
     nodelay(stdscr, true);
     noecho();
     
-    initialize(&pacman, &map, level, &powerups, &numPowerups, &ghosts, &numGhosts);
+    initialize(&pacman, score, &map, level, &powerups, &numPowerups, &ghosts, &numGhosts);
 
     while(!pacman->gameover) {
         start = clock();
@@ -57,8 +58,9 @@ int main() {
             clearMap(map, map->elems);
             level++;
             if(level <= maxLevel) {
+                score = pacman->score;
                 freeMemory(pacman, map, powerups, numPowerups, ghosts, numGhosts);
-                initialize(&pacman, &map, level, &powerups, &numPowerups, &ghosts, &numGhosts);
+                initialize(&pacman, score, &map, level, &powerups, &numPowerups, &ghosts, &numGhosts);
             }
             else
                 pacman->gameover = TRUE;

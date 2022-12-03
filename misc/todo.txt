@@ -1,9 +1,6 @@
 Pressing issues:
 - make ghosts follow pacman
-- make ghosts wait in hub until timeout
-Then:
-- Move on to next level if eat all pellets
-- Harder stages
+- make ghosts wait in hub until timeout?
 Then:
 - Autoplay
 
@@ -19,6 +16,7 @@ Autoplay for given stage (Game AI)
 
 
 To Do:
+- are tied scores always returned in the same order?
 - check when out of powerups
 - don't delete char moved from unless ghost, same for ghosts
 - see if can make macros for left/right/up/down for direction

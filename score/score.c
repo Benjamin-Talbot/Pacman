@@ -4,6 +4,8 @@ pNode nodeInit(int score, char* name) {
     pNode node = (pNode) malloc(sizeof(Node));
     node->score = score;
     node->name = name;
+    node->left = NULL;
+    node->right = NULL;
 
     return node;
 }
@@ -34,7 +36,6 @@ void addNode(pNode head, int score, char* name) {
 }
 
 pTree loadScores(pTree scores) {
-    // scores = (pTree) malloc(sizeof(Tree));
     scores = NULL;
 
     FILE* scoresFile = fopen("score/scores.txt", "r");

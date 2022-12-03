@@ -23,8 +23,11 @@ void ghostInit(pGhost this, int x, int y) {
     this->numChoices = 0;
 }
 
+// buggy
+// bounds checking
 char ghostSeesPacman(pGhost this, pPacman pacman, pMap map, char elems[map->height][map->width]) {
-    int x = this->x + 1, y = this->y;
+    int x = this->x + 1;
+    int y = this->y;
     char foundPacman = FALSE;
     while(elems[y][x] != WALL && elems[y][x] != DOOR && !foundPacman) {
         if(x == pacman->x && y == pacman->y) {
@@ -32,21 +35,25 @@ char ghostSeesPacman(pGhost this, pPacman pacman, pMap map, char elems[map->heig
         }
         x++;
     }
-    x = this->x, y = this->y - 1;
+    x = this->x;
+    y = this->y - 1;
     while(elems[y][x] != WALL && elems[y][x] != DOOR && !foundPacman) {
         if(x == pacman->x && y == pacman->y) {
             foundPacman = TRUE;
         }
         y--;
     }
-    x = this->x - 1, y = this->y;
+    x = this->x - 1;
+    y = this->y;
     while(elems[y][x] != WALL && elems[y][x] != DOOR && !foundPacman) {
         if(x == pacman->x && y == pacman->y) {
             foundPacman = TRUE;
         }
         x--;
     }
-    x = this->x, y = this->y + 1;
+    // this spot only?
+    x = this->x;
+    y = this->y + 1;
     while(elems[y][x] != WALL && elems[y][x] != DOOR && !foundPacman) {
         if(x == pacman->x && y == pacman->y) {
             foundPacman = TRUE;

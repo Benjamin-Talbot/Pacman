@@ -1,10 +1,2 @@
-Ben:10
-Ben:10
-Ben:10
-Ben:10
-Ben:10
-Ben:10
-Bwn:10
-Ben:10
-Ben:10
-Ben:10
+:0
+:100

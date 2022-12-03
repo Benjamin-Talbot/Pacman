@@ -1,6 +1,7 @@
 #include "mainFunctions.h"
 
 // what about empty name? and test if include :
+// doesn't work with handing ':'
 char* getName(char* player) {
     int lenName = 8;
     player = malloc(sizeof(char) * lenName);
@@ -9,7 +10,7 @@ char* getName(char* player) {
 
 	int i = 0;
 	scanf("%c", &player[0]);
-	while(player[i] != '\n' && player[i] != ':') {
+	while(player[i] != '\n' && player[i] == ':') {
 		i++;
         if(i >= lenName) {
             lenName *= 2;
@@ -133,14 +134,14 @@ char* loadMap(pMap* map, int level) {
     return tmp;
 }
 
-void initialize(pPacman* pacman, pMap* map, int level, pPowerup** powerups, int** numPowerups, pGhost* ghosts, int** numGhosts) {
+void initialize(pPacman* pacman, int score, pMap* map, int level, pPowerup** powerups, int** numPowerups, pGhost* ghosts, int** numGhosts) {
 
     loadMap(map, level);
 
     int** coords = NULL;
     int numpacs = findCoords(&coords, (*map)->height, (*map)->width, (*map)->elems, '<');
     *pacman = (pPacman) malloc(sizeof(Pacman));
-    pacmanInit(*pacman, coords[0][0], coords[0][1]);
+    pacmanInit(*pacman, coords[0][0], coords[0][1], score);
 
     *numPowerups = malloc(sizeof(int));
     **numPowerups = findCoords(&coords, (*map)->height, (*map)->width, (*map)->elems, 'o');
@@ -220,6 +221,7 @@ void update(pPacman pacman, char c, pMap map, pPowerup* powerups, int* numPoweru
 
 void draw(pPacman pacman, pMap map, pPowerup* powerups, int numPowerups, pGhost ghosts, int numGhosts) {
     drawMap(map, map->elems);    // draw the board
+    drawWalls(map, map->elems);
     powerupsDraw(powerups, numPowerups);
     ghostsDraw(ghosts, numGhosts, map, map->elems);
     pacmanDraw(pacman);    // print pacman
@@ -233,8 +235,8 @@ void endGame(int score, char* player) {
     else {
         scores = treeInit(scores, score, player);
     }
-    printScores(scores->head);   // problematic
-    writeScores(scores->head);
+    printScores(scores->head);  // problematic
+    writeScores(scores->head);  // also problematic?
     
     printf("Thanks for playing %s!\n", player);
 }
