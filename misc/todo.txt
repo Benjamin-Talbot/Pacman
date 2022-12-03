@@ -1,5 +1,5 @@
 Pressing issues:
-- make ghosts follow pacman
+- pacman doesn't die when invincible
 - make ghosts wait in hub until timeout?
 Then:
 - Autoplay

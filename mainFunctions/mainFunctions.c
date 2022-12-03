@@ -10,20 +10,26 @@ char* getName(char* player) {
 
 	int i = 0;
 	scanf("%c", &player[0]);
-	while(player[i] != '\n' && player[i] == ':') {
+	while(player[i] != '\n' && player[i] != ':') {
 		i++;
         if(i >= lenName) {
             lenName *= 2;
             player = realloc(player, lenName);
         }
 		scanf("%c", &player[i]);
+        // if(player[i] == ':') {
+        //     printf("You cannot include the character ':' in your name.\n");
+        //     for(int ind = 0; ind < i; ind++)
+        //         printf("%c", &player[ind]);
+        //     i--;
+        // }
 	}
-    if(player[i] != ':')
-	    player[i] = '\0';
-    else {
-        printf("You cannot include the character ':' in your name.\n");
-        player = getName(player);
-    }
+    // if(player[i] != ':')
+	//     player[i] = '\0';
+    // else {
+    //     printf("You cannot include the character ':' in your name.\n");
+    //     player = getName(player);
+    // }
 
     char* tmp = malloc(sizeof(char) * i);
 	strncpy(tmp, player, sizeof(char) * i);
@@ -228,7 +234,8 @@ void draw(pPacman pacman, pMap map, pPowerup* powerups, int numPowerups, pGhost 
 }
 
 void endGame(int score, char* player) {
-    pTree scores = loadScores(scores);
+    pTree scores;
+    scores = loadScores(scores);
     if(scores) {
         addNode(scores->head, score, player);
     }

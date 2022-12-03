@@ -23,13 +23,23 @@ void ghostInit(pGhost this, int x, int y) {
     this->numChoices = 0;
 }
 
+char withinBounds(int x, int y, int width, int height) {
+    if(x >= 0 && x < width && y >= 0 && y < height)
+        return TRUE;
+    return FALSE;
+}
+
 // buggy
 // bounds checking
+    // fprintf(file, "%d", y);
+    // fflush(file);
+    // fclose(file);
 char ghostSeesPacman(pGhost this, pPacman pacman, pMap map, char elems[map->height][map->width]) {
+    FILE* file = fopen("file.txt", "w");
     int x = this->x + 1;
     int y = this->y;
     char foundPacman = FALSE;
-    while(elems[y][x] != WALL && elems[y][x] != DOOR && !foundPacman) {
+    while(elems[y][x] != WALL && elems[y][x] != DOOR && !foundPacman && withinBounds(x, y, map->width, map->height)) {
         if(x == pacman->x && y == pacman->y) {
             foundPacman = TRUE;
         }
@@ -37,7 +47,7 @@ char ghostSeesPacman(pGhost this, pPacman pacman, pMap map, char elems[map->heig
     }
     x = this->x;
     y = this->y - 1;
-    while(elems[y][x] != WALL && elems[y][x] != DOOR && !foundPacman) {
+    while(elems[y][x] != WALL && elems[y][x] != DOOR && !foundPacman && withinBounds(x, y, map->width, map->height)) {
         if(x == pacman->x && y == pacman->y) {
             foundPacman = TRUE;
         }
@@ -45,7 +55,7 @@ char ghostSeesPacman(pGhost this, pPacman pacman, pMap map, char elems[map->heig
     }
     x = this->x - 1;
     y = this->y;
-    while(elems[y][x] != WALL && elems[y][x] != DOOR && !foundPacman) {
+    while(elems[y][x] != WALL && elems[y][x] != DOOR && !foundPacman && withinBounds(x, y, map->width, map->height)) {
         if(x == pacman->x && y == pacman->y) {
             foundPacman = TRUE;
         }
@@ -54,7 +64,7 @@ char ghostSeesPacman(pGhost this, pPacman pacman, pMap map, char elems[map->heig
     // this spot only?
     x = this->x;
     y = this->y + 1;
-    while(elems[y][x] != WALL && elems[y][x] != DOOR && !foundPacman) {
+    while(elems[y][x] != WALL && elems[y][x] != DOOR && !foundPacman && withinBounds(x, y, map->width, map->height)) {
         if(x == pacman->x && y == pacman->y) {
             foundPacman = TRUE;
         }
@@ -66,6 +76,7 @@ char ghostSeesPacman(pGhost this, pPacman pacman, pMap map, char elems[map->heig
     else
         if(this->stopTracking)
             foundPacman = FALSE;
+
 
     return foundPacman;
 }
