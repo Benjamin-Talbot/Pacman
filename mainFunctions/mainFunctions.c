@@ -88,7 +88,8 @@ int findCoords(int*** coords, int rows, int cols, char elems[rows][cols], char c
 
 char* loadMap(pMap* map, int level) {
     int lenElems = 500;
-    char* elems = malloc(sizeof(char) * lenElems);
+    char* elems = malloc(sizeof(char) * (lenElems + 1));
+    elems[0] = '\0';
     int maxchars;
 
     // cite the log expression or change
@@ -101,43 +102,46 @@ char* loadMap(pMap* map, int level) {
     snprintf(filename, maxchars, "map/levels/map%d.txt", level);
 
     FILE* mapFile = fopen(filename, "r");
-    char c = ' ';
-    int rows = 0;
-    int cols = 0;
-    int numchars = 0;
-    int success = TRUE;
+    if(mapFile != NULL) {
+        char c = ' ';
+        int rows = 0;
+        int cols = 0;
+        int numchars = 0;
 
-    while(success > 0) {
-        cols = 0;
-        while(c != '\n' && success > 0) {
-            success = fscanf(mapFile, "%c", &c);
-            if(success > 0 && c != '\n') {
-                numchars++;
-                if(numchars >= lenElems / sizeof(char)) {
-                    lenElems *= 2;
-                    elems = realloc(elems, lenElems);
+        while(c > 0) {
+            cols = 0;
+            while(c != '\n' && c > 0) {
+                c = fgetc(mapFile);
+                if(c > 0 && c != '\n') {
+                    elems[numchars] = c;
+                    numchars++;
+                    if(numchars >= lenElems / sizeof(char)) {
+                        lenElems *= 2;
+                        elems = realloc(elems, lenElems);
+                    }
+                    cols++;
                 }
-                strncat(elems, &c, 1);
-                cols++;
             }
+            rows++;
+            if(c == '\n')
+                c = ' ';
         }
-        rows++;
-        if(c == '\n')
-            c = ' ';
+        fclose(mapFile);
+
+        char* tmp = malloc(sizeof(char) * numchars);
+        strncpy(tmp, elems, numchars);
+        free(elems);
+
+        // replace_char(tmp, ' ', '.', -1);
+        replace_char(tmp, 'x', ' ', -1);
+
+        *map = (pMap) malloc(sizeof(Map));
+        mapInit(*map, rows, cols, tmp);
+
+        return tmp;
     }
-    fclose(mapFile);
 
-    char* tmp = malloc(sizeof(char) * numchars);
-    strncpy(tmp, elems, numchars);
-    free(elems);
-
-    // replace_char(tmp, ' ', '.', -1);
-    replace_char(tmp, 'x', ' ', -1);
-
-    *map = (pMap) malloc(sizeof(Map));
-    mapInit(*map, rows, cols, tmp);
-
-    return tmp;
+    return NULL;
 }
 
 void initialize(pPacman* pacman, int score, pMap* map, int level, pPowerup** powerups, int** numPowerups, pGhost* ghosts, int** numGhosts) {
@@ -176,18 +180,27 @@ void initialize(pPacman* pacman, int score, pMap* map, int level, pPowerup** pow
     draw(*pacman, *map, *powerups, **numPowerups, *ghosts, **numGhosts);
 }
 
+// sometimes segfaults
 void freeMemory(pPacman pacman, pMap map, pPowerup* powerups, int* numPowerups, pGhost ghosts, int* numGhosts) {
     free(pacman);
     free(map->elems);
     free(map);
-    for(int i = 0; i < *numPowerups; i++) {
+    for(int i = 0; i < *numPowerups; i++)
         free(powerups[i]);
-    }
     free(powerups);
     free(numPowerups);
-    free(ghosts->directions);
+    // free(ghosts->directions);
     free(ghosts);
     free(numGhosts);
+}
+
+void freeScores(pNode node) {
+    if(node->left)
+        freeScores(node->left);
+    if(node->right)
+        freeScores(node->right);
+    free(node->name);
+    free(node);
 }
 
 char getInput(clock_t start, int updateRate, pPacman pacman) {
@@ -234,7 +247,7 @@ void draw(pPacman pacman, pMap map, pPowerup* powerups, int numPowerups, pGhost 
 }
 
 void endGame(int score, char* player) {
-    pTree scores;
+    pTree scores = NULL;
     scores = loadScores(scores);
     if(scores) {
         addNode(scores->head, score, player);
@@ -242,8 +255,12 @@ void endGame(int score, char* player) {
     else {
         scores = treeInit(scores, score, player);
     }
-    printScores(scores->head);  // problematic
-    writeScores(scores->head);  // also problematic?
+    printScores(scores->head);
+    writeScores(scores->head);
+    freeScores(scores->head);
+    free(scores);
+    // rank = 1;
+    // append = FALSE;
     
     printf("Thanks for playing %s!\n", player);
 }

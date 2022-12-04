@@ -23,6 +23,8 @@ void initialize(pPacman* pacman, int score, pMap* map, int level, pPowerup** pow
 
 void freeMemory(pPacman pacman, pMap map, pPowerup* powerups, int* numPowerups, pGhost ghosts, int* numGhosts);
 
+void freeScores(pNode node);
+
 char getInput(clock_t start, int updateRate, pPacman pacman);
 
 void update(pPacman pacman, char c, pMap map, pPowerup* powerups, int* numPowerups, pGhost ghosts, int numGhosts);

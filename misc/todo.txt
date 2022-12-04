@@ -1,31 +1,22 @@
-Pressing issues:
+PRESSING ISSUES:
 - pacman doesn't die when invincible
-- make ghosts wait in hub until timeout?
-Then:
+- ghosts get deleted if behind pacman
+- fix ghosts going through walls
+- fix segfault in loadMap (still exists?)
+- fix segfault in loadScore
+    sometimes segfaults at fgetc
+- map2 not loading sometimes
+    then segfaults when move in some directions (go through spaces)
+
+THEN:
 - Autoplay
-
--- Advanced Requirements (100%?) --
-Multiple stages with increasing difficulty
-Use of C features:
- > Use files to store stage data
-
--- Bonus (<= 10%) --
-Demonstration play
-Autoplay for given stage (Game AI)
+- make directions and numchoices global again
 
 
 
-To Do:
+LOOK INTOS:
 - are tied scores always returned in the same order?
-- check when out of powerups
-- don't delete char moved from unless ghost, same for ghosts
-- see if can make macros for left/right/up/down for direction
-
-- Terminating character at end of scores file?
-- this->invincible-- vs (this->invincible)--
-- add fruit (cherries, strawberries, etc.)
-- check misc.txt for order of operations
-- make chance that if ghost sees pacman will not follow
-- create ghost home struct?
+- make ghosts wait in hub until timeout, hub struct?
 - look into windows
-- implement bounds checking in case at edges
+- add fruit (cherries, strawberries, etc.)
+- this->invincible-- vs (this->invincible)--

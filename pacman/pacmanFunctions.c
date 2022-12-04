@@ -62,7 +62,7 @@ void increaseScore(pPacman this, int points) {
 int pacmanEat(pPacman this, pMap map, char elems[map->height][map->width], pPowerup* powerups, int* numPowerups) {
     char ate = FALSE;
     char allGone = TRUE;
-    if(elems[this->y][this->x] == PELLET) {
+    if(elems[this->y][this->x] == PELLET) {     // this line breaks
         increaseScore(this, 10);
         eatPellet(map, map->elems, this->x, this->y);
         ate = TRUE;

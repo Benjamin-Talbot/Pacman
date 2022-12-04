@@ -11,8 +11,8 @@ pNode nodeInit(int score, char* name) {
 }
 
 pTree treeInit(pTree tree, int score, char* name) {
-    tree = (pTree) malloc(sizeof(Tree));
     pNode node = nodeInit(score, name);
+    tree = (pTree) malloc(sizeof(Tree));
     tree->head = node;
 
     return tree;
@@ -39,47 +39,44 @@ pTree loadScores(pTree scores) {
     scores = NULL;
 
     FILE* scoresFile = fopen("score/scores.txt", "r");
-    int success = TRUE;
     char c = ' ';
     int lenName = 8;
-    char* name = (char*) malloc(sizeof(char) * lenName);
+    char* name;
     int numchars = 0;
     int score = 0;
-
-    while(success > 0) {
-        while(c != ':' && success > 0){
-            success = fscanf(scoresFile, "%c", &c);
-            if(success > 0 && c != ':') {
+    
+    while(c > 0) {
+        lenName = 8;
+        name = (char*) malloc(sizeof(char) * lenName);
+        numchars = 0;   // was this it??? //
+        while(c != ':' && c > 0){
+            c = fgetc(scoresFile);
+            if(c > 0 && c != ':') {
+                name[numchars] = c;
                 numchars++;
                 if(numchars >= lenName / sizeof(char)) {
                     lenName *= 2;
                     name = realloc(name, lenName);
                 }
-                strncat(name, &c, 1);
             }
         }
-        char* tmp = (char*) malloc(sizeof(char) * numchars);
-        strncpy(tmp, name, numchars);
+        name[numchars] = '\0';
+        numchars++;
+        name = realloc(name, sizeof(char) * numchars);
         fscanf(scoresFile, "%d", &score);
-        if(success > 0) {
+        if(c > 0) {
             if(scores) {
-                addNode(scores->head, score, tmp);
+                addNode(scores->head, score, name);
             }
             else {
-                scores = (pTree) malloc(sizeof(Tree));
-                scores = treeInit(scores, score, tmp);
+                scores = treeInit(scores, score, name);
             }
         }
-        fscanf(scoresFile, "%c", &c);
-        if(c == '\n') {
-            free(name);
-            lenName = 8;
-            name = (char*) malloc(sizeof(char) * lenName);
+        c = fgetc(scoresFile);
+        if(c > 0 && c == '\n') {
         }
-        else
-            success = FALSE;
     }
-    
+
     fclose(scoresFile);
 
     return scores;
@@ -94,7 +91,7 @@ void writeScore(pNode score) {
         append = TRUE;
     }
     
-    if(numWritten != rank - 1)
+    if(numWritten < rank - 1)
         fprintf(scoresFile, "%s:%d\n", score->name, score->score);
     else
         fprintf(scoresFile, "%s:%d", score->name, score->score);
@@ -114,7 +111,7 @@ void writeScores(pNode head) {
 void printScores(pNode head) {
     if(head->right)
         printScores(head->right);
-    printf("%d. %s: %d\n", rank, head->name, head->score);
+    printf("%d.\t%s: %d\n", rank, head->name, head->score);
     rank++;
     if(head->left)
         printScores(head->left);

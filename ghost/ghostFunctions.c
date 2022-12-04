@@ -61,10 +61,9 @@ char ghostSeesPacman(pGhost this, pPacman pacman, pMap map, char elems[map->heig
         }
         x--;
     }
-    // this spot only?
     x = this->x;
     y = this->y + 1;
-    while(elems[y][x] != WALL && elems[y][x] != DOOR && !foundPacman && withinBounds(x, y, map->width, map->height)) {
+    while(elems[y][x] != WALL && elems[y][x] != DOOR && !foundPacman && withinBounds(x, y, map->width, map->height)) {    // this spot only?
         if(x == pacman->x && y == pacman->y) {
             foundPacman = TRUE;
         }
@@ -130,7 +129,7 @@ void ghostWander(pGhost this) {
         this->direction[0] = this->directions[r][0];
         this->direction[1] = this->directions[r][1];
     }
-    else {  // this means the only way to go is backwards
+    else {    // this means the only way to go is backwards
         this->direction[0] *= -1;
         this->direction[1] *= -1;
     }
@@ -172,12 +171,10 @@ char ghostHitsPacman(pGhost this, pPacman pacman) {
 void ghostMove(pGhost this, pPacman pacman, pMap map) {
     if(this->trackingPacman) {
         this->trackingPacman = ghostSeesPacman(this, pacman, map, map->elems);
-        if(!this->trackingPacman) {
-            // lost track
+        if(!this->trackingPacman) {    // lost track
             ghostFollowPacman(this, pacman, map);
         }
-        // else continue following with random chance to stop
-        else {
+        else {    // else continue following with random chance to stop
             int r = rand() % 20;
             // mvprintw(5, 75, "%d. ghostMove r: %d", debug, r);
             if(r == 19) {
@@ -190,12 +187,10 @@ void ghostMove(pGhost this, pPacman pacman, pMap map) {
     }
     else {
         this->trackingPacman = ghostSeesPacman(this, pacman, map, map->elems);
-        if(this->trackingPacman) {
-            // starts following
+        if(this->trackingPacman) {    // starts following
             ghostFollowPacman(this, pacman, map);
         }
-        else {
-            // isn't following
+        else {    // isn't following
             if(this->turnx && this->turny) {
                 if(this->x == this->turnx && this->y == this->turny) {
                     this->direction[0] = this->nextDirection[0];

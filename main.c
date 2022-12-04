@@ -10,21 +10,6 @@
 #include "mainFunctions/mainFunctions.h"
 #include "score/score.h"
 
-/*
-bugs:
-- segfault with ghosts (ghostSeesPacman)
-- segfault at end of game
-- ghosts sometimes go through walls
-*/
-
-// global variable from ghostFunctions.c --- no longer global variable but part of ghosts, maybe change back
-
-/*
-Left to deallocate:
-- nodes in tree
-- tree
-*/
-
 int main() {
     char* player = getName(player);
 
@@ -36,9 +21,7 @@ int main() {
     int score = 0;
     pMap map = NULL;
     int maxLevel = 2;
-    int level = 0;
-    level++;
-    // level++;
+    int level = 1; //level++; //level++;
     pPowerup* powerups = NULL;
     int* numPowerups = NULL;
     pGhost ghosts = NULL;
