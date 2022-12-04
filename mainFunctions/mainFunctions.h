@@ -6,6 +6,7 @@
 #include <time.h>
 #include <ncurses.h>
 #include <string.h>
+#include <unistd.h>
 
 #include "../pacman/pacmanFunctions.h"
 #include "../map/mapFunctions.h"

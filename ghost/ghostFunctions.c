@@ -2,16 +2,18 @@
 
 #include <time.h>
 
-static int debug = 0;
+// static int debug = 0;
 
 void ghostInit(pGhost this, int x, int y) {
     this->x = x;
     this->y = y;
+    this->initx = x;
+    this->inity = y;
     ALLDIR(direction);
     STOP(oldDirection);
     STOP(nextDirection);
-    int turnx = 0;
-    int turny = 0;
+    this->turnx = 0;
+    this->turny = 0;
     this->stopTracking = FALSE;
     this->sprite = '&';
     this->timer = 20;
@@ -23,19 +25,18 @@ void ghostInit(pGhost this, int x, int y) {
     this->numChoices = 0;
 }
 
+void ghostReset(pGhost this) {
+    this->x = this->initx;
+    this->y = this->inity;
+}
+
 char withinBounds(int x, int y, int width, int height) {
     if(x >= 0 && x < width && y >= 0 && y < height)
         return TRUE;
     return FALSE;
 }
 
-// buggy
-// bounds checking
-    // fprintf(file, "%d", y);
-    // fflush(file);
-    // fclose(file);
 char ghostSeesPacman(pGhost this, pPacman pacman, pMap map, char elems[map->height][map->width]) {
-    FILE* file = fopen("file.txt", "w");
     int x = this->x + 1;
     int y = this->y;
     char foundPacman = FALSE;
@@ -124,7 +125,7 @@ void ghostMoveOptions(pGhost this, pMap map, char elems[map->height][map->width]
 }
 
 void ghostWander(pGhost this) {
-    if(this->numChoices) {    // the ghost can at least go forward
+    if(this->numChoices > 0) {    // the ghost can at least go forward
         int r = rand() % this->numChoices;
         this->direction[0] = this->directions[r][0];
         this->direction[1] = this->directions[r][1];
@@ -136,9 +137,9 @@ void ghostWander(pGhost this) {
 }
 
 void ghostFollowPacman(pGhost this, pPacman pacman, pMap map) {
-    int r = rand() % 10;
+    int r = rand() % 15;
     // mvprintw(4, 75, "%dfollow r: %d", debug, r);
-    if(r == 9) {    // random chance to not follow
+    if(r == 14) {    // random chance to not follow
         ghostMoveOptions(this, map, map->elems, TRUE);
         ghostWander(this);
     }
@@ -175,9 +176,9 @@ void ghostMove(pGhost this, pPacman pacman, pMap map) {
             ghostFollowPacman(this, pacman, map);
         }
         else {    // else continue following with random chance to stop
-            int r = rand() % 20;
+            int r = rand() % 30;
             // mvprintw(5, 75, "%d. ghostMove r: %d", debug, r);
-            if(r == 19) {
+            if(r == 29) {
                 ghostMoveOptions(this, map, map->elems, TRUE);
                 ghostWander(this);
                 this->trackingPacman = FALSE;
@@ -209,7 +210,10 @@ void ghostMove(pGhost this, pPacman pacman, pMap map) {
     this->y += this->direction[1];
 
     if(ghostHitsPacman(this, pacman))
-        gameover(pacman);
+        if(!pacman->invincible)
+            gameover(pacman);
+        else
+            pacmanEatGhost(pacman, this);
 }
 
 void ghostsMove(pGhost ghosts, int numGhosts, pPacman pacman, pMap map) {
@@ -220,12 +224,12 @@ void ghostsMove(pGhost ghosts, int numGhosts, pPacman pacman, pMap map) {
 
 void ghostsDraw(pGhost ghosts, int numGhosts, pMap map, char elems[map->height][map->width]) {
     Ghost ghost;
-    for(int i = 0; i < numGhosts; i++) {
-        ghost = ghosts[i];
-        int oldx = ghost.x - ghost.direction[0];
-        int oldy = ghost.y - ghost.direction[1];
-        mvprintw(oldy, oldx, "%c", elems[oldy][oldx]);
-    }
+    // for(int i = 0; i < numGhosts; i++) {
+    //     ghost = ghosts[i];
+    //     int oldx = ghost.x - ghost.direction[0];
+    //     int oldy = ghost.y - ghost.direction[1];
+    //     mvprintw(oldy, oldx, "%c", elems[oldy][oldx]);
+    // }
     for(int i = 0; i < numGhosts; i++) {
         ghost = ghosts[i];
         mvprintw(ghost.y, ghost.x, "%c", ghost.sprite);

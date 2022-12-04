@@ -21,7 +21,7 @@ int main() {
     int score = 0;
     pMap map = NULL;
     int maxLevel = 2;
-    int level = 1; //level++; //level++;
+    int level = 0; level++; //level++;
     pPowerup* powerups = NULL;
     int* numPowerups = NULL;
     pGhost ghosts = NULL;
@@ -38,6 +38,7 @@ int main() {
         start = clock();
 
         if(pacman->won) {
+            sleep(1);
             clearMap(map, map->elems);
             level++;
             if(level <= maxLevel) {
@@ -47,7 +48,6 @@ int main() {
             }
             else
                 pacman->gameover = TRUE;
-            sleep(1);
         }
 
         if(!pacman->gameover) {
@@ -57,7 +57,7 @@ int main() {
 
         c = getInput(start, updateRate, pacman);
     }
-
+    sleep(1);
     endwin();
 
     endGame(pacman->score, player);

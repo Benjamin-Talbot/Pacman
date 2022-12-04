@@ -170,7 +170,7 @@ void initialize(pPacman* pacman, int score, pMap* map, int level, pPowerup** pow
 
     replace_char((*map)->elems, '<', ' ', 1);
     replace_char((*map)->elems, 'o', ' ', -1);
-    // replace_char((*map)->elems, '&', '.', 1);
+    // replace_char((*map)->elems, '&', '.', -1);
     replace_char((*map)->elems, '&', ' ', -1);
 
     free(coords[0]);
@@ -178,6 +178,8 @@ void initialize(pPacman* pacman, int score, pMap* map, int level, pPowerup** pow
 
     drawWalls(*map, (*map)->elems);
     draw(*pacman, *map, *powerups, **numPowerups, *ghosts, **numGhosts);
+    refresh();
+    sleep(1);
 }
 
 // sometimes segfaults

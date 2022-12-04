@@ -1,12 +1,13 @@
 PRESSING ISSUES:
-- pacman doesn't die when invincible
-- ghosts get deleted if behind pacman
 - fix ghosts going through walls
-- fix segfault in loadMap (still exists?)
 - fix segfault in loadScore
     sometimes segfaults at fgetc
 - map2 not loading sometimes
     then segfaults when move in some directions (go through spaces)
+- fix segfault in loadMap (still exists?)
+- when ghosts reset, can still be eaten
+- eating ghosts only gives 200, not double
+- ghosts still chase pacman when he's invincible
 
 THEN:
 - Autoplay
@@ -15,8 +16,7 @@ THEN:
 
 
 LOOK INTOS:
+- look into windows
 - are tied scores always returned in the same order?
 - make ghosts wait in hub until timeout, hub struct?
-- look into windows
 - add fruit (cherries, strawberries, etc.)
-- this->invincible-- vs (this->invincible)--

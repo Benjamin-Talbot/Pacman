@@ -93,6 +93,11 @@ int pacmanEat(pPacman this, pMap map, char elems[map->height][map->width], pPowe
     return ate;
 }
 
+void pacmanEatGhost(pPacman this, pGhost ghost) {
+    increaseScore(this, 200);
+    ghostReset(ghost);
+}
+
 char pacmanHitsGhost(pPacman this, pGhost ghosts, int numGhosts) {
     char hitGhost = FALSE;
     pGhost ghost;
@@ -101,6 +106,8 @@ char pacmanHitsGhost(pPacman this, pGhost ghosts, int numGhosts) {
 
         if(this->x == ghost->x && this->y == ghost->y) {
             hitGhost = TRUE;
+            if(this->invincible)
+                pacmanEatGhost(this, ghost);
         }
     }
 
@@ -168,12 +175,12 @@ void pacmanMove(pPacman this, char sprite, pMap map, pPowerup* powerups, int* nu
 
     pacmanEat(this, map, map->elems, powerups, numPowerups);
     if(pacmanHitsGhost(this, ghosts, numGhosts))
-        gameover(this);
+        if(!this->invincible)
+            gameover(this);
 }
 
 void pacmanDraw(pPacman this) {
-    mvprintw(this->y - this->direction[1], this->x - this->direction[0], " ");    // erase pacman from previous position
+    // mvprintw(this->y - this->direction[1], this->x - this->direction[0], " ");    // erase pacman from previous position
     mvprintw(this->y, this->x, "%c", this->sprite);    // draw pacman at new position
-    mvprintw(8, 60, "Invincible: %d", this->invincible);
     mvprintw(5, 60, "Score: %d", this->score);    // update score
 }

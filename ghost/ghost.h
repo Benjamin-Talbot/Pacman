@@ -4,6 +4,8 @@
 typedef struct Ghost {
     int x;
     int y;
+    int initx;
+    int inity;
     int direction[2];
     int oldDirection[2];
     int nextDirection[2];

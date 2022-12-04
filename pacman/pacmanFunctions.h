@@ -46,6 +46,10 @@ void increaseScore(pPacman this, int points);
 
 int pacmanEat(pPacman this, pMap map, char elems[map->height][map->width], pPowerup* powerups, int* numPowerups);
 
+void pacmanEatGhost(pPacman this, pGhost ghost);
+
+char pacmanHitsGhost(pPacman this, pGhost ghosts, int numGhosts);
+
 void pacmanMove(pPacman this, char c, pMap map, pPowerup* powerups, int* numPowerups, pGhost ghosts, int numGhosts);
 
 void pacmanDraw(pPacman this);
