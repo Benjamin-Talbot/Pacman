@@ -2,8 +2,6 @@
 
 #include <time.h>
 
-// static int debug = 0;
-
 void ghostInit(pGhost this, int x, int y) {
     this->x = x;
     this->y = y;
@@ -73,7 +71,7 @@ char ghostSeesPacman(pGhost this, pPacman pacman, pMap map, char elems[map->heig
     }
     x = this->x;
     y = this->y + 1;
-    while(elems[y][x] != WALL && elems[y][x] != DOOR && !foundPacman && withinBounds(x, y, map->width, map->height)) {    // this spot only?
+    while(elems[y][x] != WALL && elems[y][x] != DOOR && !foundPacman && withinBounds(x, y, map->width, map->height)) {
         if(x == pacman->x && y == pacman->y) {
             foundPacman = TRUE;
         }
@@ -147,7 +145,6 @@ void ghostWander(pGhost this) {
 
 void ghostFollowPacman(pGhost this, pPacman pacman, pMap map) {
     int r = rand() % 15;
-    // mvprintw(4, 75, "%dfollow r: %d", debug, r);
     if(r == 14) {    // random chance to not follow
         ghostMoveOptions(this, map, map->elems, TRUE);
         ghostWander(this);
@@ -187,7 +184,6 @@ void ghostMove(pGhost this, pPacman pacman, pMap map) {
         }
         else {    // else continue following with random chance to stop
             int r = rand() % 30;
-            // mvprintw(5, 75, "%d. ghostMove r: %d", debug, r);
             if(r == 29) {
                 ghostMoveOptions(this, map, map->elems, TRUE);
                 ghostWander(this);
@@ -234,19 +230,13 @@ void ghostsMove(pGhost ghosts, int numGhosts, pPacman pacman, pMap map) {
 
 void ghostsDraw(pGhost ghosts, int numGhosts, pMap map, char elems[map->height][map->width]) {
     Ghost ghost;
-    // for(int i = 0; i < numGhosts; i++) {
-    //     ghost = ghosts[i];
-    //     int oldx = ghost.x - ghost.direction[0];
-    //     int oldy = ghost.y - ghost.direction[1];
-    //     mvprintw(oldy, oldx, "%c", elems[oldy][oldx]);
-    // }
     for(int i = 0; i < numGhosts; i++) {
         ghost = ghosts[i];
         mvprintw(ghost.y, ghost.x, "%c", ghost.sprite);
-        if((ghost.x < 0 || ghost.x >= map->width || ghost.y < 0 || ghost.y >= map->height)) {
-            mvprintw(10+i, 75, "(%d, %d)", ghost.x, ghost.y);
+        // if((ghost.x < 0 || ghost.x >= map->width || ghost.y < 0 || ghost.y >= map->height)) {
+            // mvprintw(10+i, 75, "(%d, %d)", ghost.x, ghost.y);
             // mvprintw(10+i, 75, "(%d, %d)\t(%d, %d)", ghost.turnx, ghost.turny, ghost.x, ghost.y);
             // mvprintw(10+i, 75, "%d", ghost.trackingPacman);
-        }
+        // }
     }
 }

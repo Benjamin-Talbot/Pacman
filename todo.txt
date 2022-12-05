@@ -1,7 +1,6 @@
 PRESSING ISSUES:
 - fix ghosts going through walls
 - fix segfault in loadScore sometimes segfaults at fgetc ???
-- eating ghosts only gives 200, not double
 - ghosts still chase pacman when he's invincible
 
 THEN:

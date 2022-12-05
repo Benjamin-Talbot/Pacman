@@ -11,6 +11,7 @@ typedef struct Pacman {
     char sprite;
     char nextSprite;
     int score;
+    int ghostPoints;
     int invincible;
     char gameover;
     char won;

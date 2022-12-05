@@ -10,6 +10,7 @@ void pacmanInit(pPacman this, int x, int y, int score) {
     this->sprite = 60;
     this->nextSprite = 60;
     this->score = score;
+    this->ghostPoints = 200;
     this->invincible = 0;
     this->gameover = FALSE;
     this->won = FALSE;
@@ -53,6 +54,7 @@ int pacmanCollides(pPacman this, pMap map, char elems[map->height][map->width]) 
 
 void pacmanMakeInvincible(pPacman this, pGhost ghosts, int numGhosts) {
     this->invincible = 40;
+    this->ghostPoints = 200;
     for(int i = 0; i < numGhosts; i++) {
         ghosts[i].vulnerable = TRUE;
     }
@@ -98,8 +100,9 @@ int pacmanEat(pPacman this, pMap map, char elems[map->height][map->width], pPowe
 
 void pacmanEatGhost(pPacman this, pGhost ghost) {
     if(ghost->vulnerable == TRUE) {
-        increaseScore(this, 200);
+        increaseScore(this, this->ghostPoints);
         ghostReset(ghost);
+        this->ghostPoints *= 2;
     }
     else
         gameover(this);
@@ -187,7 +190,6 @@ void pacmanMove(pPacman this, char sprite, pMap map, pPowerup* powerups, int* nu
 }
 
 void pacmanDraw(pPacman this) {
-    // mvprintw(this->y - this->direction[1], this->x - this->direction[0], " ");    // erase pacman from previous position
     mvprintw(this->y, this->x, "%c", this->sprite);    // draw pacman at new position
     mvprintw(5, 60, "Score: %d", this->score);    // update score
 }
