@@ -53,7 +53,7 @@ int pacmanCollides(pPacman this, pMap map, char elems[map->height][map->width]) 
 }
 
 void pacmanMakeInvincible(pPacman this, pGhost ghosts, int numGhosts) {
-    this->invincible = 40;
+    this->invincible = 80; //40
     this->ghostPoints = 200;
     for(int i = 0; i < numGhosts; i++) {
         ghosts[i].vulnerable = TRUE;
@@ -115,13 +115,22 @@ char pacmanHitsGhost(pPacman this, pGhost ghosts, int numGhosts) {
         ghost = (ghosts+i);
 
         if(this->x == ghost->x && this->y == ghost->y) {
-            hitGhost = TRUE;
-            if(this->invincible)
-                pacmanEatGhost(this, ghost);
+            if(ghost->cooldown > 0) {
+                hitGhost = TRUE;
+                if(this->invincible)
+                    pacmanEatGhost(this, ghost);
+            }
         }
     }
 
     return hitGhost;
+}
+
+void function(pGhost ghosts, int numGhosts) {
+    for(int i = 0; i < numGhosts; i++) {
+        ghosts[i].vulnerable = FALSE;
+        ghosts[i].toggleUpdate = 1;
+    }
 }
 
 void pacmanMove(pPacman this, char sprite, pMap map, pPowerup* powerups, int* numPowerups, pGhost ghosts, int numGhosts) {
@@ -179,9 +188,11 @@ void pacmanMove(pPacman this, char sprite, pMap map, pPowerup* powerups, int* nu
         }
     }
     
-    if(this->invincible > 0)
+    if(this->invincible > 0) {
         (this->invincible)--;
-    
+        if(this->invincible <= 0)
+            function(ghosts, numGhosts);
+    }
 
     pacmanEat(this, map, map->elems, powerups, numPowerups, ghosts, numGhosts);
     if(pacmanHitsGhost(this, ghosts, numGhosts))

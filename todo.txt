@@ -1,6 +1,7 @@
 PRESSING ISSUES:
-- fix ghosts going through walls
-- ghosts still chase pacman when he's invincible
+- make random chance to go random direction when ghosts running from pacman
+- test whether ghosts still vulnerable if eaten and respawn w/ toggleUpdate, + general testing
+- addition of checking upon collision for cooldown broken
 
 THEN:
 - Autoplay
@@ -9,8 +10,9 @@ THEN:
 
 LOOK INTOS:
 - make directions and numchoices global again
-- fix segfault in loadScore sometimes segfaults at fgetc ???
 - add colors so can know when invincible, ghosts vulnerable, etc
+- fix segfault in loadScore sometimes segfaults at fgetc ???
+- fix ghosts going through walls
 - look into windows
 - are tied scores always returned in the same order?
 - make ghosts wait in hub until timeout, hub struct?

@@ -14,7 +14,8 @@ void ghostInit(pGhost this, int x, int y) {
     this->turny = 0;
     this->stopTracking = FALSE;
     this->sprite = '&';
-    this->timer = 20;
+    this->cooldown = 0;
+    // this->cooldown = 20;
     this->trackingPacman = 0;
     this->directions = (int**) malloc(sizeof(int*) * 4);
     for(int i = 0; i < 4; i++) {
@@ -22,6 +23,7 @@ void ghostInit(pGhost this, int x, int y) {
     }
     this->numChoices = 0;
     this->vulnerable = FALSE;
+    this->toggleUpdate = 1;
 }
 
 void ghostReset(pGhost this) {
@@ -35,6 +37,8 @@ void ghostReset(pGhost this) {
     this->stopTracking = FALSE;
     this->trackingPacman = 0;
     this->vulnerable = FALSE;
+    this->toggleUpdate = 1;
+    this->cooldown = 10;
 }
 
 char withinBounds(int x, int y, int width, int height) {
@@ -174,48 +178,102 @@ char ghostHitsPacman(pGhost this, pPacman pacman) {
     return FALSE;
 }
 
+// to prevent ghosts from going through walls
+char ghostHitsWall(pGhost this, pMap map, char elems[map->height][map->width]) {
+    if(elems[this->y + this->direction[1]][this->x + this->direction[0]] == WALL) {
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
+void ghostRunAway(pGhost this, pMap map, char elems[map->height][map->width], pPacman pacman) {
+        this->trackingPacman = 0;
+
+        ghostMoveOptions(this, map, map->elems, TRUE);
+        int xdist = 0;
+        int ydist = 0;
+        int dist = 0;
+        
+        xdist = this->x + this->directions[0][0] - pacman->x;
+        ydist = this->y + this->directions[0][1] - pacman->y;
+        int farthestDist = xdist * xdist + ydist * ydist;
+        int farthest = 0;
+
+        for(int i = 1; i < this->numChoices; i++) {
+            xdist = this->x + this->directions[i][0] - pacman->x;
+            ydist = this->y + this->directions[i][1] - pacman->y;
+            dist = xdist * xdist + ydist * ydist;
+            
+            if(dist > farthestDist) {
+                farthestDist = dist;
+                farthest = i;
+            }
+        }
+
+        // int r = rand() % 5;
+        // if(r == 4) {
+        //     (this->numChoices)--;
+        //     farthest = rand() % this->numChoices;
+        // }
+        
+        this->direction[0] = this->directions[farthest][0];
+        this->direction[1] = this->directions[farthest][1];
+}
+
 // bounds checking
 void ghostMove(pGhost this, pPacman pacman, pMap map) {
-    if(this->trackingPacman) {
-        this->trackingPacman = ghostSeesPacman(this, pacman, map, map->elems);
-        if(!this->trackingPacman) {    // lost track
-            ghostFollowPacman(this, pacman, map);
-            this->turnx = this->turny = 0;
+    if(!this->vulnerable) {    // this->vulnerable == FALSE
+        if(this->trackingPacman) {
+            this->trackingPacman = ghostSeesPacman(this, pacman, map, map->elems);
+            if(!this->trackingPacman) {    // lost track
+                ghostFollowPacman(this, pacman, map);
+                this->turnx = this->turny = 0;
+            }
+            else {    // else continue following with random chance to stop
+                int r = rand() % 30;
+                if(r == 29) {
+                    ghostMoveOptions(this, map, map->elems, TRUE);
+                    ghostWander(this);
+                    this->trackingPacman = FALSE;
+                    this->stopTracking = TRUE;
+                }
+            }
         }
-        else {    // else continue following with random chance to stop
-            int r = rand() % 30;
-            if(r == 29) {
-                ghostMoveOptions(this, map, map->elems, TRUE);
-                ghostWander(this);
-                this->trackingPacman = FALSE;
-                this->stopTracking = TRUE;
+        else {
+            this->trackingPacman = ghostSeesPacman(this, pacman, map, map->elems);
+            if(this->trackingPacman) {    // starts following
+                ghostFollowPacman(this, pacman, map);
+            }
+            else {    // isn't following
+                if(this->turnx && this->turny) {
+                    if(this->x == this->turnx && this->y == this->turny) {
+                        this->direction[0] = this->nextDirection[0];
+                        this->direction[1] = this->nextDirection[1];
+                        this->turnx = this->turny = 0;
+                    }
+                }
+                else{
+                    ghostMoveOptions(this, map, map->elems, FALSE);
+                    ghostWander(this);
+                }
             }
         }
     }
-    else {
-        this->trackingPacman = ghostSeesPacman(this, pacman, map, map->elems);
-        if(this->trackingPacman) {    // starts following
-            ghostFollowPacman(this, pacman, map);
-        }
-        else {    // isn't following
-            if(this->turnx && this->turny) {
-                if(this->x == this->turnx && this->y == this->turny) {
-                    this->direction[0] = this->nextDirection[0];
-                    this->direction[1] = this->nextDirection[1];
-                    this->turnx = this->turny = 0;
-                }
-            }
-            else{
-                ghostMoveOptions(this, map, map->elems, FALSE);
-                ghostWander(this);
-            }
-        }
+    else {    // this->vulnerable == TRUE
+        ghostRunAway(this, map, map->elems, pacman);
+    }
+
+    // to prevent ghosts from going through walls
+    if(ghostHitsWall(this, map, map->elems)) {
+        ghostMoveOptions(this, map, map->elems, TRUE);
+        ghostWander(this);
     }
 
     this->x += this->direction[0];
     this->y += this->direction[1];
 
-    if(ghostHitsPacman(this, pacman))
+    if(ghostHitsPacman(this, pacman) && !this->cooldown)
         if(!pacman->invincible)
             gameover(pacman);
         else
@@ -223,8 +281,17 @@ void ghostMove(pGhost this, pPacman pacman, pMap map) {
 }
 
 void ghostsMove(pGhost ghosts, int numGhosts, pPacman pacman, pMap map) {
+    pGhost ghost;
     for(int i = 0; i < numGhosts; i++) {
-        ghostMove(&ghosts[i], pacman, map);
+        ghost = &ghosts[i];
+        if(ghost->vulnerable) {
+            ghost->toggleUpdate = 1 - ghost->toggleUpdate;
+        }
+        if(ghost->toggleUpdate)
+            if(ghost->cooldown > 0)
+                (ghost->cooldown)--;
+            else
+                ghostMove(ghost, pacman, map);
     }
 }
 

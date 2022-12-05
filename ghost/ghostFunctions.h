@@ -43,6 +43,10 @@ void ghostFollowPacman(pGhost this, pPacman pacman, pMap map);
 
 char ghostHitsPacman(pGhost this, pPacman pacman);
 
+char ghostHitsWall(pGhost this, pMap map, char elems[map->height][map->width]);
+
+void ghostRunAway(pGhost this, pMap map, char elems[map->height][map->width], pPacman pacman);
+
 void ghostMove(pGhost this, pPacman pacman, pMap map);
 
 void ghostsMove(pGhost ghosts, int numGhosts, pPacman pacman, pMap map);

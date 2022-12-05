@@ -14,11 +14,12 @@ typedef struct Ghost {
     char stopTracking;
     char sprite;
     char nextSprite;
-    int timer;
+    int cooldown;
     char trackingPacman;
     int** directions;
     int numChoices;
     char vulnerable;
+    int toggleUpdate;
 } Ghost;
 typedef Ghost* pGhost;
 

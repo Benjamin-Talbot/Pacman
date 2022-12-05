@@ -16,7 +16,7 @@ int main() {
 
     srand(time(NULL));
     clock_t start;
-    int updateRate = 150;   // set to 150 or 200
+    int updateRate = 150;   // set to 150
     int pauseTime = 1;
     char c;
     pPacman pacman = NULL;
