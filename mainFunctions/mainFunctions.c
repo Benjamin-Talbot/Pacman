@@ -89,7 +89,7 @@ int findCoords(int*** coords, int rows, int cols, char elems[rows][cols], char c
 char* loadMap(pMap* map, int level) {
     int lenElems = 500;
     char* elems = malloc(sizeof(char) * (lenElems + 1));
-    elems[0] = '\0';
+    // elems[0] = '\0';
     int maxchars;
 
     // cite the log expression or change
@@ -144,7 +144,7 @@ char* loadMap(pMap* map, int level) {
     return NULL;
 }
 
-void initialize(pPacman* pacman, int score, pMap* map, int level, pPowerup** powerups, int** numPowerups, pGhost* ghosts, int** numGhosts) {
+void initialize(pPacman* pacman, int score, pMap* map, int level, pPowerup** powerups, int** numPowerups, pGhost* ghosts, int** numGhosts, int pauseTime) {
 
     loadMap(map, level);
 
@@ -154,6 +154,7 @@ void initialize(pPacman* pacman, int score, pMap* map, int level, pPowerup** pow
     pacmanInit(*pacman, coords[0][0], coords[0][1], score);
 
     *numPowerups = malloc(sizeof(int));
+    **numPowerups = 0;
     **numPowerups = findCoords(&coords, (*map)->height, (*map)->width, (*map)->elems, 'o');
     *powerups = (pPowerup*) malloc(sizeof(pPowerup) * **numPowerups);
     for(int i = 0; i < **numPowerups; i++) {
@@ -162,6 +163,7 @@ void initialize(pPacman* pacman, int score, pMap* map, int level, pPowerup** pow
     }
 
     *numGhosts = malloc(sizeof(int));
+    **numGhosts = 0;
     **numGhosts = findCoords(&coords, (*map)->height, (*map)->width, (*map)->elems, '&');
     *ghosts = (pGhost) malloc(sizeof(Ghost) * **numGhosts);
     for(int i = 0; i < **numGhosts; i++) {
@@ -179,7 +181,7 @@ void initialize(pPacman* pacman, int score, pMap* map, int level, pPowerup** pow
     drawWalls(*map, (*map)->elems);
     draw(*pacman, *map, *powerups, **numPowerups, *ghosts, **numGhosts);
     refresh();
-    sleep(1);
+    sleep(pauseTime);
 }
 
 // sometimes segfaults
@@ -201,8 +203,23 @@ void freeScores(pNode node) {
         freeScores(node->left);
     if(node->right)
         freeScores(node->right);
-    free(node->name);
     free(node);
+}
+
+int nextLevel(pPacman* pacman, pMap* map, int level, int maxLevel, pPowerup* powerups, int** numPowerups, pGhost* ghosts, int** numGhosts, int pauseTime) {
+    sleep(pauseTime);
+    clearMap(*map, (*map)->elems);
+    level++;
+    if(level <= maxLevel) {
+        int score = (*pacman)->score;
+        freeMemory(*pacman, *map, *powerups, *numPowerups, *ghosts, *numGhosts);
+        initialize(pacman, score, map, level, powerups, numPowerups, ghosts, numGhosts, pauseTime);
+    }
+    else {
+        (*pacman)->gameover = TRUE;
+    }
+
+    return level;
 }
 
 char getInput(clock_t start, int updateRate, pPacman pacman) {

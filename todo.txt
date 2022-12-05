@@ -1,21 +1,17 @@
 PRESSING ISSUES:
 - fix ghosts going through walls
-- fix segfault in loadScore
-    sometimes segfaults at fgetc
-- map2 not loading sometimes
-    then segfaults when move in some directions (go through spaces)
-- fix segfault in loadMap (still exists?)
-- when ghosts reset, can still be eaten
+- fix segfault in loadScore sometimes segfaults at fgetc ???
 - eating ghosts only gives 200, not double
 - ghosts still chase pacman when he's invincible
 
 THEN:
 - Autoplay
-- make directions and numchoices global again
 
 
 
 LOOK INTOS:
+- make directions and numchoices global again
+- add colors so can know when invincible, ghosts vulnerable, etc
 - look into windows
 - are tied scores always returned in the same order?
 - make ghosts wait in hub until timeout, hub struct?

@@ -40,11 +40,11 @@ char pacmanChangeDirection(pPacman this, char c);
 
 int pacmanCollides(pPacman player, pMap map, char elems[map->height][map->width]);
 
-void pacmanMakeInvincible(pPacman this);
+void pacmanMakeInvincible(pPacman this, pGhost ghosts, int numGhosts);
 
 void increaseScore(pPacman this, int points);
 
-int pacmanEat(pPacman this, pMap map, char elems[map->height][map->width], pPowerup* powerups, int* numPowerups);
+int pacmanEat(pPacman this, pMap map, char elems[map->height][map->width], pPowerup* powerups, int* numPowerups, pGhost ghosts, int numGhosts);
 
 void pacmanEatGhost(pPacman this, pGhost ghost);
 

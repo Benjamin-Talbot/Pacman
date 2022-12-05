@@ -51,15 +51,18 @@ int pacmanCollides(pPacman this, pMap map, char elems[map->height][map->width]) 
     return FALSE;
 }
 
-void pacmanMakeInvincible(pPacman this) {
-    this->invincible = 54;
+void pacmanMakeInvincible(pPacman this, pGhost ghosts, int numGhosts) {
+    this->invincible = 40;
+    for(int i = 0; i < numGhosts; i++) {
+        ghosts[i].vulnerable = TRUE;
+    }
 }
 
 void increaseScore(pPacman this, int points) {
     this->score += points;
 }
 
-int pacmanEat(pPacman this, pMap map, char elems[map->height][map->width], pPowerup* powerups, int* numPowerups) {
+int pacmanEat(pPacman this, pMap map, char elems[map->height][map->width], pPowerup* powerups, int* numPowerups, pGhost ghosts, int numGhosts) {
     char ate = FALSE;
     char allGone = TRUE;
     if(elems[this->y][this->x] == PELLET) {     // this line breaks
@@ -79,7 +82,7 @@ int pacmanEat(pPacman this, pMap map, char elems[map->height][map->width], pPowe
         for(int i = 0; i < *numPowerups; i++) {
             if(this->x == powerups[i]->x && this->y == powerups[i]->y) {
                 increaseScore(this, 50);
-                pacmanMakeInvincible(this);
+                pacmanMakeInvincible(this, ghosts, numGhosts);
                 powerupDelete(powerups, numPowerups, i);
                 for(int row = 0; row < map->height && allGone; row++)
                     for(int col = 0; col < map->width && allGone; col++)
@@ -94,8 +97,12 @@ int pacmanEat(pPacman this, pMap map, char elems[map->height][map->width], pPowe
 }
 
 void pacmanEatGhost(pPacman this, pGhost ghost) {
-    increaseScore(this, 200);
-    ghostReset(ghost);
+    if(ghost->vulnerable == TRUE) {
+        increaseScore(this, 200);
+        ghostReset(ghost);
+    }
+    else
+        gameover(this);
 }
 
 char pacmanHitsGhost(pPacman this, pGhost ghosts, int numGhosts) {
@@ -173,7 +180,7 @@ void pacmanMove(pPacman this, char sprite, pMap map, pPowerup* powerups, int* nu
         (this->invincible)--;
     
 
-    pacmanEat(this, map, map->elems, powerups, numPowerups);
+    pacmanEat(this, map, map->elems, powerups, numPowerups, ghosts, numGhosts);
     if(pacmanHitsGhost(this, ghosts, numGhosts))
         if(!this->invincible)
             gameover(this);

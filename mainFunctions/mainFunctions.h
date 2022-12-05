@@ -20,11 +20,13 @@ void replace_char(char str[], char oldc, char newc, int max);
 
 char* loadMap(pMap* map, int level);
 
-void initialize(pPacman* pacman, int score, pMap* map, int level, pPowerup** powerups, int** numPowerups, pGhost* ghosts, int** numGhosts);
+void initialize(pPacman* pacman, int score, pMap* map, int level, pPowerup** powerups, int** numPowerups, pGhost* ghosts, int** numGhosts, int pauseTime);
 
 void freeMemory(pPacman pacman, pMap map, pPowerup* powerups, int* numPowerups, pGhost ghosts, int* numGhosts);
 
 void freeScores(pNode node);
+
+int nextLevel(pPacman* pacman, pMap* map, int level, int maxLevel, pPowerup* powerups, int** numPowerups, pGhost* ghosts, int** numGhosts, int pauseTime);
 
 char getInput(clock_t start, int updateRate, pPacman pacman);
 

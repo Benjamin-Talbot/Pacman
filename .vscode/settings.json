@@ -41,6 +41,7 @@
         "algorithm": "c",
         "bitset": "c",
         "optional": "c",
-        "math.h": "c"
+        "math.h": "c",
+        "__node_handle": "c"
     }
 }

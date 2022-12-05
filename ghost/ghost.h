@@ -18,6 +18,7 @@ typedef struct Ghost {
     char trackingPacman;
     int** directions;
     int numChoices;
+    char vulnerable;
 } Ghost;
 typedef Ghost* pGhost;
 

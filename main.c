@@ -12,13 +12,15 @@
 
 int main() {
     char* player = getName(player);
+    fflush(stdout);
 
     srand(time(NULL));
     clock_t start;
     int updateRate = 100;   // set to 150 or 200
+    int pauseTime = 1;
     char c;
     pPacman pacman = NULL;
-    int score = 0;
+    // int score = 0;
     pMap map = NULL;
     int maxLevel = 2;
     int level = 0; level++; //level++;
@@ -32,23 +34,13 @@ int main() {
     nodelay(stdscr, true);
     noecho();
     
-    initialize(&pacman, score, &map, level, &powerups, &numPowerups, &ghosts, &numGhosts);
+    initialize(&pacman, 0, &map, level, &powerups, &numPowerups, &ghosts, &numGhosts, pauseTime);
 
     while(!pacman->gameover) {
         start = clock();
 
-        if(pacman->won) {
-            sleep(1);
-            clearMap(map, map->elems);
-            level++;
-            if(level <= maxLevel) {
-                score = pacman->score;
-                freeMemory(pacman, map, powerups, numPowerups, ghosts, numGhosts);
-                initialize(&pacman, score, &map, level, &powerups, &numPowerups, &ghosts, &numGhosts);
-            }
-            else
-                pacman->gameover = TRUE;
-        }
+        if(pacman->won)
+            level = nextLevel(&pacman, &map, level, maxLevel, &powerups, &numPowerups, &ghosts, &numGhosts, pauseTime);
 
         if(!pacman->gameover) {
             update(pacman, c, map, powerups, numPowerups, ghosts, *numGhosts);
@@ -57,11 +49,12 @@ int main() {
 
         c = getInput(start, updateRate, pacman);
     }
-    sleep(1);
+    sleep(pauseTime);
     endwin();
 
     endGame(pacman->score, player);
     freeMemory(pacman, map, powerups, numPowerups, ghosts, numGhosts);
+    free(player);
 
     return 0;
 }

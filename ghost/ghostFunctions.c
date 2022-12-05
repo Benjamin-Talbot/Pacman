@@ -23,11 +23,20 @@ void ghostInit(pGhost this, int x, int y) {
         this->directions[i] = malloc(sizeof(int) * 2);
     }
     this->numChoices = 0;
+    this->vulnerable = FALSE;
 }
 
 void ghostReset(pGhost this) {
     this->x = this->initx;
     this->y = this->inity;
+    ALLDIR(direction);
+    STOP(oldDirection);
+    STOP(nextDirection);
+    this->turnx = 0;
+    this->turny = 0;
+    this->stopTracking = FALSE;
+    this->trackingPacman = 0;
+    this->vulnerable = FALSE;
 }
 
 char withinBounds(int x, int y, int width, int height) {
@@ -174,6 +183,7 @@ void ghostMove(pGhost this, pPacman pacman, pMap map) {
         this->trackingPacman = ghostSeesPacman(this, pacman, map, map->elems);
         if(!this->trackingPacman) {    // lost track
             ghostFollowPacman(this, pacman, map);
+            this->turnx = this->turny = 0;
         }
         else {    // else continue following with random chance to stop
             int r = rand() % 30;
@@ -233,5 +243,10 @@ void ghostsDraw(pGhost ghosts, int numGhosts, pMap map, char elems[map->height][
     for(int i = 0; i < numGhosts; i++) {
         ghost = ghosts[i];
         mvprintw(ghost.y, ghost.x, "%c", ghost.sprite);
+        if((ghost.x < 0 || ghost.x >= map->width || ghost.y < 0 || ghost.y >= map->height)) {
+            mvprintw(10+i, 75, "(%d, %d)", ghost.x, ghost.y);
+            // mvprintw(10+i, 75, "(%d, %d)\t(%d, %d)", ghost.turnx, ghost.turny, ghost.x, ghost.y);
+            // mvprintw(10+i, 75, "%d", ghost.trackingPacman);
+        }
     }
 }
