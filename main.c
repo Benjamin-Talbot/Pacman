@@ -20,6 +20,7 @@ int main() {
     int pauseTime = 1;
     char c;
     pPacman pacman = NULL;
+    char CPU = 0;
     pMap map = NULL;
     int maxLevel = 2;
     int level = 0; //level++; //level++;
@@ -33,7 +34,7 @@ int main() {
     nodelay(stdscr, true);
     noecho();
     
-    initialize(&pacman, 0, &map, level, &powerups, &numPowerups, &ghosts, &numGhosts, pauseTime);
+    initialize(&pacman, CPU, 0, &map, level, &powerups, &numPowerups, &ghosts, &numGhosts, pauseTime);
 
     while(!pacman->gameover) {
         start = clock();

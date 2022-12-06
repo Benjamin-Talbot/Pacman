@@ -32,7 +32,7 @@
 #undef STOP
 #define STOP(dir) this->dir[0] = 0; this->dir[1] = 0;
 
-void pacmanInit(pPacman this, int x, int y, int score);
+void pacmanInit(pPacman this, int x, int y, int score, char CPU);
 
 void gameover(pPacman this);
 

@@ -20,7 +20,7 @@ void replace_char(char str[], char oldc, char newc, int max);
 
 char* loadMap(pMap* map, int level);
 
-void initialize(pPacman* pacman, int score, pMap* map, int level, pPowerup** powerups, int** numPowerups, pGhost* ghosts, int** numGhosts, int pauseTime);
+void initialize(pPacman* pacman, char CPU, int score, pMap* map, int level, pPowerup** powerups, int** numPowerups, pGhost* ghosts, int** numGhosts, int pauseTime);
 
 void freeMemory(pPacman pacman, pMap map, pPowerup* powerups, int* numPowerups, pGhost ghosts, int* numGhosts);
 

@@ -15,6 +15,7 @@ typedef struct Pacman {
     int invincible;
     char gameover;
     char won;
+    char CPU;
 } Pacman;
 typedef Pacman* pPacman;
 

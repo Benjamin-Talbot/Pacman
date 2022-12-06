@@ -143,14 +143,14 @@ char* loadMap(pMap* map, int level) {
     return NULL;
 }
 
-void initialize(pPacman* pacman, int score, pMap* map, int level, pPowerup** powerups, int** numPowerups, pGhost* ghosts, int** numGhosts, int pauseTime) {
+void initialize(pPacman* pacman, char CPU, int score, pMap* map, int level, pPowerup** powerups, int** numPowerups, pGhost* ghosts, int** numGhosts, int pauseTime) {
 
     loadMap(map, level);
 
     int** coords = NULL;
     int numpacs = findCoords(&coords, (*map)->height, (*map)->width, (*map)->elems, '<');
     *pacman = (pPacman) malloc(sizeof(Pacman));
-    pacmanInit(*pacman, coords[0][0], coords[0][1], score);
+    pacmanInit(*pacman, coords[0][0], coords[0][1], score, CPU);
 
     *numPowerups = malloc(sizeof(int));
     **numPowerups = 0;
@@ -204,13 +204,14 @@ void freeScores(pNode node) {
 }
 
 int nextLevel(pPacman* pacman, pMap* map, int level, int maxLevel, pPowerup* powerups, int** numPowerups, pGhost* ghosts, int** numGhosts, int pauseTime) {
+    char CPU = (*pacman)->CPU;
     sleep(pauseTime);
     clearMap(*map, (*map)->elems);
     level++;
     if(level <= maxLevel) {
         int score = (*pacman)->score;
         freeMemory(*pacman, *map, *powerups, *numPowerups, *ghosts, *numGhosts);
-        initialize(pacman, score, map, level, powerups, numPowerups, ghosts, numGhosts, pauseTime);
+        initialize(pacman, CPU, score, map, level, powerups, numPowerups, ghosts, numGhosts, pauseTime);
     }
     else {
         (*pacman)->gameover = TRUE;
@@ -249,6 +250,8 @@ char getInput(clock_t start, int updateRate, pPacman pacman) {
 }
 
 void update(pPacman pacman, char c, pMap map, pPowerup* powerups, int* numPowerups, pGhost ghosts, int numGhosts) {
+    if(pacman->CPU)
+        ;    // make pacman move by itself, maybe pass &c as parameter, keeps things organized
     char sprite = pacmanChangeDirection(pacman, c);    // change pacman's direction
     pacmanMove(pacman, sprite, map, powerups, numPowerups, ghosts, numGhosts);    // move pacman
     ghostsMove(ghosts, numGhosts, pacman, map);
