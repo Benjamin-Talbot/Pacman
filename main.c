@@ -16,14 +16,13 @@ int main() {
 
     srand(time(NULL));
     clock_t start;
-    int updateRate = 150;   // set to 150
+    int updateRate = 150;
     int pauseTime = 1;
     char c;
     pPacman pacman = NULL;
-    // int score = 0;
     pMap map = NULL;
     int maxLevel = 2;
-    int level = 0; level++; //level++;
+    int level = 0; //level++; //level++;
     pPowerup* powerups = NULL;
     int* numPowerups = NULL;
     pGhost ghosts = NULL;

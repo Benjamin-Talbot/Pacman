@@ -89,13 +89,11 @@ int findCoords(int*** coords, int rows, int cols, char elems[rows][cols], char c
 char* loadMap(pMap* map, int level) {
     int lenElems = 500;
     char* elems = malloc(sizeof(char) * (lenElems + 1));
-    // elems[0] = '\0';
     int maxchars;
 
-    // cite the log expression or change
     if(level)
         maxchars = sizeof(char)*(18+(int)log10(level) + 1) + 1;
-    else    // level 0, log doesn't work, plus it's constant
+    else    // level is 0, log doesn't work, plus it's constant
         maxchars = 20;
         // maxchars = sizeof(char)*(18+(int)log10(level+1) + 1) + 1;
 
@@ -133,7 +131,7 @@ char* loadMap(pMap* map, int level) {
         strncpy(tmp, elems, numchars);
         free(elems);
 
-        // replace_char(tmp, ' ', '.', -1);
+        replace_char(tmp, ' ', '.', -1);
         replace_char(tmp, 'x', ' ', -1);
 
         *map = (pMap) malloc(sizeof(Map));
@@ -173,7 +171,7 @@ void initialize(pPacman* pacman, int score, pMap* map, int level, pPowerup** pow
 
     replace_char((*map)->elems, '<', ' ', 1);
     replace_char((*map)->elems, 'o', ' ', -1);
-    // replace_char((*map)->elems, '&', '.', -1);
+    replace_char((*map)->elems, '&', '.', -1);
     replace_char((*map)->elems, '&', ' ', -1);
 
     free(coords[0]);
@@ -185,7 +183,6 @@ void initialize(pPacman* pacman, int score, pMap* map, int level, pPowerup** pow
     sleep(pauseTime);
 }
 
-// sometimes segfaults
 void freeMemory(pPacman pacman, pMap map, pPowerup* powerups, int* numPowerups, pGhost ghosts, int* numGhosts) {
     free(pacman);
     free(map->elems);
@@ -194,7 +191,6 @@ void freeMemory(pPacman pacman, pMap map, pPowerup* powerups, int* numPowerups, 
         free(powerups[i]);
     free(powerups);
     free(numPowerups);
-    // free(ghosts->directions);
     free(ghosts);
     free(numGhosts);
 }

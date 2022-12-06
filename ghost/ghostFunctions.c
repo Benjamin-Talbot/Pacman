@@ -15,7 +15,6 @@ void ghostInit(pGhost this, int x, int y) {
     this->stopTracking = FALSE;
     this->sprite = '&';
     this->cooldown = 0;    // used so ghosts can't eat pacman immediately after being reset
-    // this->cooldown = 10;
     this->trackingPacman = 0;
     this->directions = (int**) malloc(sizeof(int*) * 4);
     for(int i = 0; i < 4; i++) {
@@ -221,7 +220,7 @@ void ghostRunAway(pGhost this, pMap map, char elems[map->height][map->width], pP
         this->direction[1] = this->directions[farthest][1];
 }
 
-// bounds checking
+// implement bounds checking?
 void ghostMove(pGhost this, pPacman pacman, pMap map) {
     if(!this->vulnerable) {    // this->vulnerable == FALSE
         if(this->trackingPacman) {
@@ -300,10 +299,5 @@ void ghostsDraw(pGhost ghosts, int numGhosts, pMap map, char elems[map->height][
     for(int i = 0; i < numGhosts; i++) {
         ghost = ghosts[i];
         mvprintw(ghost.y, ghost.x, "%c", ghost.sprite);
-        // if((ghost.x < 0 || ghost.x >= map->width || ghost.y < 0 || ghost.y >= map->height)) {
-            // mvprintw(10+i, 75, "(%d, %d)", ghost.x, ghost.y);
-            // mvprintw(10+i, 75, "(%d, %d)\t(%d, %d)", ghost.turnx, ghost.turny, ghost.x, ghost.y);
-            // mvprintw(10+i, 75, "%d", ghost.trackingPacman);
-        // }
     }
 }
