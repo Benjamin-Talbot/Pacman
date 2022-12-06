@@ -53,7 +53,7 @@ int pacmanCollides(pPacman this, pMap map, char elems[map->height][map->width]) 
 }
 
 void pacmanMakeInvincible(pPacman this, pGhost ghosts, int numGhosts) {
-    this->invincible = 80; //40
+    this->invincible = 40;
     this->ghostPoints = 200;
     for(int i = 0; i < numGhosts; i++) {
         ghosts[i].vulnerable = TRUE;
@@ -115,7 +115,7 @@ char pacmanHitsGhost(pPacman this, pGhost ghosts, int numGhosts) {
         ghost = (ghosts+i);
 
         if(this->x == ghost->x && this->y == ghost->y) {
-            if(ghost->cooldown > 0) {
+            if(!ghost->cooldown) {
                 hitGhost = TRUE;
                 if(this->invincible)
                     pacmanEatGhost(this, ghost);

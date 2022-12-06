@@ -95,8 +95,9 @@ char* loadMap(pMap* map, int level) {
     // cite the log expression or change
     if(level)
         maxchars = sizeof(char)*(18+(int)log10(level) + 1) + 1;
-    else
-        maxchars = sizeof(char)*(18+(int)log10(level+1) + 1) + 1;
+    else    // level 0, log doesn't work, plus it's constant
+        maxchars = 20;
+        // maxchars = sizeof(char)*(18+(int)log10(level+1) + 1) + 1;
 
     char filename[maxchars];
     snprintf(filename, maxchars, "map/levels/map%d.txt", level);

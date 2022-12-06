@@ -14,8 +14,8 @@ void ghostInit(pGhost this, int x, int y) {
     this->turny = 0;
     this->stopTracking = FALSE;
     this->sprite = '&';
-    this->cooldown = 0;
-    // this->cooldown = 20;
+    this->cooldown = 0;    // used so ghosts can't eat pacman immediately after being reset
+    // this->cooldown = 10;
     this->trackingPacman = 0;
     this->directions = (int**) malloc(sizeof(int*) * 4);
     for(int i = 0; i < 4; i++) {
@@ -190,7 +190,7 @@ char ghostHitsWall(pGhost this, pMap map, char elems[map->height][map->width]) {
 void ghostRunAway(pGhost this, pMap map, char elems[map->height][map->width], pPacman pacman) {
         this->trackingPacman = 0;
 
-        ghostMoveOptions(this, map, map->elems, TRUE);
+        ghostMoveOptions(this, map, map->elems, FALSE);
         int xdist = 0;
         int ydist = 0;
         int dist = 0;
