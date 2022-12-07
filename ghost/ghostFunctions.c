@@ -275,7 +275,7 @@ void ghostMove(pGhost this, pPacman pacman, pMap map) {
     if(ghostHitsPacman(this, pacman) && !this->cooldown)
         if(!pacman->invincible)
             gameover(pacman);
-        else
+        else                                                        // dangling else?
             pacmanEatGhost(pacman, this);
 }
 
@@ -289,7 +289,7 @@ void ghostsMove(pGhost ghosts, int numGhosts, pPacman pacman, pMap map) {
         if(ghost->toggleUpdate)
             if(ghost->cooldown > 0)
                 (ghost->cooldown)--;
-            else
+            else                                                    // dangling else?
                 ghostMove(ghost, pacman, map);
     }
 }

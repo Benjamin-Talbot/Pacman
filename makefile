@@ -7,8 +7,8 @@
 # NEED TO ADD .h FILES!!!
 #
 
-main: main.o score.o mainFunctions.o pacmanFunctions.o mapFunctions.o powerupFunctions.o ghostFunctions.o
-	gcc -o main main.o score.o mainFunctions.o pacmanFunctions.o mapFunctions.o powerupFunctions.o ghostFunctions.o -lncurses -lm
+main: main.o score.o mainFunctions.o pacmanFunctions.o pacmanAI.o mapFunctions.o powerupFunctions.o ghostFunctions.o
+	gcc -o main main.o score.o mainFunctions.o pacmanFunctions.o pacmanAI.o mapFunctions.o powerupFunctions.o ghostFunctions.o -lncurses -lm
 
 # debug: main.o mainFunctions.o pacmanFunctions.o mapFunctions.o powerupFunctions.o ghostFunctions.o
 # 	gcc -o main main.o -g mainFunctions.o pacmanFunctions.o mapFunctions.o powerupFunctions.o ghostFunctions.o -lncurses -lm
@@ -24,6 +24,9 @@ powerupFunctions.o: powerup/powerupFunctions.c
 
 mapFunctions.o: map/mapFunctions.c
 	gcc -c map/mapFunctions.c -g
+
+pacmanAI.o: pacman/pacmanAI.c
+	gcc -c pacman/pacmanAI.c -g
 
 pacmanFunctions.o: pacman/pacmanFunctions.c
 	gcc -c pacman/pacmanFunctions.c -g

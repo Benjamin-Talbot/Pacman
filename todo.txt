@@ -1,4 +1,7 @@
 - Autoplay
+- somehow a ghost still went diagonally
+  check map0.txt for ghost init locations and ghost move function in case [1, 1] as direction doesn't move into a wall, but an open space
+  other ghosts do this too
 
 
 LOOK INTOS:

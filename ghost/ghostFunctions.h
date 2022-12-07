@@ -33,6 +33,8 @@ void ghostInit(pGhost this, int x, int y);
 
 void ghostReset(pGhost this);
 
+char withinBounds(int x, int y, int width, int height);
+
 char ghostSeesPacman(pGhost this, pPacman pacman, pMap map, char elems[map->height][map->width]);
 
 void ghostMoveOptions(pGhost this, pMap map, char elems[map->height][map->width], char withBackwards);

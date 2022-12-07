@@ -1,6 +1,6 @@
 #include "mainFunctions.h"
 
-// what about empty name? and test if include :
+// what about empty name? and test if include ':'
 // doesn't work with handing ':'
 char* getName(char* player) {
     int lenName = 8;
@@ -210,8 +210,8 @@ int nextLevel(pPacman* pacman, pMap* map, int level, int maxLevel, pPowerup* pow
     level++;
     if(level <= maxLevel) {
         int score = (*pacman)->score;
-        freeMemory(*pacman, *map, *powerups, *numPowerups, *ghosts, *numGhosts);
-        initialize(pacman, CPU, score, map, level, powerups, numPowerups, ghosts, numGhosts, pauseTime);
+        freeMemory(*pacman, *map, powerups, *numPowerups, *ghosts, *numGhosts);
+        initialize(pacman, CPU, score, map, level, &powerups, numPowerups, ghosts, numGhosts, pauseTime);
     }
     else {
         (*pacman)->gameover = TRUE;
@@ -251,7 +251,7 @@ char getInput(clock_t start, int updateRate, pPacman pacman) {
 
 void update(pPacman pacman, char c, pMap map, pPowerup* powerups, int* numPowerups, pGhost ghosts, int numGhosts) {
     if(pacman->CPU)
-        ;    // make pacman move by itself, maybe pass &c as parameter, keeps things organized
+        pacmanChooseDirection(pacman, map, map->elems, *powerups, *numPowerups, ghosts, numGhosts, &c);    // make pacman move by itself, maybe pass &c as parameter, keeps things organized
     char sprite = pacmanChangeDirection(pacman, c);    // change pacman's direction
     pacmanMove(pacman, sprite, map, powerups, numPowerups, ghosts, numGhosts);    // move pacman
     ghostsMove(ghosts, numGhosts, pacman, map);

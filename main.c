@@ -20,7 +20,7 @@ int main() {
     int pauseTime = 1;
     char c;
     pPacman pacman = NULL;
-    char CPU = 0;
+    char CPU = 1;
     pMap map = NULL;
     int maxLevel = 2;
     int level = 0; //level++; //level++;
@@ -40,7 +40,7 @@ int main() {
         start = clock();
 
         if(pacman->won)
-            level = nextLevel(&pacman, &map, level, maxLevel, &powerups, &numPowerups, &ghosts, &numGhosts, pauseTime);
+            level = nextLevel(&pacman, &map, level, maxLevel, powerups, &numPowerups, &ghosts, &numGhosts, pauseTime);
 
         if(!pacman->gameover) {
             update(pacman, c, map, powerups, numPowerups, ghosts, *numGhosts);

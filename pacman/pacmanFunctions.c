@@ -127,7 +127,7 @@ char pacmanHitsGhost(pPacman this, pGhost ghosts, int numGhosts) {
     return hitGhost;
 }
 
-void function(pGhost ghosts, int numGhosts) {
+void pacmanUninvincible(pGhost ghosts, int numGhosts) {
     for(int i = 0; i < numGhosts; i++) {
         ghosts[i].vulnerable = FALSE;
         ghosts[i].toggleUpdate = 1;
@@ -192,7 +192,7 @@ void pacmanMove(pPacman this, char sprite, pMap map, pPowerup* powerups, int* nu
     if(this->invincible > 0) {
         (this->invincible)--;
         if(this->invincible <= 0)
-            function(ghosts, numGhosts);
+            pacmanUninvincible(ghosts, numGhosts);
     }
 
     pacmanEat(this, map, map->elems, powerups, numPowerups, ghosts, numGhosts);
