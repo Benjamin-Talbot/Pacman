@@ -2,4 +2,5 @@ Fatima:190
 Aiden:210
 Fatima:990
 Pat:2150
+CPU:3280
 Ben:8300

@@ -151,8 +151,6 @@ void pelletVector(pPacman this, pMap map, char elems[map->height][map->width], p
         *pelletycomp += (powerups[i]->y - this->y) / 2;
     }
 
-    // if not 0
-
     *pelletxcomp /= (numPellets + numPowerups) / 2 + 1;
     *pelletycomp /= (numPellets + numPowerups) / 2 + 1;
 }
@@ -192,11 +190,10 @@ char ghostsInVicinity(pPacman this, pGhost ghosts, int numGhosts, int* minx, int
     int minind = 0, mind = 10000;
     int dx, dy, d;
     *ghostxcomp = *ghostycomp = 0;
-    Ghost ghost = ghost;
+    Ghost ghost = ghosts[0];
 
     if(numGhosts > 0) {
-        if(TRUE || !ghost.vulnerable) {
-            ghost = ghost;
+        if(!ghost.vulnerable) {
             *minx = ghost.x;
             *miny = ghost.y;
             mind = (*minx)*(*minx) + (*miny)*(*miny);
@@ -207,7 +204,7 @@ char ghostsInVicinity(pPacman this, pGhost ghosts, int numGhosts, int* minx, int
 
         for(int i = 1; i < numGhosts; i++) {
             ghost = ghosts[i];
-            if(TRUE || !ghost.vulnerable) {
+            if(!ghost.vulnerable) {
                 dx = this->x - ghost.x;
                 dy = this->y - ghost.y;
                 d = dx*dx + dy*dy;
