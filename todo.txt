@@ -6,6 +6,7 @@
 
 LOOK INTOS:
 - test empty name and w/ :
+- once ghost managed to get inside closed loop
 - rarely, but sometimes can't eat ghost when invincible?
 - make directions and numchoices global again
 - add colors so can know when invincible, ghosts vulnerable, etc

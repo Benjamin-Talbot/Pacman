@@ -174,7 +174,7 @@ void initialize(pPacman* pacman, char CPU, int score, pMap* map, int level, pPow
     replace_char((*map)->elems, '<', ' ', 1);
     replace_char((*map)->elems, 'o', ' ', -1);
     replace_char((*map)->elems, '&', '.', -1);
-    replace_char((*map)->elems, '&', ' ', -1);
+    // replace_char((*map)->elems, '&', ' ', -1);
 
     free(coords[0]);
     free(coords);
@@ -205,15 +205,15 @@ void freeScores(pNode node) {
     free(node);
 }
 
-int nextLevel(pPacman* pacman, pMap* map, int level, int maxLevel, pPowerup* powerups, int** numPowerups, pGhost* ghosts, int** numGhosts, int pauseTime) {
+int nextLevel(pPacman* pacman, pMap* map, int level, int maxLevel, pPowerup** powerups, int** numPowerups, pGhost* ghosts, int** numGhosts, int pauseTime) {
     char CPU = (*pacman)->CPU;
     sleep(pauseTime);
     clearMap(*map, (*map)->elems);
     level++;
     if(level <= maxLevel) {
         int score = (*pacman)->score;
-        freeMemory(*pacman, *map, powerups, *numPowerups, *ghosts, *numGhosts);
-        initialize(pacman, CPU, score, map, level, &powerups, numPowerups, ghosts, numGhosts, pauseTime);
+        freeMemory(*pacman, *map, *powerups, *numPowerups, *ghosts, *numGhosts);
+        initialize(pacman, CPU, score, map, level, powerups, numPowerups, ghosts, numGhosts, pauseTime);
     }
     else {
         (*pacman)->gameover = TRUE;
@@ -288,5 +288,6 @@ void endGame(int score, char* player) {
     // rank = 1;
     // append = FALSE;
     
+    printf("You scored %d points. Good job!\n", score);
     printf("Thanks for playing %s!\n", player);
 }

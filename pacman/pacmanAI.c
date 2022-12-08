@@ -1,14 +1,12 @@
 #include "pacmanFunctions.h"
 
-// abort probably from undefined behaviour of no initializing arrays properly
-
 static char prevchars[2] = {' ', ' '};
 static char infloopWarning = FALSE;
 static char infloop = FALSE;
 static int numChoices = 0, numRandTimes = 0;
 static int directions[4][2] = {{0, 0}, {0, 0}, {0, 0}, {0, 0}};
 static char pathfinding = FALSE;
-static int randTick = 15;
+static int randTick = 20;
 
 int randint(int max) {
     int r = rand() % max;
@@ -141,26 +139,22 @@ void pelletVector(pPacman this, pMap map, char elems[map->height][map->width], p
     for(int y = 0; y < map->height; y++) {
         for(int x = 0; x < map->width; x++) {
             if(elems[y][x] == PELLET) {
-                *pelletxcomp += (x - this->x);// / 2;
-                *pelletycomp += (y - this->y);// / 2;
+                *pelletxcomp += (x - this->x) / 2;
+                *pelletycomp += (y - this->y) / 2;
                 numPellets++;
             }
         }
     }
 
     for(int i = 0; i < numPowerups; i++) {
-        *pelletxcomp += (powerups[i]->x - this->x);// / 2;
-        *pelletycomp += (powerups[i]->y - this->y);// / 2;
+        *pelletxcomp += (powerups[i]->x - this->x) / 2;
+        *pelletycomp += (powerups[i]->y - this->y) / 2;
     }
 
     // if not 0
 
-    *pelletxcomp /= (numPellets + numPowerups);// / 2;
-    *pelletycomp /= (numPellets + numPowerups);// / 2;
-}
-
-void ghostVector() {
-
+    *pelletxcomp /= (numPellets + numPowerups) / 2 + 1;
+    *pelletycomp /= (numPellets + numPowerups) / 2 + 1;
 }
 
 void findNearestPellet(pPacman this, pMap map, char elems[map->height][map->width], pPowerup* powerups, int numPowerups, int* minx, int* miny) {
@@ -193,6 +187,53 @@ void findNearestPellet(pPacman this, pMap map, char elems[map->height][map->widt
     }
 }
 
+char ghostsInVicinity(pPacman this, pGhost ghosts, int numGhosts, int* minx, int* miny, int* ghostxcomp, int* ghostycomp) {
+    char ghostClose = FALSE;
+    int minind = 0, mind = 10000;
+    int dx, dy, d;
+    *ghostxcomp = *ghostycomp = 0;
+    Ghost ghost = ghost;
+
+    if(numGhosts > 0) {
+        if(TRUE || !ghost.vulnerable) {
+            ghost = ghost;
+            *minx = ghost.x;
+            *miny = ghost.y;
+            mind = (*minx)*(*minx) + (*miny)*(*miny);
+            
+            *ghostxcomp += ghost.x;
+            *ghostycomp += ghost.y;
+        }
+
+        for(int i = 1; i < numGhosts; i++) {
+            ghost = ghosts[i];
+            if(TRUE || !ghost.vulnerable) {
+                dx = this->x - ghost.x;
+                dy = this->y - ghost.y;
+                d = dx*dx + dy*dy;
+
+                *ghostxcomp += ghost.x;
+                *ghostycomp += ghost.y;
+
+                if(d < mind) {
+                    (*minx) = ghost.x;
+                    (*miny) = ghost.y;
+                    mind = d;
+                    minind = i;
+                }
+            }
+        }
+
+        *ghostxcomp -= ghosts[minind].x;
+        *ghostycomp -= ghosts[minind].y;
+
+        if(mind <= 16)
+            ghostClose = TRUE;
+    }
+
+    return ghostClose;
+}
+
 char pacmanChooseDirection(pPacman this, pMap map, char elems[map->height][map->width], pPowerup* powerups, int numPowerups, pGhost ghosts, int numGhosts, char *c) {
     char ghostClose = FALSE;
     int dirs[4][2] = {{1, 0}, {0, -1}, {-1, 0}, {0, 1}};
@@ -200,8 +241,14 @@ char pacmanChooseDirection(pPacman this, pMap map, char elems[map->height][map->
     int dirChoices[4];
     int numClosePellets = 0;
     int row, col, i, vx, vy, r;
+    int ghostxcomp, ghostycomp;    // vector components for the average ghost distance out of the not closest ghosts
     float pelletxcomp, pelletycomp;    // vector components for the average pellet distance
     int xdir = 0, ydir = 0;
+    int minx = 0, miny = 0;
+
+    ghostClose = ghostsInVicinity(this, ghosts, numGhosts, &minx, &miny, &ghostxcomp, &ghostycomp);
+
+    mvprintw(5, 75, "ghostClose: %d", ghostClose);
 
     if(!ghostClose) {
         for(int i = 0; i < 4; i++) {
@@ -213,7 +260,7 @@ char pacmanChooseDirection(pPacman this, pMap map, char elems[map->height][map->
             }
 
             for(int j = 0; j < numPowerups && numClosePellets < 4; j++) {
-                if(this->x + dirs[j][0] == powerups[j]->x && this->y + dirs[j][1] == powerups[j]->y) {                      // can't read anything from powerups[0]
+                if(this->x + dirs[j][0] == powerups[j]->x && this->y + dirs[j][1] == powerups[j]->y) {
                     dirChoices[numClosePellets] = i;
                     numClosePellets++;
                     break;
@@ -225,7 +272,7 @@ char pacmanChooseDirection(pPacman this, pMap map, char elems[map->height][map->
                                      // this means finding vector and checking one that is in a closer direction
             infloop = FALSE;
             pelletVector(this, map, elems, powerups, numPowerups, &pelletxcomp, &pelletycomp);
-            i = 0;
+            int i = 0;
             for(i = 0; i < numClosePellets; i++) {
                 vx = pelletxcomp + dirs[i][0];
                 vy = pelletycomp + dirs[i][1];
@@ -326,7 +373,7 @@ char pacmanChooseDirection(pPacman this, pMap map, char elems[map->height][map->
                 }
                 
                 r = randint(randTick);
-                if((r == randTick - 1)) {
+                if(r == randTick - 1) {
                     pacmanMoveOptions(this, map, elems, FALSE);
                     if(numChoices > 0) {
                         r = randint(numChoices);
@@ -360,6 +407,39 @@ char pacmanChooseDirection(pPacman this, pMap map, char elems[map->height][map->
             }
         }
     }
+    else {    // ghostClose == TRUE
+        pacmanMoveOptions(this, map , elems, TRUE);
+        int rundir[2];
+        rundir[0] = (this->x - minx) / abs(this->x - minx);
+        rundir[1] = (this->y - miny) / abs(this->y - miny);
+        
+        if(this->invincible) {
+            rundir[0] *= -1;
+            rundir[1] *= -1;
+        }
+
+        for(i = 0; i < numChoices; i++)
+            if(directions[i][0] == rundir[0] && directions[i][1] == rundir[1])
+                break;
+        if(i == numChoices) {
+            rundir[0] *= -1;
+            rundir[1] *= -1;
+            for(i = 0; i < numChoices; i++)
+                if(directions[i][0] != rundir[0] || directions[i][1] != rundir[1])
+                    break;
+            if(i == numChoices)
+                i = 0;
+        }
+        if(directions[i][0] == 1)
+            *c = keys[0];
+        else if(directions[i][0] == -1)
+            *c = keys[2];
+        else if(directions[i][1] == -1)
+            *c = keys[1];
+        else    // directions[i][1] == 1?
+            *c = keys[3];
+    }
+
     if(!ghostClose && infloop && numRandTimes > 0) {    // !ghostClose && infloop
         // if(!pathfinding) {
         //     // findNearestPellet();

@@ -19,7 +19,7 @@ int main() {
 
     srand(time(NULL));
     clock_t start;
-    int updateRate = 50;
+    int updateRate = 150;
     int pauseTime = 1;
     char c = '\0';
     pPacman pacman = NULL;
@@ -42,7 +42,7 @@ int main() {
         start = clock();
 
         if(pacman->won)
-            level = nextLevel(&pacman, &map, level, maxLevel, powerups, &numPowerups, &ghosts, &numGhosts, pauseTime);
+            level = nextLevel(&pacman, &map, level, maxLevel, &powerups, &numPowerups, &ghosts, &numGhosts, pauseTime);
 
         if(!pacman->gameover) {
             clear();
@@ -57,7 +57,8 @@ int main() {
 
     endGame(pacman->score, player);
     freeMemory(pacman, map, powerups, numPowerups, ghosts, numGhosts);
-    free(player);
+    if(!CPU)
+        free(player);
 
     return 0;
 }
