@@ -2,6 +2,17 @@
 
 static int paused = FALSE;
 
+char getPlayer() {
+    int CPU;
+    printf("Would you like to play (1) or let the computer play (0)? ");
+    scanf("%d", &CPU);
+    CPU = 1 - CPU;
+    char garbage;
+    scanf("%c", &garbage);
+    
+    return (char) CPU;
+}
+
 // what about empty name? and test if include ':'
 // doesn't work with handing ':'
 char* getName(char* player) {

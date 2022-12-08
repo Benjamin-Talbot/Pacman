@@ -14,9 +14,13 @@
 #include "../ghost/ghostFunctions.h"
 #include "../score/score.h"
 
+char getPlayer();
+
 char* getName(char* player);
 
 void replace_char(char str[], char oldc, char newc, int max);
+
+int findCoords(int*** coords, int rows, int cols, char elems[rows][cols], char character);
 
 char* loadMap(pMap* map, int level);
 

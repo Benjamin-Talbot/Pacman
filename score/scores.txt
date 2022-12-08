@@ -1,6 +1,10 @@
+Podvik:0
 Fatima:190
 Aiden:210
+Benjamin Talbot:640
 Fatima:990
+CPU:1950
 Pat:2150
+Podvikisthebest:2730
 CPU:3280
 Ben:8300

@@ -33,11 +33,21 @@
 #undef STOP
 #define STOP(dir) this->dir[0] = 0; this->dir[1] = 0;
 
+// begin pacman AI functions
+int randint(int max);
+
+void pacmanMoveOptions(pPacman this, pMap map, char elems[map->height][map->width], char withBackwards);
+
 int pacmanSeesPellet(pPacman this, pMap map, char elems[map->height][map->width], int dirs[4][2], int* choice, pPowerup* powerups, int numPowerups);
 
 void pelletVector(pPacman this, pMap map, char elems[map->height][map->width], pPowerup* powerups, int numPowerups, float* pelletxcomp, float* pelletycomp);
 
+void findNearestPellet(pPacman this, pMap map, char elems[map->height][map->width], pPowerup* powerups, int numPowerups, int* minx, int* miny);
+
+char ghostsInVicinity(pPacman this, pGhost ghosts, int numGhosts, int* minx, int* miny, int* ghostxcomp, int* ghostycomp);
+
 char pacmanChooseDirection(pPacman this, pMap map, char elems[map->height][map->width], pPowerup* powerups, int numPowerups, pGhost ghosts, int numGhosts, char *c);
+// end pacman AI functions
 
 void pacmanInit(pPacman this, int x, int y, int score, char CPU);
 

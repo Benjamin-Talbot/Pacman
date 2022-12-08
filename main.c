@@ -11,7 +11,8 @@
 #include "score/score.h"
 
 int main() {
-    char CPU = 1;
+    char CPU;
+    CPU = getPlayer();
     char* player = "CPU";
     if(!CPU)
         player = getName(player);
@@ -64,10 +65,6 @@ int main() {
 }
 
 /*
-With AI:
 cd C/FinalProject; make clean; make main; clear; ./main
 cd C/FinalProject; make clean; make main; clear; lldb main
-
-Without AI:
-cd C/FinalProject\ Functional; make clean; make main; clear; ./main
 */

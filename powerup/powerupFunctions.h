@@ -9,8 +9,6 @@
 
 void powerupInit(pPowerup this, int x, int y);
 
-void movePowerups(pPowerup* powerups, int* numPowerups, int index);
-
 void powerupDelete(pPowerup* powerups, int* numPowerups, int index);
 
 void powerupsDraw(pPowerup* powerups, int numPowerups);

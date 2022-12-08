@@ -407,8 +407,11 @@ char pacmanChooseDirection(pPacman this, pMap map, char elems[map->height][map->
     else {    // ghostClose == TRUE
         pacmanMoveOptions(this, map , elems, TRUE);
         int rundir[2];
-        rundir[0] = (this->x - minx) / abs(this->x - minx);
-        rundir[1] = (this->y - miny) / abs(this->y - miny);
+        int x = this->x - minx, y = this->y - miny;
+        rundir[0] = (x) / abs(x);
+        rundir[1] = (y) / abs(y);
+
+        abs(x) > abs(y) ? (rundir[1] = 0) : (rundir[0] = 0);
         
         if(this->invincible) {
             rundir[0] *= -1;
