@@ -11,16 +11,18 @@
 #include "score/score.h"
 
 int main() {
-    char* player = getName(player);
+    char CPU = 1;
+    char* player = "CPU";
+    if(!CPU)
+        player = getName(player);
     fflush(stdout);
 
     srand(time(NULL));
     clock_t start;
-    int updateRate = 150;
+    int updateRate = 50;
     int pauseTime = 1;
-    char c;
+    char c = '\0';
     pPacman pacman = NULL;
-    char CPU = 1;
     pMap map = NULL;
     int maxLevel = 2;
     int level = 0; //level++; //level++;
@@ -43,6 +45,7 @@ int main() {
             level = nextLevel(&pacman, &map, level, maxLevel, powerups, &numPowerups, &ghosts, &numGhosts, pauseTime);
 
         if(!pacman->gameover) {
+            clear();
             update(pacman, c, map, powerups, numPowerups, ghosts, *numGhosts);
             draw(pacman, map, powerups, *numPowerups, ghosts, *numGhosts);
         }
@@ -58,3 +61,12 @@ int main() {
 
     return 0;
 }
+
+/*
+With AI:
+cd C/FinalProject; make clean; make main; clear; ./main
+cd C/FinalProject; make clean; make main; clear; lldb main
+
+Without AI:
+cd C/FinalProject\ Functional; make clean; make main; clear; ./main
+*/

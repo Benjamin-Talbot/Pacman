@@ -33,11 +33,11 @@
 #undef STOP
 #define STOP(dir) this->dir[0] = 0; this->dir[1] = 0;
 
-int pacmanSeesPellet(pPacman this, pMap map, char elems[map->height][map->width], int dirs[4][2]);
+int pacmanSeesPellet(pPacman this, pMap map, char elems[map->height][map->width], int dirs[4][2], int* choice, pPowerup* powerups, int numPowerups);
 
-void pelletVector(pPacman this, pMap map, char elems[map->height][map->width], Powerup* powerups, int numPowerups, float* pelletxcomp, float* pelletycomp);
+void pelletVector(pPacman this, pMap map, char elems[map->height][map->width], pPowerup* powerups, int numPowerups, float* pelletxcomp, float* pelletycomp);
 
-char pacmanChooseDirection(pPacman this, pMap map, char elems[map->height][map->width], Powerup* powerups, int numPowerups, pGhost ghosts, int numGhosts, char *c);
+char pacmanChooseDirection(pPacman this, pMap map, char elems[map->height][map->width], pPowerup* powerups, int numPowerups, pGhost ghosts, int numGhosts, char *c);
 
 void pacmanInit(pPacman this, int x, int y, int score, char CPU);
 
@@ -59,7 +59,7 @@ char pacmanHitsGhost(pPacman this, pGhost ghosts, int numGhosts);
 
 void pacmanUninvincible(pGhost ghosts, int numGhosts);
 
-char pacmanChooseDirection(pPacman this, pMap map, char elems[map->height][map->width], Powerup* powerups, int numPowerups, pGhost ghosts, int numGhosts, char *c);
+// char pacmanChooseDirection(pPacman this, pMap map, char elems[map->height][map->width], pPowerup* powerups, int numPowerups, pGhost ghosts, int numGhosts, char *c);
 
 void pacmanMove(pPacman this, char c, pMap map, pPowerup* powerups, int* numPowerups, pGhost ghosts, int numGhosts);
 

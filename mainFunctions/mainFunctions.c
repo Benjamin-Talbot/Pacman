@@ -1,5 +1,7 @@
 #include "mainFunctions.h"
 
+static int paused = FALSE;
+
 // what about empty name? and test if include ':'
 // doesn't work with handing ':'
 char* getName(char* player) {
@@ -250,11 +252,16 @@ char getInput(clock_t start, int updateRate, pPacman pacman) {
 }
 
 void update(pPacman pacman, char c, pMap map, pPowerup* powerups, int* numPowerups, pGhost ghosts, int numGhosts) {
-    if(pacman->CPU)
-        pacmanChooseDirection(pacman, map, map->elems, *powerups, *numPowerups, ghosts, numGhosts, &c);    // make pacman move by itself, maybe pass &c as parameter, keeps things organized
-    char sprite = pacmanChangeDirection(pacman, c);    // change pacman's direction
-    pacmanMove(pacman, sprite, map, powerups, numPowerups, ghosts, numGhosts);    // move pacman
-    ghostsMove(ghosts, numGhosts, pacman, map);
+    if(c == ' ')
+        paused = 1 - paused;
+
+    if(!paused) {
+        if(pacman->CPU)
+            pacmanChooseDirection(pacman, map, map->elems, powerups, *numPowerups, ghosts, numGhosts, &c);    // make pacman move by itself
+        char sprite = pacmanChangeDirection(pacman, c);    // change pacman's direction
+        pacmanMove(pacman, sprite, map, powerups, numPowerups, ghosts, numGhosts);    // move pacman
+        ghostsMove(ghosts, numGhosts, pacman, map);
+    }
 }
 
 void draw(pPacman pacman, pMap map, pPowerup* powerups, int numPowerups, pGhost ghosts, int numGhosts) {
