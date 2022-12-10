@@ -7,14 +7,17 @@
 # NEED TO ADD .h FILES!!!
 #
 
-main: main.o score.o mainFunctions.o pacmanFunctions.o pacmanAI.o mapFunctions.o powerupFunctions.o ghostFunctions.o
-	gcc -o main main.o score.o mainFunctions.o pacmanFunctions.o pacmanAI.o mapFunctions.o powerupFunctions.o ghostFunctions.o -lncurses -lm
+main: main.o score.o mainFunctions.o pacmanFunctions.o pacmanAI.o mapFunctions.o powerupFunctions.o ghostFunctions.o portalFunctions.o
+	gcc -o main main.o score.o mainFunctions.o pacmanFunctions.o pacmanAI.o mapFunctions.o powerupFunctions.o ghostFunctions.o portalFunctions.o -lncurses -lm
 
 # debug: main.o mainFunctions.o pacmanFunctions.o mapFunctions.o powerupFunctions.o ghostFunctions.o
 # 	gcc -o main main.o -g mainFunctions.o pacmanFunctions.o mapFunctions.o powerupFunctions.o ghostFunctions.o -lncurses -lm
 
 main.o: main.c
 	gcc -c main.c -g
+
+portalFunctions.o: portal/portalFunctions.c
+	gcc -c portal/portalFunctions.c -g
 
 ghostFunctions.o: ghost/ghostFunctions.c
 	gcc -c ghost/ghostFunctions.c -g

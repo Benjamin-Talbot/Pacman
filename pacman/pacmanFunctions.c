@@ -99,6 +99,15 @@ int pacmanEat(pPacman this, pMap map, char elems[map->height][map->width], pPowe
     return ate;
 }
 
+void pacmanAtPortal(pPacman this, pPortal* portals, int numPortals) {
+    for(int i = 0; i < numPortals; i++) {
+        if(this->x == portals[i]->x && this->y == portals[i]->y) {
+            teleport(portals[i], this);
+            break;
+        }
+    }
+}
+
 void pacmanEatGhost(pPacman this, pGhost ghost) {
     if(ghost->vulnerable == TRUE) {
         increaseScore(this, this->ghostPoints);
@@ -134,7 +143,7 @@ void pacmanUninvincible(pGhost ghosts, int numGhosts) {
     }
 }
 
-void pacmanMove(pPacman this, char sprite, pMap map, pPowerup* powerups, int* numPowerups, pGhost ghosts, int numGhosts) {
+void pacmanMove(pPacman this, char sprite, pMap map, pPowerup* powerups, int* numPowerups, pGhost ghosts, int numGhosts, pPortal* portals, int numPortals) {
     int oldx = this->x, oldy = this->y;
 
     if(this->changedDirection || (!this->nextDirection[0] && !this->nextDirection[1])) {
@@ -194,6 +203,8 @@ void pacmanMove(pPacman this, char sprite, pMap map, pPowerup* powerups, int* nu
         if(this->invincible <= 0)
             pacmanUninvincible(ghosts, numGhosts);
     }
+
+    pacmanAtPortal(this, portals, numPortals);
 
     pacmanEat(this, map, map->elems, powerups, numPowerups, ghosts, numGhosts);
     if(pacmanHitsGhost(this, ghosts, numGhosts))

@@ -156,7 +156,7 @@ char* loadMap(pMap* map, int level) {
     return NULL;
 }
 
-void initialize(pPacman* pacman, char CPU, int score, pMap* map, int level, pPowerup** powerups, int** numPowerups, pGhost* ghosts, int** numGhosts, int pauseTime) {
+void initialize(pPacman* pacman, char CPU, int score, pMap* map, int level, pPowerup** powerups, int** numPowerups, pGhost* ghosts, int** numGhosts, pPortal** portals, int* numPortals, int pauseTime) {
 
     loadMap(map, level);
 
@@ -182,6 +182,17 @@ void initialize(pPacman* pacman, char CPU, int score, pMap* map, int level, pPow
         ghostInit(*ghosts+i, coords[i][0], coords[i][1]);
     }
 
+    *numPortals = 0;
+    *numPortals = findCoords(&coords, (*map)->height, (*map)->width, (*map)->elems, 'O');
+    *portals = (pPortal*) malloc(sizeof(pPortal) * *numPortals);
+    for(int i = 0; i < *numPortals; i++) {
+        (*portals)[i] = malloc(sizeof(Portal));
+        portalInit((*portals)[i], coords[i][0], coords[i][1]);
+    }
+    for(int i = 0; i < *numPortals; i += 2) {
+        portalLink((*portals)[i], (*portals)[i+1]);
+    }
+
     replace_char((*map)->elems, '<', ' ', 1);
     replace_char((*map)->elems, 'o', ' ', -1);
     replace_char((*map)->elems, '&', '.', -1);
@@ -191,7 +202,7 @@ void initialize(pPacman* pacman, char CPU, int score, pMap* map, int level, pPow
     free(coords);
 
     drawWalls(*map, (*map)->elems);
-    draw(*pacman, *map, *powerups, **numPowerups, *ghosts, **numGhosts);
+    draw(*pacman, *map, *powerups, **numPowerups, *ghosts, **numGhosts, *portals, *numPortals);
     refresh();
     sleep(pauseTime);
 }
@@ -216,7 +227,7 @@ void freeScores(pNode node) {
     free(node);
 }
 
-int nextLevel(pPacman* pacman, pMap* map, int level, int maxLevel, pPowerup** powerups, int** numPowerups, pGhost* ghosts, int** numGhosts, int pauseTime) {
+int nextLevel(pPacman* pacman, pMap* map, int level, int maxLevel, pPowerup** powerups, int** numPowerups, pGhost* ghosts, int** numGhosts, pPortal** portals, int* numPortals, int pauseTime) {
     char CPU = (*pacman)->CPU;
     sleep(pauseTime);
     clearMap(*map, (*map)->elems);
@@ -224,7 +235,7 @@ int nextLevel(pPacman* pacman, pMap* map, int level, int maxLevel, pPowerup** po
     if(level <= maxLevel) {
         int score = (*pacman)->score;
         freeMemory(*pacman, *map, *powerups, *numPowerups, *ghosts, *numGhosts);
-        initialize(pacman, CPU, score, map, level, powerups, numPowerups, ghosts, numGhosts, pauseTime);
+        initialize(pacman, CPU, score, map, level, powerups, numPowerups, ghosts, numGhosts, portals, numPortals, pauseTime);
     }
     else {
         (*pacman)->gameover = TRUE;
@@ -262,7 +273,7 @@ char getInput(clock_t start, int updateRate, pPacman pacman) {
     return c;
 }
 
-void update(pPacman pacman, char c, pMap map, pPowerup* powerups, int* numPowerups, pGhost ghosts, int numGhosts) {
+void update(pPacman pacman, char c, pMap map, pPowerup* powerups, int* numPowerups, pGhost ghosts, int numGhosts, pPortal* portals, int numPortals) {
     if(c == ' ')
         paused = 1 - paused;
 
@@ -270,15 +281,16 @@ void update(pPacman pacman, char c, pMap map, pPowerup* powerups, int* numPoweru
         if(pacman->CPU)
             pacmanChooseDirection(pacman, map, map->elems, powerups, *numPowerups, ghosts, numGhosts, &c);    // make pacman move by itself
         char sprite = pacmanChangeDirection(pacman, c);    // change pacman's direction
-        pacmanMove(pacman, sprite, map, powerups, numPowerups, ghosts, numGhosts);    // move pacman
+        pacmanMove(pacman, sprite, map, powerups, numPowerups, ghosts, numGhosts, portals, numPortals);    // move pacman
         ghostsMove(ghosts, numGhosts, pacman, map);
     }
 }
 
-void draw(pPacman pacman, pMap map, pPowerup* powerups, int numPowerups, pGhost ghosts, int numGhosts) {
+void draw(pPacman pacman, pMap map, pPowerup* powerups, int numPowerups, pGhost ghosts, int numGhosts, pPortal* portals, int numPortals) {
     drawMap(map, map->elems);    // draw the board
     drawWalls(map, map->elems);
     powerupsDraw(powerups, numPowerups);
+    portalsDraw(portals, numPortals);
     ghostsDraw(ghosts, numGhosts, map, map->elems);
     pacmanDraw(pacman);    // print pacman
 }

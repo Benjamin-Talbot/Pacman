@@ -9,6 +9,7 @@
 #include "ghost/ghostFunctions.h"
 #include "mainFunctions/mainFunctions.h"
 #include "score/score.h"
+#include "portal/portalFunctions.h"
 
 int main() {
     char CPU;
@@ -31,24 +32,26 @@ int main() {
     int* numPowerups = NULL;
     pGhost ghosts = NULL;
     int* numGhosts = NULL;
+    pPortal* portals = NULL;
+    int numPortals = 0;
 
     initscr();
     curs_set(0);
     nodelay(stdscr, true);
     noecho();
     
-    initialize(&pacman, CPU, 0, &map, level, &powerups, &numPowerups, &ghosts, &numGhosts, pauseTime);
+    initialize(&pacman, CPU, 0, &map, level, &powerups, &numPowerups, &ghosts, &numGhosts, &portals, &numPortals, pauseTime);
 
     while(!pacman->gameover) {
         start = clock();
 
         if(pacman->won)
-            level = nextLevel(&pacman, &map, level, maxLevel, &powerups, &numPowerups, &ghosts, &numGhosts, pauseTime);
+            level = nextLevel(&pacman, &map, level, maxLevel, &powerups, &numPowerups, &ghosts, &numGhosts, &portals, &numPortals, pauseTime);
 
         if(!pacman->gameover) {
             clear();
-            update(pacman, c, map, powerups, numPowerups, ghosts, *numGhosts);
-            draw(pacman, map, powerups, *numPowerups, ghosts, *numGhosts);
+            update(pacman, c, map, powerups, numPowerups, ghosts, *numGhosts, portals, numPortals);
+            draw(pacman, map, powerups, *numPowerups, ghosts, *numGhosts, portals, numPortals);
         }
 
         c = getInput(start, updateRate, pacman);

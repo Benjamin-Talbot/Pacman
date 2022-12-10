@@ -11,6 +11,7 @@
 #include "../map/mapFunctions.h"
 #include "../powerup/powerupFunctions.h"
 #include "../ghost/ghostFunctions.h"
+#include "../portal/portalFunctions.h"
 
 #ifndef WALL
 #define WALL ('#')    // #, 35
@@ -63,6 +64,8 @@ void increaseScore(pPacman this, int points);
 
 int pacmanEat(pPacman this, pMap map, char elems[map->height][map->width], pPowerup* powerups, int* numPowerups, pGhost ghosts, int numGhosts);
 
+void pacmanAtPortal(pPacman this, pPortal* portals, int numPortals);
+
 void pacmanEatGhost(pPacman this, pGhost ghost);
 
 char pacmanHitsGhost(pPacman this, pGhost ghosts, int numGhosts);
@@ -71,7 +74,7 @@ void pacmanUninvincible(pGhost ghosts, int numGhosts);
 
 // char pacmanChooseDirection(pPacman this, pMap map, char elems[map->height][map->width], pPowerup* powerups, int numPowerups, pGhost ghosts, int numGhosts, char *c);
 
-void pacmanMove(pPacman this, char c, pMap map, pPowerup* powerups, int* numPowerups, pGhost ghosts, int numGhosts);
+void pacmanMove(pPacman this, char c, pMap map, pPowerup* powerups, int* numPowerups, pGhost ghosts, int numGhosts, pPortal* portals, int numPortals);
 
 void pacmanDraw(pPacman this);
 
