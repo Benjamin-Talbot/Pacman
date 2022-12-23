@@ -27,7 +27,7 @@ int main() {
     pPacman pacman = NULL;
     pMap map = NULL;
     int maxLevel = 2;
-    int level = 0; //level++; //level++;
+    int level = 0;
     pPowerup* powerups = NULL;
     int* numPowerups = NULL;
     pGhost ghosts = NULL;
@@ -48,11 +48,9 @@ int main() {
         if(pacman->won)
             level = nextLevel(&pacman, &map, level, maxLevel, &powerups, &numPowerups, &ghosts, &numGhosts, &portals, &numPortals, pauseTime);
 
-        if(!pacman->gameover) {
-            clear();
-            update(pacman, c, map, powerups, numPowerups, ghosts, *numGhosts, portals, numPortals);
-            draw(pacman, map, powerups, *numPowerups, ghosts, *numGhosts, portals, numPortals);
-        }
+        clear();
+        update(pacman, c, map, powerups, numPowerups, ghosts, *numGhosts, portals, numPortals);
+        draw(pacman, map, powerups, *numPowerups, ghosts, *numGhosts, portals, numPortals);
 
         c = getInput(start, updateRate, pacman);
     }

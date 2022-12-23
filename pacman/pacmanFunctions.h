@@ -36,46 +36,26 @@
 
 // begin pacman AI functions
 int randint(int max);
-
 void pacmanMoveOptions(pPacman this, pMap map, char elems[map->height][map->width], char withBackwards);
-
 int pacmanSeesPellet(pPacman this, pMap map, char elems[map->height][map->width], int dirs[4][2], int* choice, pPowerup* powerups, int numPowerups);
-
 void pelletVector(pPacman this, pMap map, char elems[map->height][map->width], pPowerup* powerups, int numPowerups, float* pelletxcomp, float* pelletycomp);
-
 void findNearestPellet(pPacman this, pMap map, char elems[map->height][map->width], pPowerup* powerups, int numPowerups, int* minx, int* miny);
-
 char ghostsInVicinity(pPacman this, pGhost ghosts, int numGhosts, int* minx, int* miny, int* ghostxcomp, int* ghostycomp);
-
 char pacmanChooseDirection(pPacman this, pMap map, char elems[map->height][map->width], pPowerup* powerups, int numPowerups, pGhost ghosts, int numGhosts, char *c);
 // end pacman AI functions
 
 void pacmanInit(pPacman this, int x, int y, int score, char CPU);
-
 void gameover(pPacman this);
-
 char pacmanChangeDirection(pPacman this, char c);
-
 int pacmanCollides(pPacman player, pMap map, char elems[map->height][map->width]);
-
 void pacmanMakeInvincible(pPacman this, pGhost ghosts, int numGhosts);
-
 void increaseScore(pPacman this, int points);
-
 int pacmanEat(pPacman this, pMap map, char elems[map->height][map->width], pPowerup* powerups, int* numPowerups, pGhost ghosts, int numGhosts);
-
 void pacmanAtPortal(pPacman this, pPortal* portals, int numPortals);
-
 void pacmanEatGhost(pPacman this, pGhost ghost);
-
 char pacmanHitsGhost(pPacman this, pGhost ghosts, int numGhosts);
-
 void pacmanUninvincible(pGhost ghosts, int numGhosts);
-
-// char pacmanChooseDirection(pPacman this, pMap map, char elems[map->height][map->width], pPowerup* powerups, int numPowerups, pGhost ghosts, int numGhosts, char *c);
-
 void pacmanMove(pPacman this, char c, pMap map, pPowerup* powerups, int* numPowerups, pGhost ghosts, int numGhosts, pPortal* portals, int numPortals);
-
 void pacmanDraw(pPacman this);
 
 #endif

@@ -1,7 +1,11 @@
 #include "mainFunctions.h"
 
+// change ghosts from array of ghost structs to array of ghost pointers
+
 static int paused = FALSE;
 
+// gets the boolean value of whether the player or the CPU will play
+// making sure the correct input is accepted has not been implemented yet
 char getPlayer() {
     int CPU;
     printf("Would you like to play (1) or let the computer play (0)? ");
@@ -13,8 +17,10 @@ char getPlayer() {
     return (char) CPU;
 }
 
+// gets the player's name
 // what about empty name? and test if include ':'
-// doesn't work with handing ':'
+// doesn't work with handling ':'
+// still need to complete this function with input checking
 char* getName(char* player) {
     int lenName = 8;
     player = malloc(sizeof(char) * lenName);
@@ -51,6 +57,7 @@ char* getName(char* player) {
 	return tmp;
 }
 
+// replaces every instance of the given character oldc with the new character newc, a maximum of max instances
 void replace_char(char str[], char oldc, char newc, int max) {
     for(int i = 0; str[i] && max;) {
         if(str[i] == oldc) {
@@ -63,6 +70,7 @@ void replace_char(char str[], char oldc, char newc, int max) {
     }
 }
 
+// finds the coordinates of the given character in the map's elements, as many times as it appears
 int findCoords(int*** coords, int rows, int cols, char elems[rows][cols], char character) {
     // holds the max number of coordinates (x,y pairs) in coords
     int sizeCoords = sizeof(int) * 2 * 4;
@@ -99,6 +107,7 @@ int findCoords(int*** coords, int rows, int cols, char elems[rows][cols], char c
     return index;
 }
 
+// loads the map from a text file into an array, then initializes a map instance with this array as its elements
 char* loadMap(pMap* map, int level) {
     int lenElems = 500;
     char* elems = malloc(sizeof(char) * (lenElems + 1));
@@ -113,6 +122,7 @@ char* loadMap(pMap* map, int level) {
     char filename[maxchars];
     snprintf(filename, maxchars, "map/levels/map%d.txt", level);
 
+    // read each character into the array, organized by row
     FILE* mapFile = fopen(filename, "r");
     if(mapFile != NULL) {
         char c = ' ';
@@ -156,6 +166,7 @@ char* loadMap(pMap* map, int level) {
     return NULL;
 }
 
+// initializes all the main variables used while playing the game
 void initialize(pPacman* pacman, char CPU, int score, pMap* map, int level, pPowerup** powerups, int** numPowerups, pGhost* ghosts, int** numGhosts, pPortal** portals, int* numPortals, int pauseTime) {
 
     loadMap(map, level);
@@ -196,7 +207,7 @@ void initialize(pPacman* pacman, char CPU, int score, pMap* map, int level, pPow
     replace_char((*map)->elems, '<', ' ', 1);
     replace_char((*map)->elems, 'o', ' ', -1);
     replace_char((*map)->elems, '&', '.', -1);
-    // replace_char((*map)->elems, '&', ' ', -1);
+    replace_char((*map)->elems, 'O', ' ', -1);
 
     free(coords[0]);
     free(coords);
@@ -207,6 +218,8 @@ void initialize(pPacman* pacman, char CPU, int score, pMap* map, int level, pPow
     sleep(pauseTime);
 }
 
+// free's the memory used by the main variables used while playing the game
+// still need to free portals and numPortals
 void freeMemory(pPacman pacman, pMap map, pPowerup* powerups, int* numPowerups, pGhost ghosts, int* numGhosts) {
     free(pacman);
     free(map->elems);
@@ -217,8 +230,11 @@ void freeMemory(pPacman pacman, pMap map, pPowerup* powerups, int* numPowerups, 
     free(numPowerups);
     free(ghosts);
     free(numGhosts);
+    // free(portals);
+    // free(numPortals);
 }
 
+// traverse the binary search tree of the scores and free all the memory used
 void freeScores(pNode node) {
     if(node->left)
         freeScores(node->left);
@@ -227,6 +243,9 @@ void freeScores(pNode node) {
     free(node);
 }
 
+// used to reinitialize all the variables to load the next level
+// could reduce the overhead by simply changing what needs to be changed instead of freeing and reinitializing everything,
+//   but the overhead is not significant in terms of the player noticing so this can be fixed later
 int nextLevel(pPacman* pacman, pMap* map, int level, int maxLevel, pPowerup** powerups, int** numPowerups, pGhost* ghosts, int** numGhosts, pPortal** portals, int* numPortals, int pauseTime) {
     char CPU = (*pacman)->CPU;
     sleep(pauseTime);
@@ -244,10 +263,13 @@ int nextLevel(pPacman* pacman, pMap* map, int level, int maxLevel, pPowerup** po
     return level;
 }
 
+// used to get the character to move Pacman
 char getInput(clock_t start, int updateRate, pPacman pacman) {
     char nextc = getch();
     char c = ERR;
 
+    // empties the input buffer to get the last one
+    // could probably flush it instead
     while(nextc != ERR) {
         c = nextc;
         nextc = getch();
@@ -256,6 +278,8 @@ char getInput(clock_t start, int updateRate, pPacman pacman) {
     clock_t end = clock();
     long time_elapsed = (long) ((end - start)/(double)CLOCKS_PER_SEC*1000);
 
+    // wait until a specified amount of time has passed to keep the update rate of the game constant
+    //   and to only get a single character per update
     while(time_elapsed < updateRate) {
         nextc = getch();
         if(nextc != ERR) {
@@ -273,28 +297,34 @@ char getInput(clock_t start, int updateRate, pPacman pacman) {
     return c;
 }
 
+// updates the state of the game
 void update(pPacman pacman, char c, pMap map, pPowerup* powerups, int* numPowerups, pGhost ghosts, int numGhosts, pPortal* portals, int numPortals) {
     if(c == ' ')
         paused = 1 - paused;
 
     if(!paused) {
         if(pacman->CPU)
-            pacmanChooseDirection(pacman, map, map->elems, powerups, *numPowerups, ghosts, numGhosts, &c);    // make pacman move by itself
-        char sprite = pacmanChangeDirection(pacman, c);    // change pacman's direction
-        pacmanMove(pacman, sprite, map, powerups, numPowerups, ghosts, numGhosts, portals, numPortals);    // move pacman
+            pacmanChooseDirection(pacman, map, map->elems, powerups, *numPowerups, ghosts, numGhosts, &c);    // make pacman move by itself (CPU)
+        char sprite = pacmanChangeDirection(pacman, c);
+        pacmanMove(pacman, sprite, map, powerups, numPowerups, ghosts, numGhosts, portals, numPortals);
         ghostsMove(ghosts, numGhosts, pacman, map);
     }
 }
 
+// draws everything on the board
+// the map is drawn every frame, which is of course not desirable
+//   this was originally for debugging, but hasn't yet been changed back to only drawing things that changed since the last frame
 void draw(pPacman pacman, pMap map, pPowerup* powerups, int numPowerups, pGhost ghosts, int numGhosts, pPortal* portals, int numPortals) {
-    drawMap(map, map->elems);    // draw the board
+    drawMap(map, map->elems);
     drawWalls(map, map->elems);
     powerupsDraw(powerups, numPowerups);
     portalsDraw(portals, numPortals);
     ghostsDraw(ghosts, numGhosts, map, map->elems);
-    pacmanDraw(pacman);    // print pacman
+    pacmanDraw(pacman);
 }
 
+// loads the scores into a binary search tree, inserts the current player's score prints them in order,
+//   writes the new set of scores to the file, frees them, and frees the tree
 void endGame(int score, char* player) {
     pTree scores = NULL;
     scores = loadScores(scores);

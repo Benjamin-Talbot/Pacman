@@ -1,5 +1,8 @@
 #include "pacmanFunctions.h"
 
+// this code was written quickly and hasn't been reviewed
+// it is not very clean, it contains some redundant code, and it is not optimized at all
+
 static char prevchars[2] = {' ', ' '};
 static char infloopWarning = FALSE;
 static char infloop = FALSE;

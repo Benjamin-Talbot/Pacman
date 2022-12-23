@@ -1,5 +1,10 @@
 #include "pacmanFunctions.h"
 
+// most functions that check if Pacman is in the same space as a certain object check separately
+//   will try to combine the collision checking in a single function and switch case which character is in that space
+//   to decide what to do
+
+// initialize the pacman struct
 void pacmanInit(pPacman this, int x, int y, int score, char CPU) {
     this->x = x;
     this->y = y;
@@ -21,6 +26,7 @@ void gameover(pPacman this) {
     this->gameover = TRUE;
 }
 
+// changes the direction of Pacman
 char pacmanChangeDirection(pPacman this, char c) {
     char sprite = this->sprite;
     this->oldDirection[0] = this->direction[0];
@@ -47,17 +53,19 @@ char pacmanChangeDirection(pPacman this, char c) {
     return sprite;
 }
 
+// checks if Pacman collides with a wall or door
 int pacmanCollides(pPacman this, pMap map, char elems[map->height][map->width]) {
     if(this->x >= 0 && this->x < map->width && this->y >= 0 && this->y < map->height)
         return elems[this->y][this->x] == WALL || elems[this->y][this->x] == DOOR ? TRUE : FALSE;
     return FALSE;
 }
 
+// makes Pacman invincible
 void pacmanMakeInvincible(pPacman this, pGhost ghosts, int numGhosts) {
     this->invincible = 40;
     this->ghostPoints = 200;
     for(int i = 0; i < numGhosts; i++) {
-        ghosts[i].vulnerable = TRUE;
+        ghosts[i].vulnerable = TRUE;    // ghosts[i]->vulnerable = TRUE; ?
     }
 }
 
@@ -65,6 +73,8 @@ void increaseScore(pPacman this, int points) {
     this->score += points;
 }
 
+// checks if Pacman is in the same space as a pellet or powerup, then increases score if so and makes invincible if a powerup was eaten
+// checking if all the pellets and powerups have been eaten is quite brute force, so will try to change later
 int pacmanEat(pPacman this, pMap map, char elems[map->height][map->width], pPowerup* powerups, int* numPowerups, pGhost ghosts, int numGhosts) {
     char ate = FALSE;
     char allGone = TRUE;
@@ -99,6 +109,7 @@ int pacmanEat(pPacman this, pMap map, char elems[map->height][map->width], pPowe
     return ate;
 }
 
+// checks if Pacman is at a portal
 void pacmanAtPortal(pPacman this, pPortal* portals, int numPortals) {
     for(int i = 0; i < numPortals; i++) {
         if(this->x == portals[i]->x && this->y == portals[i]->y) {
@@ -108,6 +119,7 @@ void pacmanAtPortal(pPacman this, pPortal* portals, int numPortals) {
     }
 }
 
+// increases score and resets ghost if Pacman is invincible
 void pacmanEatGhost(pPacman this, pGhost ghost) {
     if(ghost->vulnerable == TRUE) {
         increaseScore(this, this->ghostPoints);
@@ -118,6 +130,7 @@ void pacmanEatGhost(pPacman this, pGhost ghost) {
         gameover(this);
 }
 
+// checls if Pacman is in the same space as a ghost
 char pacmanHitsGhost(pPacman this, pGhost ghosts, int numGhosts) {
     char hitGhost = FALSE;
     pGhost ghost;
@@ -136,6 +149,7 @@ char pacmanHitsGhost(pPacman this, pGhost ghosts, int numGhosts) {
     return hitGhost;
 }
 
+// takes away Pacman's invincibility
 void pacmanUninvincible(pGhost ghosts, int numGhosts) {
     for(int i = 0; i < numGhosts; i++) {
         ghosts[i].vulnerable = FALSE;
@@ -143,6 +157,7 @@ void pacmanUninvincible(pGhost ghosts, int numGhosts) {
     }
 }
 
+// moves Pacman in a valid direction and checks for various collisions with other objects
 void pacmanMove(pPacman this, char sprite, pMap map, pPowerup* powerups, int* numPowerups, pGhost ghosts, int numGhosts, pPortal* portals, int numPortals) {
     int oldx = this->x, oldy = this->y;
 
@@ -212,6 +227,7 @@ void pacmanMove(pPacman this, char sprite, pMap map, pPowerup* powerups, int* nu
             gameover(this);
 }
 
+// draws Pacman
 void pacmanDraw(pPacman this) {
     mvprintw(this->y, this->x, "%c", this->sprite);    // draw pacman at new position
     mvprintw(5, 60, "Score: %d", this->score);    // update score

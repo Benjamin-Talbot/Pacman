@@ -5,14 +5,13 @@
 
 
 LOOK INTOS:
-- test empty name and w/ :
+- test empty name and with :
 - once ghost managed to get inside closed loop
-- rarely, but sometimes can't eat ghost when invincible?
-- make directions and numchoices global again
-- add colors so can know when invincible, ghosts vulnerable, etc
-- fix segfault in loadScore sometimes segfaults at fgetc ???
 - fix ghosts going through walls
-- look into windows
+- make directions and numchoices global again
 - are tied scores always returned in the same order?
+
+- add colors so can know when invincible, ghosts vulnerable, etc
+- look into windows
 - make ghosts wait in hub until timeout, hub struct?
 - add fruit (cherries, strawberries, etc.)

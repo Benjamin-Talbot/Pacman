@@ -30,17 +30,11 @@ static int numWritten = 1;
 static int append = FALSE;
 
 pNode nodeInit(int score, char* name);
-
 pTree treeInit(pTree tree, int score, char* name);
-
 void addNode(pNode head, int score, char* name);
-
 pTree loadScores(pTree scores);
-
 void writeScores(pNode head);
-
 void printScores(pNode head);
-
 void printTree(pNode head, int level);
 
 #endif

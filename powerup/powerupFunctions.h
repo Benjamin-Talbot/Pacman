@@ -8,9 +8,7 @@
 #include <ncurses.h>
 
 void powerupInit(pPowerup this, int x, int y);
-
 void powerupDelete(pPowerup* powerups, int* numPowerups, int index);
-
 void powerupsDraw(pPowerup* powerups, int numPowerups);
 
 #endif

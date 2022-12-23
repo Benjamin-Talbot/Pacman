@@ -1,5 +1,6 @@
 #include "score.h"
 
+// initializes a node struct
 pNode nodeInit(int score, char* name) {
     pNode node = (pNode) malloc(sizeof(Node));
     node->score = score;
@@ -10,6 +11,7 @@ pNode nodeInit(int score, char* name) {
     return node;
 }
 
+// initializes a tree struct
 pTree treeInit(pTree tree, int score, char* name) {
     pNode node = nodeInit(score, name);
     tree = (pTree) malloc(sizeof(Tree));
@@ -18,6 +20,7 @@ pTree treeInit(pTree tree, int score, char* name) {
     return tree;
 }
 
+// adds a node to a tree to make a binary search tree
 void addNode(pNode head, int score, char* name) {
     if(score <= head->score) {
         if(head->left) {
@@ -35,6 +38,7 @@ void addNode(pNode head, int score, char* name) {
     }
 }
 
+// loads the scores from the file scores.txt
 pTree loadScores(pTree scores) {
     scores = NULL;
 
@@ -48,7 +52,7 @@ pTree loadScores(pTree scores) {
     while(c > 0) {
         lenName = 8;
         name = (char*) malloc(sizeof(char) * lenName);
-        numchars = 0;   // was this it??? //
+        numchars = 0;
         while(c != ':' && c > 0){
             c = fgetc(scoresFile);
             if(c > 0 && c != ':') {
@@ -82,6 +86,7 @@ pTree loadScores(pTree scores) {
     return scores;
 }
 
+// writes a single score to the file scores.txt
 void writeScore(pNode score) {
     FILE* scoresFile;
     if(append)
@@ -100,6 +105,7 @@ void writeScore(pNode score) {
     fclose(scoresFile);
 }
 
+// writes the scores to the file scores.txt
 void writeScores(pNode head) {
     if(head->left)
         writeScores(head->left);
@@ -108,6 +114,7 @@ void writeScores(pNode head) {
         writeScores(head->right);
 }
 
+// prints the scores
 void printScores(pNode head) {
     if(head->right)
         printScores(head->right);
@@ -117,6 +124,7 @@ void printScores(pNode head) {
         printScores(head->left);
 }
 
+// prints the binary search tree, for debugging purposes
 void printTree(pNode head, int level) {
     if(head->right) {
         printTree(head->right, level + 1);

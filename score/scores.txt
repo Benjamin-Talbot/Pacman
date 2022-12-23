@@ -1,20 +1,16 @@
 Podvik:0
-Ben:0
-Ben:40
 Fatima:190
 Aiden:210
 TomDaBomb:250
-Ben:330
 Ant:530
-Ben:580
 Benjamin Talbot:640
+Ben:900
 Fatima:990
 Bot:990
-Ben:1350
-CPU:1950
 CPU:1950
 Toine:2090
 Pat:2150
+Ben:2690
 Podvikisthebest:2730
 CPU:2970
 CPU:3280

@@ -30,29 +30,17 @@
 #define ALLDIR(dir) this->dir[0] = 1; this->dir[1] = 1;
 
 void ghostInit(pGhost this, int x, int y);
-
 void ghostReset(pGhost this);
-
 char withinBounds(int x, int y, int width, int height);
-
 char ghostSeesPacman(pGhost this, pPacman pacman, pMap map, char elems[map->height][map->width]);
-
 void ghostMoveOptions(pGhost this, pMap map, char elems[map->height][map->width], char withBackwards);
-
 void ghostWander(pGhost this);
-
 void ghostFollowPacman(pGhost this, pPacman pacman, pMap map);
-
 char ghostHitsPacman(pGhost this, pPacman pacman);
-
 char ghostHitsWall(pGhost this, pMap map, char elems[map->height][map->width]);
-
 void ghostRunAway(pGhost this, pMap map, char elems[map->height][map->width], pPacman pacman);
-
 void ghostMove(pGhost this, pPacman pacman, pMap map);
-
 void ghostsMove(pGhost ghosts, int numGhosts, pPacman pacman, pMap map);
-
 void ghostsDraw(pGhost ghosts, int numGhosts, pMap map, char elems[map->height][map->width]);
 
 #endif

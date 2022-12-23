@@ -2,6 +2,11 @@
 
 #include <time.h>
 
+// still need to add portal functionality to ghosts
+
+// initializes the ghost struct
+// this->directions and this->numChoices could be implemented as static variables shared by all ghosts
+//   will implement at a later date
 void ghostInit(pGhost this, int x, int y) {
     this->x = x;
     this->y = y;
@@ -25,6 +30,7 @@ void ghostInit(pGhost this, int x, int y) {
     this->toggleUpdate = 1;
 }
 
+// resets the ghost to its original position
 void ghostReset(pGhost this) {
     this->x = this->initx;
     this->y = this->inity;
@@ -40,12 +46,14 @@ void ghostReset(pGhost this) {
     this->cooldown = 10;
 }
 
+// checks whether a certain (x,y) coordinate is within the map's boundary
 char withinBounds(int x, int y, int width, int height) {
     if(x >= 0 && x < width && y >= 0 && y < height)
         return TRUE;
     return FALSE;
 }
 
+// checks if the ghost is along the same row or column as Pacman and has an unobstructed view of Pacman
 char ghostSeesPacman(pGhost this, pPacman pacman, pMap map, char elems[map->height][map->width]) {
     int x = this->x + 1;
     int y = this->y;
@@ -91,6 +99,7 @@ char ghostSeesPacman(pGhost this, pPacman pacman, pMap map, char elems[map->heig
     return foundPacman;
 }
 
+// finds the possible directions the ghost can move, with or without the direction it just came from (withBackwards)
 void ghostMoveOptions(pGhost this, pMap map, char elems[map->height][map->width], char withBackwards) {
     this->numChoices = 0;
 
@@ -134,6 +143,7 @@ void ghostMoveOptions(pGhost this, pMap map, char elems[map->height][map->width]
     }
 }
 
+// makes the ghost choose a random, valid, direction
 void ghostWander(pGhost this) {
     if(this->numChoices > 0) {    // the ghost can at least go forward
         int r = rand() % this->numChoices;
@@ -146,6 +156,7 @@ void ghostWander(pGhost this) {
     }
 }
 
+// makes the ghost follow pacman
 void ghostFollowPacman(pGhost this, pPacman pacman, pMap map) {
     int r = rand() % 15;
     if(r == 14) {    // random chance to not follow
@@ -158,7 +169,7 @@ void ghostFollowPacman(pGhost this, pPacman pacman, pMap map) {
         xdir /= xdir > 0 ? xdir : xdir * -1;
         ydir /= ydir > 0 ? ydir : ydir * -1;
 
-        if(xdir && ydir) {  // pacman is around a turn or something
+        if(xdir && ydir) {  // pacman is around a turn, save the last known direction to go
             this->turnx = pacman->x - pacman->direction[0];
             this->turny = pacman->y - pacman->direction[1];
             this->nextDirection[0] = pacman->direction[0];
@@ -171,13 +182,14 @@ void ghostFollowPacman(pGhost this, pPacman pacman, pMap map) {
     }
 }
 
+//  checks if the ghost and Pacman are on the same space
 char ghostHitsPacman(pGhost this, pPacman pacman) {
     if(this->x == pacman->x && this->y == pacman->y)
         return TRUE;
     return FALSE;
 }
 
-// to prevent ghosts from going through walls
+// checks whether a ghost will go through a wall
 char ghostHitsWall(pGhost this, pMap map, char elems[map->height][map->width]) {
     if(elems[this->y + this->direction[1]][this->x + this->direction[0]] == WALL) {
         return TRUE;
@@ -186,6 +198,7 @@ char ghostHitsWall(pGhost this, pMap map, char elems[map->height][map->width]) {
     return FALSE;
 }
 
+// makes the ghost move away from Pacman
 void ghostRunAway(pGhost this, pMap map, char elems[map->height][map->width], pPacman pacman) {
         this->trackingPacman = 0;
 
@@ -220,7 +233,8 @@ void ghostRunAway(pGhost this, pMap map, char elems[map->height][map->width], pP
         this->direction[1] = this->directions[farthest][1];
 }
 
-// implement bounds checking?
+// moves the ghost in a certain way, depending on whether it can 'see' Pacman or not, Pacman is invincible, 
+//   or whether it is randomly wandering
 void ghostMove(pGhost this, pPacman pacman, pMap map) {
     if(!this->vulnerable) {    // this->vulnerable == FALSE
         if(this->trackingPacman) {
@@ -279,6 +293,7 @@ void ghostMove(pGhost this, pPacman pacman, pMap map) {
             pacmanEatGhost(pacman, this);
 }
 
+// moves every ghost
 void ghostsMove(pGhost ghosts, int numGhosts, pPacman pacman, pMap map) {
     pGhost ghost;
     for(int i = 0; i < numGhosts; i++) {
@@ -294,10 +309,11 @@ void ghostsMove(pGhost ghosts, int numGhosts, pPacman pacman, pMap map) {
     }
 }
 
+// draws the ghosts
 void ghostsDraw(pGhost ghosts, int numGhosts, pMap map, char elems[map->height][map->width]) {
-    Ghost ghost;
+    pGhost ghost;
     for(int i = 0; i < numGhosts; i++) {
-        ghost = ghosts[i];
-        mvprintw(ghost.y, ghost.x, "%c", ghost.sprite);
+        ghost = &ghosts[i];
+        mvprintw(ghost->y, ghost->x, "%c", ghost->sprite);
     }
 }
